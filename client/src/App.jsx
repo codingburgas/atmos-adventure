@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import useThemeMode from "./hooks/useThemeMode";
 import { ThemeContext } from "./components/context/ThemeContext";
 import Navbar from "./components/UI/Navbar";
-import image from "./assets/tempBackground.svg";
 import "./index.css";
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
   return (
     <div className="z-10">
       <Navbar />
-      <div className="bg-landing h-screen bg-center bg-no-repeat bg-cover object-cover"></div>
+      <div className="nuclea:bg-nuclea h-screen bg-center bg-no-repeat bg-cover object-cover dust:bg-dust"></div>
     </div>
   );
 }

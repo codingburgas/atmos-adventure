@@ -9,7 +9,8 @@ module.exports = {
         sans: ["Commissioner", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
-        landing: "url('./assets/tempBackground.svg')",
+        dust: "url('./assets/tempDust.svg')",
+        nuclea: "url('./assets/tempNuclea.svg')",
       },
     },
   },
