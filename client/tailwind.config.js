@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,jsx,ts,js}"],
+  purge: ["src/**/*.js", "src/**/*.jsx"],
   theme: {
+    themeVariants: ["dust", "nuclea"],
     extend: {},
   },
-  plugins: [],
+  variants: {
+    backgroundColor: ["responsive", "dust"],
+    textColor: ["responsive", "dust"],
+  },
+  plugins: [require("tailwindcss-multi-theme")],
 };
