@@ -5,6 +5,9 @@ export default function useThemeMode() {
 
   useEffect(() => {
     const root = document.getElementById("root");
+    themeContext.theme === "theme-nuclea"
+      ? (document.title = "ATMOS | Nuclea Theme")
+      : (document.title = "ATMOS | Dust Theme");
     root.classList.add(`${themeContext.theme}`);
   }, []);
 }

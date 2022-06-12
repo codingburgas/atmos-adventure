@@ -1,19 +1,19 @@
 import { useContext, useEffect } from "react";
 import useThemeMode from "./hooks/useThemeMode";
 import { ThemeContext } from "./components/context/ThemeContext";
+import Navbar from "./components/UI/Navbar";
+import image from "./assets/tempBackground.svg";
+import "./index.css";
+
 function App() {
   const themeContext = useContext(ThemeContext);
 
-  if (themeContext.theme) {
-    useThemeMode();
-  }
-  console.log(themeContext.theme);
+  themeContext.theme ? useThemeMode() : null;
 
   return (
-    <div className="flex justify-center">
-      <h1 className="font-bold text-2xl  nuclea:text-pink-500 dust:text-purple-700">
-        React and Tailwind with Vitejs!
-      </h1>
+    <div className="z-10">
+      <Navbar />
+      <div className="bg-landing h-screen bg-center bg-no-repeat bg-cover object-cover"></div>
     </div>
   );
 }
