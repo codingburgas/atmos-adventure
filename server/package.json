@@ -1,0 +1,14 @@
+{
+  "name": "atmos-server",
+  "version": "1.0.0",
+  "description": "Server for the atmos project website",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16"
+  }
+}
