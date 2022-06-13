@@ -1,16 +1,26 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="flex flex-row justify-between items-center pr-14 pt-4 z-0 w-full absolute text-white">
-      <div className="ml-16 font-sans text-4xl mt-1.5 w-full h-1/3">ATMOS</div>
+      <Link to="/">
+        <div className="ml-16 font-sans text-4xl mt-1.5 w-full h-1/3">
+          ATMOS
+        </div>
+      </Link>
 
       <div>
         <ul className="flex space-x-10">
-          <li className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer">
-            About
-          </li>
-          <li className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer">
-            Register
-          </li>
+          <Link to="*">
+            <li className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer">
+              About
+            </li>
+          </Link>
+          <Link to="*">
+            <li className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer">
+              Register
+            </li>
+          </Link>
           <button
             onSubmit={(e) => e.preventDefault}
             className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl hover:cursor-pointer"
