@@ -55,7 +55,7 @@ const Login = () => {
                   className="mt-4 text-blue-400 border-b-2 border-blue-300 cursor-pointer"
                   onClick={redirectHandler}
                 >
-                  <p>Dont't have an account?</p>
+                  <p>Don't have an account?</p>
                 </div>
               </form>
               <br />
