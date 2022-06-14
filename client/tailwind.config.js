@@ -5,6 +5,7 @@ module.exports = {
   theme: {
     screens: {
       laptop: "1537px",
+      smallDesk: "1746px",
     },
     themeVariants: ["dust", "nuclea"],
     extend: {
