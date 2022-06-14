@@ -8,7 +8,7 @@ router.use(bodyParser.json());
 
 
 router.get('/', (req, res) => {
-    res.send('Invalid API endpoint');
+    res.send({"message":"Invalid API endpoint"});
 });
 
 router.post('/register',(req,res)=>{
@@ -23,19 +23,19 @@ router.post('/register',(req,res)=>{
         if (err)
         {
             console.error("Something went wrong");
-            res.send("Something went wrong");
+            res.send({"message":"Something went wrong"});
         }
         else if (results.length > 0)
         {
             if(results[0].username === data[1])
             {
                 console.log("Username already exists");
-                res.send('Username already exists');
+                res.send({"message":"Username already exists"});
             }
             else if(results[0].email === data[2])
             {
                 console.log("Email already exists");
-                res.send('Email already exists');
+                res.send({"message":"Email already exists"});
             }
         }
         else
@@ -44,12 +44,12 @@ router.post('/register',(req,res)=>{
                 if(err) 
                 {
                     console.error("Something went wrong");
-                    res.send("Something went wrong");
+                    res.send({"message":"Something went wrong"});
                 }
                 else 
                 {
                     console.log("User created"); 
-                    res.send("User created");
+                    res.send({"message":"User created"});
                 }
             });
         }
@@ -67,25 +67,25 @@ router.post('/login',(req,res)=>{
         if (err)
         {
             console.error("Something went wrong");
-            res.send("Something went wrong");
+            res.send({"message":"Something went wrong"});
         }
         else if (results.length > 0)
         {
             if(bcrypt.compareSync(data[1], results[0].pass_hash))
             {
                 console.log("User logged in");
-                res.send("User logged in");
+                res.send({"message":"User logged in"});
             }
             else
             {
                 console.log("Wrong password");
-                res.send("Wrong password");
+                res.send({"message":"Wrong password"});
             }
         }
         else
         {
             console.log("User not found");
-            res.send("User not found");
+            res.send({"message":"User not found"});
         }
     });
 });
