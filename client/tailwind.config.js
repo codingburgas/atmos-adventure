@@ -4,8 +4,11 @@ module.exports = {
   purge: ["src/**/*.js", "src/**/*.jsx"],
   theme: {
     screens: {
-      laptop: "1537px",
       smallDesk: "1746px",
+      laptop: "1537px",
+      smallLaptop: "1281px",
+      bigTablet: "1098px",
+      tablet: "907px",
     },
     themeVariants: ["dust", "nuclea"],
     extend: {
