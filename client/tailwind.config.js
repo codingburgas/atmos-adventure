@@ -7,10 +7,12 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Commissioner", ...defaultTheme.fontFamily.sans],
+        serif: ["Inter", ...defaultTheme.fontFamily.serif],
       },
       backgroundImage: {
         dust: "url('./assets/tempDust.svg')",
         nuclea: "url('./assets/tempNuclea.svg')",
+        form: "url('./assets/formBackground.svg')",
       },
     },
   },
