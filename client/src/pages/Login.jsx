@@ -13,6 +13,23 @@ const Login = () => {
   const password = useRef();
   const loginHandler = (e) => {
     e.preventDefault();
+    const user = {
+      username: username.current.value,
+      password: password.current.value,
+    };
+
+    fetch("http://localhost:3001/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data.message))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -38,6 +55,7 @@ const Login = () => {
                     className="focus:border-none outline-none ml-3 placeholder:font-bold font-serif"
                     placeholder="Username"
                     required
+                    ref={username}
                   />
                   <div className="mt-1"></div>
                 </div>
@@ -50,6 +68,7 @@ const Login = () => {
                     className="focus:border-none outline-none ml-3 placeholder:font-bold font-serif"
                     placeholder="Password"
                     required
+                    ref={password}
                   />
                   <div className="mt-1"></div>
                 </div>
