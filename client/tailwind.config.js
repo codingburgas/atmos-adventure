@@ -3,6 +3,9 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   purge: ["src/**/*.js", "src/**/*.jsx"],
   theme: {
+    screens: {
+      laptop: "1537px",
+    },
     themeVariants: ["dust", "nuclea"],
     extend: {
       fontFamily: {
