@@ -7,7 +7,7 @@ CREATE TABLE `users` (
     `username` VARCHAR(16) NOT NULL,
     `email` VARCHAR(30) NOT NULL,
     `pass_hash` VARCHAR(60) NOT NULL,
-    `role` VARCHAR(10) NOT NULL,
+    `role` VARCHAR(10) DEFAULT "user",
     PRIMARY KEY(`uuid`)
 );
 INSERT INTO `users` VALUES ("6706aae5-7ca0-4915-b688-098c8644407c", "admin", "admin@atmos.me", "$2b$10$KiqYHZJlmzl7G0fvA1XY2uYuR3QeHAA71Dn05AzfwsPcsIEeItxZS", "admin");
