@@ -1,10 +1,23 @@
 const express = require('express');
-const router = express.Router();
 const bodyParser = require('body-parser');
 const db = require('../db/db_config.js');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const session = require('express-session');
+
+const router = express.Router();
+
 router.use(bodyParser.json());
+
+router.use(session({
+    secret: 'this is our little secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 3600000 // 1 Hour
+    }
+}));
+var currentSession = null;
 
 
 router.get('/', (req, res) => {
@@ -19,20 +32,20 @@ router.post('/register',(req,res)=>{
         bcrypt.hashSync(req.body.password, 10)
     ];
     console.log(`User with username: "${data[1]}" trying to register.`)
-    db.query('SELECT * FROM users WHERE username = (?) OR email = (?)', [data[1], data[2]], (err, results) => {
+    db.query('SELECT * FROM users WHERE username = (?) OR email = (?)', [data[1], data[2]], (err, result) => {
         if (err)
         {
             console.error("Something went wrong");
             res.send({"message":"Something went wrong"});
         }
-        else if (results.length > 0)
+        else if (result.length > 0)
         {
-            if(results[0].username === data[1])
+            if(result[0].username === data[1])
             {
                 console.log("Username already exists");
                 res.send({"message":"Username already exists"});
             }
-            else if(results[0].email === data[2])
+            else if(result[0].email === data[2])
             {
                 console.log("Email already exists");
                 res.send({"message":"Email already exists"});
@@ -61,19 +74,20 @@ router.post('/login',(req,res)=>{
         req.body.username,
         req.body.password
     ];
-    console.log(req.body.username);
     console.log(`User with username: "${data[0]}" trying to login.`)
-    db.query('SELECT * FROM users WHERE username = (?) OR email = (?)', [data[0], data[0]], (err, results) => {
+    db.query('SELECT * FROM users WHERE username = (?) OR email = (?)', [data[0], data[0]], (err, result) => {
         if (err)
         {
             console.error("Something went wrong");
             res.send({"message":"Something went wrong"});
         }
-        else if (results.length > 0)
+        else if (result.length > 0)
         {
-            if(bcrypt.compareSync(data[1], results[0].pass_hash))
+            if(bcrypt.compareSync(data[1], result[0].pass_hash))
             {
-                console.log("User logged in");
+                currentSession = req.session;
+                currentSession.uuid = result[0].uuid;
+                console.log(`User ${data[0]} logged in`);
                 res.send({"message":"User logged in"});
             }
             else
@@ -89,6 +103,5 @@ router.post('/login',(req,res)=>{
         }
     });
 });
-
 
 module.exports = router;
