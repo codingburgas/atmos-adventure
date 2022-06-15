@@ -7,3 +7,13 @@ html {
   height: 100%;
   margin: 0;
 }
+
+@font-face {
+  font-family: "Dreamscape";
+  src: url("assets/fonts/Dreamscape.ttf");
+}
+
+@font-face {
+  font-family: "Dreamscape sans";
+  src: url("assets/fonts/Dreamscape Sans.ttf");
+}
