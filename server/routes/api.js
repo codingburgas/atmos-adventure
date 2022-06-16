@@ -4,6 +4,7 @@ const db = require('../db/db_config.js');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const session = require('express-session');
+const randToken = require('rand-token');
 
 const router = express.Router();
 
@@ -53,7 +54,7 @@ router.post('/register',(req,res)=>{
         }
         else
         {
-            db.query('INSERT INTO users (uuid, username, email, pass_hash) VALUES (?)', [data], (err, result) => {
+            db.query('INSERT INTO users (uuid, username, email, pass_hash) VALUES (?)', [data], (err) => {
                 if(err) 
                 {
                     console.error("Something went wrong");
@@ -103,5 +104,32 @@ router.post('/login',(req,res)=>{
         }
     });
 });
+
+router.get(`/sendConfirmationEmail`,(req,res)=>{
+    if(currentSession)
+    {
+        console.log(`User with uuid: "${currentSession.uuid}" requesting a confirmation email.`)
+        const token = randToken.generate(60);
+        db.query('UPDATE users SET token = (?) WHERE uuid = (?)', [token, currentSession.uuid], (err) => {
+            if(err) 
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else 
+            {
+                console.log("Created temporary verification token"); 
+                res.send({"message":"Created verification temporary token"});
+            }
+        });
+    }
+    else
+    {
+        console.log("User not logged in");
+        res.send({"message":"User not logged in"});
+    }
+});
+
+
 
 module.exports = router;

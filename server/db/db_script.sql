@@ -8,6 +8,8 @@ CREATE TABLE `users` (
     `email` VARCHAR(30) NOT NULL,
     `pass_hash` VARCHAR(60) NOT NULL,
     `role` VARCHAR(10) DEFAULT "user",
+    `verified` BOOLEAN DEFAULT FALSE,
+    `token` VARCHAR(60) DEFAULT NULL,
     PRIMARY KEY(`uuid`)
 );
-INSERT INTO `users` VALUES ("6706aae5-7ca0-4915-b688-098c8644407c", "admin", "admin@atmos.me", "$2b$10$KiqYHZJlmzl7G0fvA1XY2uYuR3QeHAA71Dn05AzfwsPcsIEeItxZS", "admin");
+INSERT INTO `users` VALUES ("6706aae5-7ca0-4915-b688-098c8644407c", "admin", "admin@atmos.me", "$2b$10$KiqYHZJlmzl7G0fvA1XY2uYuR3QeHAA71Dn05AzfwsPcsIEeItxZS", "admin", FALSE, NULL);
