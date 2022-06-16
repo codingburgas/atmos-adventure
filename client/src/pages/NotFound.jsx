@@ -17,16 +17,16 @@ const NotFound = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center flex-col">
-      <h1 className="text-3xl">Error 404</h1>
-      <br />
-      <h1 className="text-xl">
-        Oops you entered the wrong ATMOS page! Please go to [link]
-      </h1>
-      <br />
-      <h1>Page not found</h1>
-      {automaticRedirect()}
-      <p>Redirecting to the Home page in: {time}</p>
+    <div className="h-screen w-screen bg-404 bg-center bg-no-repeat bg-cover object-cover backdrop-blur overflow-hidden">
+      <div className="flex flex-col items-center justify-center font-serif font-black pt-10 bg-gradient-to-b from-smoothWhite to-smoothPurple text-transparent bg-clip-text text-3xl desktop:text-5xl tablet:text-6xl">
+        <h1>Whoops...</h1>
+        <h1>Something went wrong!</h1>
+      </div>
+      <div className="flex flex-row items-center justify-center font-raleway font-normal text-white text-xl mt-10 tablet:text-3xl">
+        {automaticRedirect()}
+        <h1>Redirecting to home in: {time}</h1>
+      </div>
+      <div className="h-full object-cover bg-forms bg-no-repeat bg-center bg-300 -mt-20 tablet:bg-700 tablet:-mt-32"></div>
     </div>
   );
 };
