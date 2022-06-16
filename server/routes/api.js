@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const session = require('express-session');
 const randToken = require('rand-token');
+const { application } = require('express');
 
 const router = express.Router();
 
@@ -130,6 +131,20 @@ router.get(`/sendConfirmationEmail`,(req,res)=>{
     }
 });
 
+router.get('/logout', (req,res) => {
+    if(currentSession)
+    {
+        console.log(`User with uuid: "${currentSession.uuid}" trying to logout.`)
+        currentSession.destroy();
+        currentSession = null;
+        res.send({"message":"User logged out"});
+    }
+    else
+    {
+        console.log("User not logged in");
+        res.send({"message":"User not logged in"});
+    }
+});
 
 
 module.exports = router;
