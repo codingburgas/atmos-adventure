@@ -39,6 +39,8 @@ module.exports = {
       white: "#FFFFFF",
       lightGreen: "#DAF5D5",
       lightBlue: "#7D7BDC",
+      stroke: "#ABCFE9",
+      transparent: "transparent",
     },
   },
   variants: {

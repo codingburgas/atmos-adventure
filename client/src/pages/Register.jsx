@@ -3,8 +3,15 @@ import { MdAccountCircle } from "react-icons/md";
 import { BiLockAlt } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 import { useRef, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Register = () => {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -27,7 +34,11 @@ const Register = () => {
 
   return (
     <div className="h-screen bg-form bg-center bg-no-repeat bg-cover object-cover">
-      <div className="h-full w-full backdrop-blur-sm desktop:w-half extra:backdrop-blur-md">
+      <div
+        className="h-screen w-full backdrop-blur-sm desktop:w-half extra:backdrop-blur-md"
+        data-aos="fade-right"
+        data-aos-duration="1500"
+      >
         <div className="flex flex-col">
           <h1 className="font-dreamScape text-7xl flex flex-col items-center justify-center relative pt-20 text-white extra:text-9xl">
             ATMOS
@@ -41,30 +52,29 @@ const Register = () => {
           <input
             type="text"
             name=""
-            id=""
-            className="bg-account bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
+            className="border-solid border focus:border-2 border-stroke bg-account bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
             placeholder="Username"
             ref={username}
             required
+            key={username}
           />
         </div>
         <div className="flex flex-row items-center justify-center pt-10 ">
           <input
             type="password"
             name=""
-            id=""
-            className="bg-lock bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
+            className="border-solid border focus:border-2 border-stroke bg-lock bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
             placeholder="Password"
             ref={password}
             required
+            key={password}
           />
         </div>
         <div className="flex flex-row items-center justify-center pt-10 ">
           <input
             type="text"
             name=""
-            id=""
-            className="bg-email bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
+            className="border-solid border focus:border-2 border-stroke bg-email bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
             placeholder="Email"
             ref={email}
             required
@@ -72,7 +82,7 @@ const Register = () => {
         </div>
         <div className="flex flex-row items-center justify-center pt-16 extra:pt-20 ">
           <button
-            className="py-5 px-28 font-sans bg-darkBlue rounded-full extra:px-32 text-white font-bold text-xl extra:text-3xl"
+            className="border-solid border border-stroke py-5 px-28 font-sans bg-darkBlue rounded-full extra:px-32 text-white font-bold text-xl extra:text-3xl"
             onClick={registerHandler}
           >
             Sign up

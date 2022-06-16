@@ -3,7 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import { BiLockAlt } from "react-icons/bi";
 import { useRef, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Login = () => {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+
   const navigate = useNavigate();
   const redirectHandler = () => {
     navigate("/Register", { replace: false });
@@ -40,63 +47,56 @@ const Login = () => {
   // });
 
   return (
-    <div className="h-full">
-      <Navbar />
-      <div className="bg-purple-300  h-screen bg-center bg-no-repeat bg-cover object-cover">
-        <div className="flex h-screen items-end justify-end flex-col-reverse ">
-          <div className="m-auto bg-white bigTablet:bg-form bg-center bg-no-repeat bg-cover object-cover w-1/2 items-center justify-center h-4/6 rounded-3xl">
-            <div className="flex flex-col items-center bg-white w-1/2 h-full ml-auto rounded-r-3xl">
-              <h1 className="mt-8 text-xl bigTablet:mt-14 bigTablet:text-4xl smallLaptop:text-4xl font-serif font-bold smallDesk:text-4xl smallDesk:mt-20 laptop:text-3xl laptop:mt-16">
-                Welcome back!
-              </h1>
-              <h1 className="text-lg bigTablet:text-2xl smallLaptop:text-3xl font-serif smallDesk:text-3xl laptop:text-2xl ">
-                Did you miss us?
-              </h1>
-              <br />
-              <form className="flex flex-col items-center justify-center mt-0 bigTablet:mt-18 laptop:mt-20 smallDesk:mt-20 smallLaptop:mt-20">
-                <div className="border-b-2 border-black w-3/4 bigTablet:w-full bigTablet:border-b-4">
-                  <MdAccountCircle className="text-sm inline-block bigTablet:text-3xl" />
-                  <input
-                    type="username"
-                    name="username"
-                    className="focus:border-none outline-none ml-3 placeholder:font-bold text-xs bigTablet:ml-3 bigTablet:placeholder:font-bold bigTablet:font-serif bigTablet:placeholder:text-base"
-                    placeholder="Username"
-                    required
-                    ref={username}
-                  />
-                  <div className="mt-1"></div>
-                </div>
-                <br />
-                <div className="border-b-2 border-black w-3/4 bigTablet:w-full bigTablet:border-b-4">
-                  <BiLockAlt className="text-sm inline-block bigTablet:text-3xl" />
-                  <input
-                    type="password"
-                    name="username"
-                    className="focus:border-none outline-none ml-3 placeholder:font-bold text-xs bigTablet:ml-3 bigTablet:placeholder:font-bold bigTablet:font-serif bigTablet:placeholder:text-base"
-                    placeholder="Password"
-                    required
-                    ref={password}
-                  />
-                  <div className="mt-1"></div>
-                </div>
-                <div className="bg-blue-400 rounded-3xl mt-12 text-white bigTablet:mt-20 smallDesk:mt-32 laptop:mt-28 smallLaptop:mt-72">
-                  <button
-                    className="font-serif font-bold text-lg pl-20 pr-20 pt-1 ppb-1 bigTablet:pr-28 bigTablet:pl-28 bigTablet:pt-1 bigTablet:pb-1 smallLaptop:pr-28 smallLaptop:pl-28 smallLaptop:pt-2 smallLaptop:pb-2 smallDesk:text-3xl smallDesk:pr-32 smallDesk:pl-32 smallDesk:pt-3 smallDesk:pb-3 laptop:text-2xl laptop:pr-32 laptop:pl-32 laptop:pt-3 laptop:pb-3 smallLaptop:3xl"
-                    onClick={loginHandler}
-                  >
-                    Log in
-                  </button>
-                </div>
-                <div
-                  className="mt-4 text-blue-400 border-b-2 border-blue-300 cursor-pointer "
-                  onClick={redirectHandler}
-                >
-                  <p>Don't have an account?</p>
-                </div>
-              </form>
-              <br />
-            </div>
-          </div>
+    <div className="h-screen bg-form bg-center bg-no-repeat bg-cover object-cover">
+      <div
+        className="h-screen w-full backdrop-blur-sm desktop:w-half extra:backdrop-blur-md"
+        data-aos="fade-right"
+        data-aos-duration="1500"
+      >
+        <div className="flex flex-col">
+          <h1 className="font-dreamScape text-7xl flex flex-col items-center justify-center relative pt-20 text-white extra:text-9xl">
+            ATMOS
+          </h1>
+          <h1 className="font-dreamScapeSans flex flex-col items-center justify-center relative text-lightGreen text-2xl extra:text-4xl">
+            Welcome back!
+          </h1>
+        </div>
+
+        <div className="flex flex-row items-center justify-center pt-12 ">
+          <input
+            type="text"
+            name=""
+            className="border-solid border focus:border-2 border-stroke bg-account bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
+            placeholder="Username"
+            ref={username}
+            required
+            key={username}
+          />
+        </div>
+        <div className="flex flex-row items-center justify-center pt-12 ">
+          <input
+            type="password"
+            name=""
+            className="border-solid border focus:border-2 border-stroke bg-lock bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
+            placeholder="Password"
+            ref={password}
+            required
+            key={password}
+          />
+        </div>
+        <div className="flex flex-row items-center justify-center pt-16 extra:pt-20 ">
+          <button
+            className="border-solid border border-stroke py-5 px-28 font-sans bg-darkBlue rounded-full extra:px-32 text-white font-bold text-xl extra:text-3xl"
+            onClick={loginHandler}
+          >
+            Log in
+          </button>
+        </div>
+        <div
+          className="flex flex-row items-center justify-center text-white font-serif text-xl hover:cursor-pointer mt-2"
+          onClick={redirectHandler}
+        >
+          <h1>Don't have an account?</h1>
         </div>
       </div>
     </div>
