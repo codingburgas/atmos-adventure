@@ -1,7 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 const Navbar = () => {
+  const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    if (authContext.isAuthenticated) {
+      authContext.isAuthenticated = false;
+      navigate("/", { replace: true });
+    } else {
+      navigate("/login", { replace: false });
+    }
+  };
+
+  const buttonHandler = () => {
+    authContext.isAuthenticated ? null : navigate("/login", { replace: false });
+  };
   return (
     <div className="flex flex-row justify-between items-center pr-14 pt-4 z-0 w-full absolute text-white">
       <div
@@ -24,12 +39,12 @@ const Navbar = () => {
 
           <li
             className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
-            onClick={() => navigate("/Login", { replace: false })}
+            onClick={logoutHandler}
           >
-            Login
+            {authContext.isAuthenticated ? "Logout" : "Login"}
           </li>
           <button
-            onSubmit={(e) => e.preventDefault}
+            onClick={buttonHandler}
             className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl hover:cursor-pointer"
           >
             Download

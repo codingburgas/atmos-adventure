@@ -2,11 +2,15 @@ import Navbar from "../components/UI/Navbar";
 import { MdAccountCircle } from "react-icons/md";
 import { BiLockAlt } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
+import { AuthContext } from "../components/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Register = () => {
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -29,7 +33,26 @@ const Register = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
-    }).then(() => console.log("User registered"));
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        switch (data.message) {
+          case "User already exists":
+            alert(data.message);
+            break;
+          case "Email already exists":
+            alert(data.message);
+            break;
+          case "User created":
+            alert(data.message);
+            navigate("/", { replace: true });
+            authContext.isAuthenticated = true;
+            break;
+          default:
+            alert(data.message);
+            break;
+        }
+      });
   };
 
   return (

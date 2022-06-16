@@ -2,7 +2,8 @@ import Navbar from "../components/UI/Navbar";
 import { useNavigate } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import { BiLockAlt } from "react-icons/bi";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
+import { AuthContext } from "./../components/context/AuthContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const Login = () => {
@@ -12,6 +13,7 @@ const Login = () => {
   }, []);
 
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
   const redirectHandler = () => {
     navigate("/Register", { replace: false });
   };
@@ -33,7 +35,23 @@ const Login = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data.message))
+      .then((data) => {
+        switch (data.message) {
+          case "User logged in":
+            authContext.isAuthenticated = true;
+            navigate("/", { replace: true });
+            break;
+          case "Wrong password":
+            alert(data.message);
+            break;
+          case "User not found":
+            alert(data.message);
+            break;
+          default:
+            alert(data.message);
+            break;
+        }
+      })
       .catch((err) => {
         console.log(err);
       });
