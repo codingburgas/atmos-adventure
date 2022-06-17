@@ -3,7 +3,10 @@ const app = express();
 const api = require('./routes/api.js');
 const cors = require('cors');
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 app.use('/api', api);
 

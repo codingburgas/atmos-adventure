@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const session = require('express-session');
 const randToken = require('rand-token');
-const { application } = require('express');
 
 const router = express.Router();
 
@@ -13,13 +12,13 @@ router.use(bodyParser.json());
 
 router.use(session({
     secret: 'this is our little secret',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     cookie: {
-        maxAge: 3600000 // 1 Hour
+        httpOnly: false,
+        maxAge: 3600000, // 1 Hour
     }
 }));
-var currentSession = null;
 
 
 router.get('/', (req, res) => {
@@ -63,8 +62,7 @@ router.post('/register',(req,res)=>{
                 }
                 else 
                 {
-                    currentSession = req.session;
-                    currentSession.uuid = data[0];
+                    req.session.uuid = data[0];
                     console.log("User created"); 
                     res.send({"message":"User created"});
                 }
@@ -89,8 +87,7 @@ router.post('/login',(req,res)=>{
         {
             if(bcrypt.compareSync(data[1], result[0].pass_hash))
             {
-                currentSession = req.session;
-                currentSession.uuid = result[0].uuid;
+                req.session.uuid = result[0].uuid;
                 console.log(`User ${data[0]} logged in`);
                 res.send({"message":"User logged in"});
             }
@@ -109,39 +106,41 @@ router.post('/login',(req,res)=>{
 });
 
 router.get('/logout', (req,res) => {
-    if(currentSession)
+    if(req.session.uuid)
     {
-        console.log(`User with uuid: "${currentSession.uuid}" trying to logout.`)
-        currentSession.destroy();
-        currentSession = null;
+        console.log(`User with uuid: "${req.session.uuid}" trying to logout.`)
+        req.session.destroy();
+        req.session.uuid = null;
         res.send({"message":"User logged out"});
     }
     else
     {
         console.log("User not logged in");
+        res.cookie('uuid', '');
         res.send({"message":"User not logged in"});
     }
 });
 
 router.get('/isAuthenticated', (req,res) => {
-    if(currentSession)
+    if(req.session.uuid)
     {
-        console.log(`User is authenticated with uuid ${currentSession.uuid}`);
+        console.log(`User is authenticated with uuid ${req.session.uuid}`);
         res.send({"message":"User is authenticated"});
     }
     else
     {
+        console.log(req.session)
         console.log("User not authenticated");
         res.send({"message":"User not authenticated"});
     }
 });
 
 router.get(`/sendConfirmationEmail`,(req,res)=>{
-    if(currentSession)
+    if(req.session.uuid)
     {
-        console.log(`User with uuid: "${currentSession.uuid}" requesting a confirmation email.`)
+        console.log(`User with uuid: "${req.session.uuid}" requesting a confirmation email.`)
         const token = randToken.generate(60);
-        db.query('UPDATE users SET token = (?) WHERE uuid = (?) AND verified = FALSE', [token, currentSession.uuid], (err, result) => {
+        db.query('UPDATE users SET token = (?) WHERE uuid = (?) AND verified = FALSE', [token, req.session.uuid], (err, result) => {
             if(err) 
             {
                 console.error("Something went wrong");
@@ -180,7 +179,7 @@ router.post(`/confirm/:token`,(req,res)=>{
         }
         else if (result.length > 0)
         {
-            db.query('UPDATE users SET token = NULL WHERE uuid = (?)', [currentSession.uuid], (err) => {
+            db.query('UPDATE users SET token = NULL WHERE uuid = (?)', [req.session.uuid], (err) => {
                 if(err)
                 {
                     console.error("Something went wrong");
