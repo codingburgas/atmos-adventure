@@ -63,6 +63,8 @@ router.post('/register',(req,res)=>{
                 }
                 else 
                 {
+                    currentSession = req.session;
+                    currentSession.uuid = data[0];
                     console.log("User created"); 
                     res.send({"message":"User created"});
                 }
