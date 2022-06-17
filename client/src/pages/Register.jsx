@@ -44,9 +44,15 @@ const Register = () => {
             alert(data.message);
             break;
           case "User created":
+            fetch("http://localhost:3001/api/isAuthenticated")
+              .then((res) => res.json())
+              .then((data) => {
+                data.message === "User is authenticated"
+                  ? authContext.setIsAuthenticated(true)
+                  : null;
+              });
             alert(data.message);
             navigate("/", { replace: true });
-            authContext.isAuthenticated = true;
             break;
           default:
             alert(data.message);

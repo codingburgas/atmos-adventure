@@ -38,7 +38,14 @@ const Login = () => {
       .then((data) => {
         switch (data.message) {
           case "User logged in":
-            authContext.isAuthenticated = true;
+            fetch("http://localhost:3001/api/isAuthenticated")
+              .then((res) => res.json())
+              .then((data) => {
+                data.message === "User is authenticated"
+                  ? authContext.setIsAuthenticated(true)
+                  : null;
+              });
+
             navigate("/", { replace: true });
             break;
           case "Wrong password":

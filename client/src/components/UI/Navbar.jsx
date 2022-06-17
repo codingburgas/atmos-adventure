@@ -1,14 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import BurgerNavbar from "./BurgerNavbar";
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
+  console.log(authContext.isAuthenticated);
+
   const logoutHandler = () => {
     if (authContext.isAuthenticated) {
-      authContext.isAuthenticated = false;
+      fetch("http://localhost:3001/api/logout")
+        .then((res) => res.json())
+        .then((data) => {
+          data.message === "User logged out"
+            ? authContext.setIsAuthenticated(false)
+            : null;
+        });
+
       navigate("/", { replace: true });
     } else {
       navigate("/login", { replace: false });
