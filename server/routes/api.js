@@ -108,31 +108,6 @@ router.post('/login',(req,res)=>{
     });
 });
 
-router.get(`/sendConfirmationEmail`,(req,res)=>{
-    if(currentSession)
-    {
-        console.log(`User with uuid: "${currentSession.uuid}" requesting a confirmation email.`)
-        const token = randToken.generate(60);
-        db.query('UPDATE users SET token = (?) WHERE uuid = (?)', [token, currentSession.uuid], (err) => {
-            if(err) 
-            {
-                console.error("Something went wrong");
-                res.send({"message":"Something went wrong"});
-            }
-            else 
-            {
-                console.log("Created temporary verification token"); 
-                res.send({"message":"Created verification temporary token"});
-            }
-        });
-    }
-    else
-    {
-        console.log("User not logged in");
-        res.send({"message":"User not logged in"});
-    }
-});
-
 router.get('/logout', (req,res) => {
     if(currentSession)
     {
@@ -161,5 +136,69 @@ router.get('/isAuthenticated', (req,res) => {
     }
 });
 
+router.get(`/sendConfirmationEmail`,(req,res)=>{
+    if(currentSession)
+    {
+        console.log(`User with uuid: "${currentSession.uuid}" requesting a confirmation email.`)
+        const token = randToken.generate(60);
+        db.query('UPDATE users SET token = (?) WHERE uuid = (?) AND verified = FALSE', [token, currentSession.uuid], (err, result) => {
+            if(err) 
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else 
+            {
+                if(result.affectedRows > 0)
+                {
+                    console.log("Created temporary verification token"); 
+                    res.send({"message":"Created verification temporary token"});
+                }
+                
+                else 
+                {
+                    console.log("User already verified");
+                    res.send({"message":"User already verified"});
+                }
+            }
+        });
+    }
+    else
+    {
+        console.log("User not logged in");
+        res.send({"message":"User not logged in"});
+    }
+});
+
+router.post(`/confirm/:token`,(req,res)=>{
+    console.log(`User trying to confir their email.`)
+    db.query('SELECT * FROM users WHERE token = (?)', [req.params.token], (err, result) => {
+        if (err)
+        {
+            console.error("Something went wrong");
+            res.send({"message":"Something went wrong"});
+        }
+        else if (result.length > 0)
+        {
+            db.query('UPDATE users SET token = NULL WHERE uuid = (?)', [currentSession.uuid], (err) => {
+                if(err)
+                {
+                    console.error("Something went wrong");
+                    res.send({"message":"Something went wrong"});
+                }
+                else
+                {
+                    console.log("Email confirmed");
+                    res.send({"message":"Email confirmed"});
+                }
+            });
+        }
+        else
+        {
+            console.log("Invalid token");
+            res.send({"message":"Invalid token"});
+        }
+    });
+});
 
 module.exports = router;
