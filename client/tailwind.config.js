@@ -31,6 +31,7 @@ module.exports = {
           "url('https://cdn.discordapp.com/attachments/883768694835130390/986687019046551642/My_project_1.png')",
         404: "url('./assets/404.jpg')",
         forms: "url('./assets/forms.png')",
+        dashboardBg: "url('./assets/dashboardBg.jpg')",
       },
       backgroundSize: {
         20: "27px",
