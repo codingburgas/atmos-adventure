@@ -13,6 +13,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "rand-token": "^1.0.1",
     "uuid": "^8.3.2"
