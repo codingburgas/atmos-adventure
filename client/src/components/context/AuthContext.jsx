@@ -19,6 +19,7 @@ const AuthContextProvider = (props) => {
   const setIsAuthenticated = (isAuthenticated) => {
     setIsAuth(isAuthenticated);
   };
+
   const context = {
     isAuthenticated: isAuth,
     setIsAuthenticated: setIsAuthenticated,

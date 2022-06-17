@@ -1,7 +1,3 @@
-import Navbar from "../components/UI/Navbar";
-import { MdAccountCircle } from "react-icons/md";
-import { BiLockAlt } from "react-icons/bi";
-import { MdEmail } from "react-icons/md";
 import { useRef, useEffect, useContext } from "react";
 import { AuthContext } from "../components/context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -11,14 +7,15 @@ import "aos/dist/aos.css";
 const Register = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const username = useRef();
+  const email = useRef();
+  const password = useRef();
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
 
-  const username = useRef();
-  const email = useRef();
-  const password = useRef();
   const registerHandler = (e) => {
     e.preventDefault();
     const user = {

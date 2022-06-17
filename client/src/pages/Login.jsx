@@ -1,25 +1,22 @@
-import Navbar from "../components/UI/Navbar";
 import { useNavigate } from "react-router-dom";
-import { MdAccountCircle } from "react-icons/md";
-import { BiLockAlt } from "react-icons/bi";
 import { useRef, useEffect, useContext } from "react";
 import { AuthContext } from "./../components/context/AuthContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const Login = () => {
+  const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
+  const username = useRef();
+  const password = useRef();
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
 
-  const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
   const redirectHandler = () => {
     navigate("/Register", { replace: false });
   };
 
-  const username = useRef();
-  const password = useRef();
   const loginHandler = (e) => {
     e.preventDefault();
     const user = {
@@ -63,13 +60,6 @@ const Login = () => {
         console.log(err);
       });
   };
-
-  // useEffect(() => {
-  //   const resize = () => {
-  //     console.log(window.innerWidth);
-  //   };
-  //   window.addEventListener("resize", resize);
-  // });
 
   return (
     <div className="h-screen bg-form bg-center bg-no-repeat bg-cover object-cover">

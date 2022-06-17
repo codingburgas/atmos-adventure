@@ -6,8 +6,6 @@ const Navbar = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log(authContext.isAuthenticated);
-
   const logoutHandler = () => {
     if (authContext.isAuthenticated) {
       fetch("http://localhost:3001/api/logout")
@@ -24,18 +22,23 @@ const Navbar = () => {
     }
   };
 
-  const buttonHandler = () => {
+  const downloadButtonHandler = () => {
     authContext.isAuthenticated ? null : navigate("/login", { replace: false });
   };
 
+  const logoRedirectHandler = () => {
+    navigate("/", { replace: false });
+  };
+
+  const aboutHandler = () => {
+    navigate("*", { replace: false });
+  };
   return (
     <div>
       <div className="hidden tablet:flex tablet:flex-row tablet:justify-between tablet:items-center tablet:pr-14 tablet:pt-4 z-0 w-full absolute text-white">
         <div
           className="ml-16 font-sans text-4xl mt-1.5 w-full h-1/3 hover:cursor-pointer"
-          onClick={() => {
-            navigate("/", { replace: false });
-          }}
+          onClick={logoRedirectHandler}
         >
           ATMOS
         </div>
@@ -44,7 +47,7 @@ const Navbar = () => {
           <ul className="flex space-x-10">
             <li
               className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
-              onClick={() => navigate("*", { replace: false })}
+              onClick={aboutHandler}
             >
               About
             </li>
@@ -56,7 +59,7 @@ const Navbar = () => {
               {authContext.isAuthenticated ? "Logout" : "Login"}
             </li>
             <button
-              onClick={buttonHandler}
+              onClick={downloadButtonHandler}
               className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl hover:cursor-pointer"
             >
               Download

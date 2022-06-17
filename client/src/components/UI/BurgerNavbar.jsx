@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "../../index.css";
 const BurgerNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const authContext = useContext(AuthContext);
@@ -32,12 +31,16 @@ const BurgerNavbar = () => {
       : navigate("/Register", { replace: false });
   };
 
-  const burgerHandler = () => {
-    setIsOpen(!isOpen);
+  const downloadButtonHandler = () => {
+    authContext.isAuthenticated ? null : navigate("/login", { replace: false });
   };
 
-  const buttonHandler = () => {
-    authContext.isAuthenticated ? null : navigate("/login", { replace: false });
+  const aboutHandler = () => {
+    navigate("*", { replace: false });
+  };
+
+  const burgerHandler = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -90,14 +93,11 @@ const BurgerNavbar = () => {
             ? "animate-trX opacity-50 flex flex-row-reverse justify-center absolute top-0 backdrop-blur-3xl bg-[#150636] h-full w-full tablet:hidden"
             : "hidden"
         }
-        onClick={() => {}}
       >
         <ul className="font-raleway backdrop-blur-3xl font-semibold text-2xl text-center uppercase text-white flex flex-col items-center justify-start w-full">
           <li
             className="hover:cursor-pointer mt-16 py-4 border-b border-t-2 w-full text-center border-b-solid border-white"
-            onClick={() => {
-              navigate("*", { replace: false });
-            }}
+            onClick={aboutHandler}
           >
             About
           </li>
@@ -115,7 +115,7 @@ const BurgerNavbar = () => {
           </li>
           <li
             className="hover:cursor-pointer py-4 border-b-2 border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
-            onClick={buttonHandler}
+            onClick={downloadButtonHandler}
           >
             Download
           </li>

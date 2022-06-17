@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { AuthContext } from "./components/context/AuthContext";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
