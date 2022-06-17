@@ -50,6 +50,20 @@ module.exports = {
       smoothWhite: "#F6F4EA",
       smoothPurple: "#B08BD6",
     },
+    keyframes: {
+      trX: {
+        "0%": { transform: "translateX(100%)" },
+        "100%": { transform: "translateX(0%)" },
+      },
+      trXRev: {
+        "0%": { transform: "translateX(0%)" },
+        "100%": { transform: "translateX(-100%)" },
+      },
+    },
+    animation: {
+      trX: "trX 1s ease-in-out",
+      trXRev: "trXRev 1s ease-in-out",
+    },
   },
   variants: {
     backgroundColor: ["responsive", "dust"],

@@ -58,7 +58,7 @@ const Register = () => {
   return (
     <div className="h-screen bg-form bg-center bg-no-repeat bg-cover object-cover">
       <div
-        className="h-screen w-full backdrop-blur-sm desktop:w-half extra:backdrop-blur-md"
+        className="h-screen w-full backdrop-blur-sm desktop:w-half extra:backdrop-blur-md relative top-0 left-0"
         data-aos="fade-right"
         data-aos-duration="1500"
       >
