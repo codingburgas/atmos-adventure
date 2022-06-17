@@ -146,5 +146,18 @@ router.get('/logout', (req,res) => {
     }
 });
 
+router.get('/isAuthenticated', (req,res) => {
+    if(currentSession)
+    {
+        console.log(`User is authenticated with uuid ${currentSession.uuid}`);
+        res.send({"message":"User is authenticated"});
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
 
 module.exports = router;
