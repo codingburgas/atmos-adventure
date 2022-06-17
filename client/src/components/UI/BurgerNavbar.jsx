@@ -18,7 +18,14 @@ const BurgerNavbar = () => {
 
   const logOutInHandler = () => {
     if (authContext.isAuthenticated) {
-      authContext.isAuthenticated = false;
+      fetch("http://localhost:3001/api/logout")
+        .then((res) => res.json())
+        .then((data) => {
+          data.message === "User logged out"
+            ? authContext.setIsAuthenticated(false)
+            : null;
+        });
+
       navigate("/", { replace: true });
     } else {
       navigate("/login", { replace: false });
