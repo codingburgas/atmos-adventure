@@ -94,44 +94,46 @@ const tableData = [
 ];
 const MuiTable = () => {
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: "50vh" }}>
-      <Table aria-label="users" stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              <strong>ID</strong>
-            </TableCell>
-            <TableCell>
-              <strong>First Name</strong>
-            </TableCell>
-            <TableCell>
-              <strong>Last Name</strong>
-            </TableCell>
-            <TableCell>
-              <strong>Email</strong>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tableData.map((row) => {
-            return (
-              <TableRow
-                key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                onClick={() => {
-                  // delete row.id;
-                }}
-              >
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.first_name}</TableCell>
-                <TableCell>{row.last_name}</TableCell>
-                <TableCell>{row.email}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className="z-0">
+      <TableContainer component={Paper} sx={{ maxHeight: "50vh" }}>
+        <Table aria-label="users" stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <strong>ID</strong>
+              </TableCell>
+              <TableCell>
+                <strong>First Name</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Last Name</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Email</strong>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tableData.map((row) => {
+              return (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  onClick={() => {
+                    // delete row.id;
+                  }}
+                >
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.first_name}</TableCell>
+                  <TableCell>{row.last_name}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 

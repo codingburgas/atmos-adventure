@@ -2,21 +2,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useState, useEffect } from "react";
 import BurgerNavbar from "./BurgerNavbar";
+import axios from "axios";
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     if (authContext.isAuthenticated) {
-      fetch("http://localhost:3001/api/logout")
-        .then((res) => res.json())
-        .then((data) => {
-          data.message === "User logged out"
-            ? authContext.setIsAuthenticated(false)
-            : null;
+      // fetch("http://localhost:3001/api/logout")
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     data.message === "User logged out"
+      //       ? authContext.setIsAuthenticated(false)
+      //       : null;
+      //   });
+      axios
+        .get("http://localhost:3001/api/logout", { withCredentials: true })
+        .then((res) => {
+          if (res.data.message === "User logged out") {
+            authContext.setIsAuthenticated(false);
+            navigate("/", { replace: true });
+          } else {
+            console.log(res.data.message);
+          }
         });
-
-      navigate("/", { replace: true });
     } else {
       navigate("/login", { replace: false });
     }

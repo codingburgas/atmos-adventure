@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from "react";
-
+import axios from "axios";
 export const AuthContext = createContext({
   isAuthenticated: false,
   setIsAuthenticated: () => {},
@@ -8,10 +8,10 @@ export const AuthContext = createContext({
 const AuthContextProvider = (props) => {
   const [isAuth, setIsAuth] = useState(false);
 
-  fetch("http://localhost:3001/api/isAuthenticated")
-    .then((res) => res.json())
-    .then((data) => {
-      data.message === "User is authenticated"
+  axios
+    .get("http://localhost:3001/api/isAuthenticated", { withCredentials: true })
+    .then((res) => {
+      res.data.message === "User is authenticated"
         ? setIsAuth(true)
         : setIsAuth(false);
     });

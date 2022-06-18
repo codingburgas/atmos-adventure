@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useEffect, useContext } from "react";
 import { AuthContext } from "./../components/context/AuthContext";
+import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const Login = () => {
@@ -24,40 +25,23 @@ const Login = () => {
       password: password.current.value,
     };
 
-    fetch("http://localhost:3001/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        switch (data.message) {
-          case "User logged in":
-            fetch("http://localhost:3001/api/isAuthenticated")
-              .then((res) => res.json())
-              .then((data) => {
-                data.message === "User is authenticated"
-                  ? authContext.setIsAuthenticated(true)
-                  : null;
-              });
-
-            navigate("/", { replace: true });
-            break;
-          case "Wrong password":
-            alert(data.message);
-            break;
-          case "User not found":
-            alert(data.message);
-            break;
-          default:
-            alert(data.message);
-            break;
+    axios
+      .post("http://localhost:3001/api/login", user, { withCredentials: true })
+      .then((res) => {
+        if (res.data.message === "User logged in") {
+          axios
+            .get("http://localhost:3001/api/isAuthenticated", {
+              withCredentials: true,
+            })
+            .then((res) => {
+              res.data.message === "User is authenticated"
+                ? authContext.setIsAuthenticated(true)
+                : authContext.setIsAuthenticated(false);
+            });
+          navigate("/", { replace: true });
+        } else {
+          console.log(res.data.message);
         }
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 

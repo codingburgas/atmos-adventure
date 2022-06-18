@@ -1,6 +1,7 @@
 import { useRef, useEffect, useContext } from "react";
 import { AuthContext } from "../components/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -24,36 +25,24 @@ const Register = () => {
       password: password.current.value,
     };
 
-    fetch("http://localhost:3001/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        switch (data.message) {
-          case "User already exists":
-            alert(data.message);
-            break;
-          case "Email already exists":
-            alert(data.message);
-            break;
-          case "User created":
-            fetch("http://localhost:3001/api/isAuthenticated")
-              .then((res) => res.json())
-              .then((data) => {
-                data.message === "User is authenticated"
-                  ? authContext.setIsAuthenticated(true)
-                  : null;
-              });
-            alert(data.message);
-            navigate("/", { replace: true });
-            break;
-          default:
-            alert(data.message);
-            break;
+    axios
+      .post("http://localhost:3001/api/register", user, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.message === "User created") {
+          axios
+            .get("http://localhost:3001/api/isAuthenticated", {
+              withCredentials: true,
+            })
+            .then((res) => {
+              res.data.message === "User is authenticated"
+                ? authContext.setIsAuthenticated(true)
+                : authContext.setIsAuthenticated(false);
+            });
+          navigate("/", { replace: true });
+        } else {
+          console.log(res.data.message);
         }
       });
   };
