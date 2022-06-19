@@ -10,14 +10,14 @@ const AuthContextProvider = (props) => {
 
   const setIsAuthenticatedHandler = () => {
     axios
-      .get("http://localhost:3001/api/isAuthenticated", {
+      .get("http://localhost:3001/api/getUser", {
         withCredentials: true,
       })
       .then((res) => {
-        if (res.data.message === "User is authenticated") {
-          setIsAuth(true);
-        } else {
+        if (res.data.message === "User not authenticated") {
           setIsAuth(false);
+        } else {
+          setIsAuth(true);
         }
       });
   };
