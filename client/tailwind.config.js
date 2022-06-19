@@ -4,6 +4,8 @@ module.exports = {
   purge: ["src/**/*.js", "src/**/*.jsx"],
   theme: {
     screens: {
+      xl: "1600px",
+      el: "1535px",
       extra: "1281px",
       desktop: "1023px",
       tablet: "768px",
@@ -32,6 +34,7 @@ module.exports = {
         404: "url('./assets/404.jpg')",
         forms: "url('./assets/forms.png')",
         dashboardBg: "url('./assets/dashboardBg.jpg')",
+        profileBg: "url('./assets/profileBg.jpg')",
       },
       backgroundSize: {
         20: "27px",

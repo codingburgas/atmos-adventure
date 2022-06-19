@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const BurgerNavbar = () => {
@@ -18,15 +19,16 @@ const BurgerNavbar = () => {
 
   const logOutInHandler = () => {
     if (authContext.isAuthenticated) {
-      fetch("http://localhost:3001/api/logout")
-        .then((res) => res.json())
-        .then((data) => {
-          data.message === "User logged out"
-            ? authContext.setIsAuthenticated(false)
-            : null;
+      axios
+        .get("http://localhost:3001/api/logout", { withCredentials: true })
+        .then((res) => {
+          if (res.data.message === "User logged out") {
+            authContext.setIsAuthenticated(false);
+            navigate("/", { replace: true });
+          } else {
+            console.log(res.data.message);
+          }
         });
-
-      navigate("/", { replace: true });
     } else {
       navigate("/login", { replace: false });
     }

@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useState, useEffect, useCallback } from "react";
+import ProfilePopup from "./ProfilePopup";
 import BurgerNavbar from "./BurgerNavbar";
 import axios from "axios";
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -41,7 +43,7 @@ const Navbar = () => {
 
   const registerHandler = () => {
     authContext.isAuthenticated
-      ? null
+      ? setIsOpen(!isOpen)
       : navigate("/register", { replace: false });
   };
   return (
@@ -85,6 +87,7 @@ const Navbar = () => {
         </div>
       </div>
       <BurgerNavbar />
+      <ProfilePopup isOpen={isOpen} />
     </div>
   );
 };
