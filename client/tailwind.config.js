@@ -50,6 +50,7 @@ module.exports = {
       transparent: "transparent",
       smoothWhite: "#F6F4EA",
       smoothPurple: "#B08BD6",
+      red: "#FF0000",
     },
     keyframes: {
       trX: {

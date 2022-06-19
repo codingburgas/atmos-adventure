@@ -42,6 +42,12 @@ const Navbar = () => {
   const aboutHandler = () => {
     navigate("*", { replace: false });
   };
+
+  const registerHandler = () => {
+    authContext.isAuthenticated
+      ? null
+      : navigate("/register", { replace: false });
+  };
   return (
     <div>
       <div className="hidden tablet:flex tablet:flex-row tablet:justify-between tablet:items-center tablet:pr-14 tablet:pt-4 z-0 w-full absolute text-white">
@@ -66,6 +72,12 @@ const Navbar = () => {
               onClick={logoutHandler}
             >
               {authContext.isAuthenticated ? "Logout" : "Login"}
+            </li>
+            <li
+              className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
+              onClick={registerHandler}
+            >
+              {authContext.isAuthenticated ? "Profile" : "Register"}
             </li>
             <button
               onClick={downloadButtonHandler}

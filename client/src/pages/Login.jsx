@@ -39,8 +39,17 @@ const Login = () => {
                 : authContext.setIsAuthenticated(false);
             });
           navigate("/", { replace: true });
-        } else {
-          console.log(res.data.message);
+        } else if (res.data.message === "Wrong password") {
+          password.current.classList.remove("border-stroke");
+          password.current.classList.add("border-red");
+          password.current.value = "";
+        } else if (res.data.message === "User not found") {
+          username.current.classList.remove("border-stroke");
+          username.current.classList.add("border-red");
+          username.current.value = "";
+          password.current.classList.remove("border-stroke");
+          password.current.classList.add("border-red");
+          password.current.value = "";
         }
       });
   };
