@@ -64,10 +64,15 @@ module.exports = {
         "0%": { transform: "translateX(0%)" },
         "100%": { transform: "translateX(-100%)" },
       },
+      spin: {
+        "0%": { transform: "rotate(0deg)" },
+        "100%": { transform: "rotate(360deg)" },
+      },
     },
     animation: {
       trX: "trX 1s ease-in-out",
       trXRev: "trXRev 1s ease-in-out",
+      spin: "spin 2s linear infinite",
     },
   },
   variants: {

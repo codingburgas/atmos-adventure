@@ -1,5 +1,4 @@
 const ProfilePopup = (props) => {
-  console.log(props.isOpen);
   return (
     <div
       className={
@@ -38,7 +37,7 @@ const ProfilePopup = (props) => {
           </div>
           <hr />
         </div>
-        <div className="flex flex-row justify-around relative bottom-0 font-raleway font-light text-xl mt-4 el:text-lg el:mt-2 xl:!text-xl xl:!mt-4">
+        <div className="flex flex-row justify-around relative bottom-0 font-raleway font-light text-xl mt-4 el:text-lg el:mt-0 xl:!text-xl xl:!mt-4">
           <h1 className="cursor-pointer">Sign out</h1>
           <h1 className="text-red cursor-pointer">Delete account</h1>
         </div>
