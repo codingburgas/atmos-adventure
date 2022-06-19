@@ -29,15 +29,6 @@ const Login = () => {
       .post("http://localhost:3001/api/login", user, { withCredentials: true })
       .then((res) => {
         if (res.data.message === "User logged in") {
-          axios
-            .get("http://localhost:3001/api/isAuthenticated", {
-              withCredentials: true,
-            })
-            .then((res) => {
-              res.data.message === "User is authenticated"
-                ? authContext.setIsAuthenticated(true)
-                : authContext.setIsAuthenticated(false);
-            });
           navigate("/", { replace: true });
         } else if (res.data.message === "Wrong password") {
           password.current.classList.remove("border-stroke");

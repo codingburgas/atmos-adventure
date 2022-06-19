@@ -8,21 +8,23 @@ export const AuthContext = createContext({
 const AuthContextProvider = (props) => {
   const [isAuth, setIsAuth] = useState(false);
 
-  axios
-    .get("http://localhost:3001/api/isAuthenticated", { withCredentials: true })
-    .then((res) => {
-      res.data.message === "User is authenticated"
-        ? setIsAuth(true)
-        : setIsAuth(false);
-    });
-
-  const setIsAuthenticated = (isAuthenticated) => {
-    setIsAuth(isAuthenticated);
+  const setIsAuthenticatedHandler = () => {
+    axios
+      .get("http://localhost:3001/api/isAuthenticated", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.message === "User is authenticated") {
+          setIsAuth(true);
+        } else {
+          setIsAuth(false);
+        }
+      });
   };
 
   const context = {
     isAuthenticated: isAuth,
-    setIsAuthenticated: setIsAuthenticated,
+    setIsAuthenticated: setIsAuthenticatedHandler,
   };
 
   return (

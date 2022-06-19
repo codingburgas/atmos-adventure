@@ -102,6 +102,7 @@ router.get("/logout", (req, res) => {
     req.session.destroy();
     // req.session.uuid = null;
     res.send({ message: "User logged out" });
+    console.clear();
   } else {
     console.log("User not logged in");
     res.cookie("uuid", "");

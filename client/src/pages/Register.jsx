@@ -31,15 +31,6 @@ const Register = () => {
       })
       .then((res) => {
         if (res.data.message === "User created") {
-          axios
-            .get("http://localhost:3001/api/isAuthenticated", {
-              withCredentials: true,
-            })
-            .then((res) => {
-              res.data.message === "User is authenticated"
-                ? authContext.setIsAuthenticated(true)
-                : authContext.setIsAuthenticated(false);
-            });
           navigate("/", { replace: true });
         } else {
           console.log(res.data.message);
