@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const session = require('express-session');
 const randToken = require('rand-token');
+const mailer = require('../controllers/email.js');
 
 const router = express.Router();
 
@@ -130,7 +131,7 @@ router.get('/getUser', (req,res) => {
             }
             else if (result.length > 0)
             {
-                console.log(`User with uuid ${req.session.uuid} retrieved`);
+                console.log(`Retrieved information for user with uuid ${req.session.uuid}`);
                 res.send(result[0]);
             }
             else
@@ -164,9 +165,9 @@ router.get(`/sendConfirmationEmail`,(req,res)=>{
                 if(result.affectedRows > 0)
                 {
                     console.log("Created temporary verification token"); 
-                    res.send({"message":"Created verification temporary token"});
+                    mailer.sendConfirmationEmail(req.session.uuid, token);
+                    res.send({"message":"Created temporary verification token"});
                 }
-                
                 else 
                 {
                     console.log("User already verified");
@@ -182,8 +183,8 @@ router.get(`/sendConfirmationEmail`,(req,res)=>{
     }
 });
 
-router.post(`/confirm/:token`,(req,res)=>{
-    console.log(`User trying to confir their email.`)
+router.get(`/confirm/:token`,(req,res)=>{
+    console.log(`User trying to confirm their email.`)
     db.query('SELECT * FROM users WHERE token = (?)', [req.params.token], (err, result) => {
         if (err)
         {
@@ -192,7 +193,7 @@ router.post(`/confirm/:token`,(req,res)=>{
         }
         else if (result.length > 0)
         {
-            db.query('UPDATE users SET token = NULL WHERE uuid = (?)', [req.session.uuid], (err) => {
+            db.query('UPDATE users SET token = NULL, verified = TRUE WHERE token = (?)', [req.params.token], (err) => {
                 if(err)
                 {
                     console.error("Something went wrong");
@@ -207,8 +208,8 @@ router.post(`/confirm/:token`,(req,res)=>{
         }
         else
         {
-            console.log("Invalid token");
-            res.send({"message":"Invalid token"});
+            console.log("Invalid token or email already confirmed");
+            res.send({"message":"Invalid token or email already confirmed"});
         }
     });
 });
