@@ -1,8 +1,21 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 const ProfilePopup = (props) => {
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/getUser", { withCredentials: true })
+      .then((res) => {
+        setUsername(res.data.username);
+        setRole(res.data.role);
+      });
+  }, []);
+
   return (
     <div
       className={
-        props.isOpen
+        props.isOpen && props.isAuth
           ? "hidden tablet:flex tablet:flex-column tablet:justify-end tablet:rounded-xl"
           : "hidden"
       }
@@ -13,9 +26,9 @@ const ProfilePopup = (props) => {
           <div className=" bg-white h-24 w-24 rounded-full mr-3 ml-10"></div>
           <div className="text-white">
             <h1 className="font-raleway font-semibold text-3xl el:text-2xl xl:!text-3xl">
-              [Username]
+              {username}
             </h1>
-            <h1 className="font-raleway font-normal text-xl">[Role]</h1>
+            <h1 className="font-raleway font-normal text-xl">{role}</h1>
           </div>
         </div>
         <div className="space-y-2 space-x-3">

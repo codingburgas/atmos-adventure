@@ -87,7 +87,7 @@ const Navbar = () => {
         </div>
       </div>
       <BurgerNavbar />
-      <ProfilePopup isOpen={isOpen} />
+      <ProfilePopup isOpen={isOpen} isAuth={authContext.isAuthenticated} />
     </div>
   );
 };
