@@ -6,6 +6,7 @@ const uuid = require('uuid');
 const session = require('express-session');
 const randToken = require('rand-token');
 const mailer = require('../controllers/email.js');
+const moment = require('moment');
 
 const router = express.Router();
 
@@ -27,11 +28,13 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register',(req,res)=>{
+    const date = moment().format('YYYY-MM-DD HH:mm:ss');
     const data = [
         uuid.v4(),
         req.body.username,
         req.body.email,
-        bcrypt.hashSync(req.body.password, 10)
+        bcrypt.hashSync(req.body.password, 10),
+        date,
     ];
     console.log(`User with username: "${data[1]}" trying to register.`)
     db.query('SELECT * FROM users WHERE username = (?) OR email = (?)', [data[1], data[2]], (err, result) => {
@@ -55,9 +58,10 @@ router.post('/register',(req,res)=>{
         }
         else
         {
-            db.query('INSERT INTO users (uuid, username, email, pass_hash) VALUES (?)', [data], (err) => {
+            db.query('INSERT INTO users (uuid, username, email, pass_hash, date_created) VALUES (?)', [data], (err) => {
                 if(err) 
                 {
+                    console.log(err)
                     console.error("Something went wrong");
                     res.send({"message":"Something went wrong"});
                 }
@@ -140,6 +144,52 @@ router.get('/getUser', (req,res) => {
                 res.send({"message":"User not found"});
             }
         });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
+router.get('/getAllUsers', (req,res) => {
+    if(req.session.uuid)
+    {
+        db.query('SELECT * FROM users WHERE uuid = (?) AND role = "admin"', [req.session.uuid], (err,result)=>{
+            if(err)
+            {
+                console.log(err)
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else if(result.length > 0)
+            {
+                db.query('SELECT username, email, role, date_created, verified FROM users', (err, result) => {
+                    if (err)
+                    {
+                        console.log(err);
+                        console.error("Something went wrong");
+                        res.send({"message":"Something went wrong"});
+                    }
+                    else if (result.length > 0)
+                    {
+                        console.log(result);
+                        console.log("Retrieved all users");
+                        res.send(result);
+                    }
+                    else
+                    {
+                        console.log("No users found");
+                        res.send({"message":"No users found"});
+                    }
+                });
+            }
+            else
+            {
+                console.log("User doesn't have permission to access this endpoint");
+                res.send({"message":"User doesn't have permission to access this endpoint"});
+            }
+        })
     }
     else
     {
