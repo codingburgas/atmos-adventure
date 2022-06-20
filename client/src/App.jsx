@@ -1,18 +1,6 @@
-import {
-  React,
-  useContext,
-  useEffect,
-  useCallback,
-  Suspense,
-  lazy,
-} from "react";
+import { React, useContext, useEffect, useState, Suspense, lazy } from "react";
 import { Routes, Route, Router } from "react-router-dom";
 import { AuthContext } from "./components/context/AuthContext";
-// import Home from "./pages/Home";
-// import NotFound from "./pages/NotFound";
-// import Login from "./pages/Login";
-// import Register from "./pages/Register";
-// import Dashboard from "./pages/Dashboard";
 const Home = lazy(() => import("./pages/Home"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Login = lazy(() => import("./pages/Login"));
@@ -20,10 +8,18 @@ const Register = lazy(() => import("./pages/Register"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import "./index.css";
-
+import Profile from "./pages/Profile";
+import axios from "axios";
 function App() {
   const authContext = useContext(AuthContext);
-
+  const [role, setRole] = useState("user");
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/getUser", { withCredentials: true })
+      .then((res) => {
+        setRole(res.data.role);
+      });
+  }, []);
   useEffect(() => {
     authContext.setIsAuthenticated();
   }, []);
@@ -39,7 +35,12 @@ function App() {
           {authContext.isAuthenticated ? null : (
             <Route path="Register" element={<Register />}></Route>
           )}
-          <Route path="Dashboard" element={<Dashboard />}></Route>
+          {authContext.isAuthenticated ? null : (
+            <Route path="Profile" element={<Profile />}></Route>
+          )}
+          {role === "admin" ? (
+            <Route path="Dashboard" element={<Dashboard />}></Route>
+          ) : null}
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
