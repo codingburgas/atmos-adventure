@@ -6,13 +6,14 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Profile = lazy(() => import("./pages/Profile"));
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import "./index.css";
-import Profile from "./pages/Profile";
 import axios from "axios";
 function App() {
   const authContext = useContext(AuthContext);
   const [role, setRole] = useState("user");
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/getUser", { withCredentials: true })
@@ -35,9 +36,9 @@ function App() {
           {authContext.isAuthenticated ? null : (
             <Route path="Register" element={<Register />}></Route>
           )}
-          {authContext.isAuthenticated ? null : (
+          {authContext.isAuthenticated ? (
             <Route path="Profile" element={<Profile />}></Route>
-          )}
+          ) : null}
           {role === "admin" ? (
             <Route path="Dashboard" element={<Dashboard />}></Route>
           ) : null}

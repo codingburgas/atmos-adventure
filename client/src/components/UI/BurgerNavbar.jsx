@@ -36,7 +36,7 @@ const BurgerNavbar = () => {
 
   const registerHandler = () => {
     authContext.isAuthenticated
-      ? navigate("*", { replace: true })
+      ? navigate("/Profile", { replace: true })
       : navigate("/Register", { replace: false });
   };
 
