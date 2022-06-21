@@ -198,6 +198,44 @@ router.get('/getAllUsers', (req,res) => {
     }
 });
 
+router.post('/changeUsername', (req, res) => {
+    if(req.session.uuid)
+    {
+        db.query('SELECT * FROM users WHERE username = (?)', [req.body.newUsername], (err, result) => {
+            if (err)
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else if (result.length > 0)
+            {
+                console.log("Username already exists");
+                res.send({"message":"Username already exists"});
+            }
+            else
+            {
+                db.query('UPDATE users SET username = (?) WHERE uuid = (?)', [req.body.newUsername, req.session.uuid], (err) => {
+                    if(err)
+                    {
+                        console.error("Something went wrong");
+                        res.send({"message":"Something went wrong"});
+                    }
+                    else
+                    {
+                        console.log("Username changed");
+                        res.send({"message":"Username changed"});
+                    }
+                });
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
 
 router.get(`/sendConfirmationEmail`,(req,res)=>{
     if(req.session.uuid)
