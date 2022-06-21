@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-const ChangeUsername = (props) => {
+const ChangePassword = (props) => {
   const confirmHandler = () => {
     props.close(false);
   };
@@ -20,16 +18,20 @@ const ChangeUsername = (props) => {
 
         <div className="flex flex-col items-center justify-center mt-5">
           <label htmlFor="" className="text-white text-3xl text-left">
-            New username:
+            Change password:
           </label>
           <input
             type="text"
-            className="w-9/12 px-4 py-3 rounded-md bg-[#383838] text-white font-sans text-xl mt-1"
-            value="Maxim Marinov"
-            placeholder="New username"
+            className="w-9/12 px-4 py-1 rounded-md bg-[#383838] text-white font-sans text-xl mt-1"
+            placeholder="Old password"
+          />
+          <input
+            type="text"
+            className="w-9/12 px-4 py-1 rounded-md bg-[#383838] text-white font-sans text-xl mt-1"
+            placeholder="New password"
           />
         </div>
-        <div className="flex flex-col items-center justify-center mt-8">
+        <div className="flex flex-col items-center justify-center mt-1 xl:mt-8">
           <button
             className="text-white text-2xl font-sans font-bold bg-[#12B46F] rounded-full px-12 py-1"
             onClick={confirmHandler}
@@ -42,4 +44,4 @@ const ChangeUsername = (props) => {
   );
 };
 
-export default ChangeUsername;
+export default ChangePassword;

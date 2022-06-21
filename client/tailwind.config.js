@@ -18,6 +18,7 @@ module.exports = {
         dreamScape: ["Dreamscape", ...defaultTheme.fontFamily.sans],
         dreamScapeSans: ["Dreamscape Sans", ...defaultTheme.fontFamily.sans],
         raleway: ["Raleway", ...defaultTheme.fontFamily.sans],
+        josefin: ["Josefin Sans", ...defaultTheme.fontFamily.sans],
       },
       width: {
         half: "38%",
