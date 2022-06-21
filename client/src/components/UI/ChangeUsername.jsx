@@ -1,8 +1,35 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ChangeUsername = (props) => {
+  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/getUser", { withCredentials: true })
+      .then((res) => {
+        setUsername(res.data.username);
+      });
+  }, []);
+
+  const usernameRef = useRef();
   const confirmHandler = () => {
-    props.close(false);
+    const username = {
+      newUsername: usernameRef.current.value,
+    };
+    axios
+      .post("http://localhost:3001/api/changeUsername", username, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.message === "Username changed") {
+          props.close(false);
+          navigate("/", { replace: true });
+        } else if (res.data.message === "Username already exists") {
+          alert("Username already exists");
+        }
+      });
   };
 
   return (
@@ -25,8 +52,8 @@ const ChangeUsername = (props) => {
           <input
             type="text"
             className="w-9/12 px-4 py-3 rounded-md bg-[#383838] text-white font-sans text-xl mt-1"
-            value="Maxim Marinov"
-            placeholder="New username"
+            placeholder={username}
+            ref={usernameRef}
           />
         </div>
         <div className="flex flex-col items-center justify-center mt-8">

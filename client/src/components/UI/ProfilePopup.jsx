@@ -45,7 +45,6 @@ const ProfilePopup = (props) => {
       .then((res) => {
         if (res.data.message === "User logged out") {
           authContext.setIsAuthenticated(false);
-          navigate("/", { replace: true });
         } else {
           console.log(res.data.message);
         }
