@@ -236,7 +236,7 @@ router.post('/changeUsername', (req, res) => {
     }
 });
 
-router.post("/changePassword", (req, res) => {
+router.post('/changePassword', (req, res) => {
     if(req.session.uuid)
     {
         db.query('SELECT * FROM users WHERE uuid = (?)', [req.session.uuid], (err, result) => {
@@ -277,8 +277,26 @@ router.post("/changePassword", (req, res) => {
     }
 });
 
+router.post('/sendForgotPasswordEmail', (req, res) => {
+    db.query('SELECT * FROM users WHERE email = (?)', req.body.email, (err, result) => {
+        if(result.length > 0)
+        {
+            const token = randToken.generate(60);
+            mailer.sendForgotPasswordEmail(req.body.email, token);
+            console.log(`Successfully sent a password reset email to user with email: ${req.body.email}`);
+            res.send({"message":"Sent a password reset email"});
+        }
+        else
+        {
+            console.log(`User with email: ${req.body.email} doesn't exist`);
+            res.send({"message":"User doesn't exist"});
+        }
+    })
+});
 
-router.get(`/sendConfirmationEmail`,(req,res)=>{
+
+
+router.get('/sendConfirmationEmail', (req,res)=>{
     if(req.session.uuid)
     {
         console.log(`User with uuid: "${req.session.uuid}" requesting a confirmation email.`)
@@ -312,7 +330,7 @@ router.get(`/sendConfirmationEmail`,(req,res)=>{
     }
 });
 
-router.get(`/confirm/:token`,(req,res)=>{
+router.get('/confirm/:token',(req,res)=>{
     console.log(`User trying to confirm their email.`)
     db.query('SELECT * FROM users WHERE token = (?)', [req.params.token], (err, result) => {
         if (err)
