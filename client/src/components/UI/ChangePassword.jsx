@@ -1,6 +1,31 @@
+import { useRef } from "react";
+import axios from "axios";
 const ChangePassword = (props) => {
+  const oldPasswordRef = useRef();
+  const newPasswordRef = useRef();
+
   const confirmHandler = () => {
-    props.close(false);
+    const oldPassword = oldPasswordRef.current.value;
+    const newPassword = newPasswordRef.current.value;
+
+    const userData = {
+      oldPassword,
+      newPassword,
+    };
+    axios
+      .post("http://localhost:3001/api/changePassword", userData, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.message === "Password changed") {
+          props.close(false);
+        }
+        if (res.data.message === "Wrong password") {
+          oldPasswordRef.current.classList.add(
+            "border-red border-2 border-solid"
+          );
+        }
+      });
   };
 
   return (
@@ -21,14 +46,16 @@ const ChangePassword = (props) => {
             Change password:
           </label>
           <input
-            type="text"
+            type="password"
             className="w-9/12 px-4 py-1 rounded-md bg-[#383838] text-white font-sans text-xl mt-1"
             placeholder="Old password"
+            ref={oldPasswordRef}
           />
           <input
-            type="text"
+            type="password"
             className="w-9/12 px-4 py-1 rounded-md bg-[#383838] text-white font-sans text-xl mt-1"
             placeholder="New password"
+            ref={newPasswordRef}
           />
         </div>
         <div className="flex flex-col items-center justify-center mt-1 xl:mt-8">
