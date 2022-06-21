@@ -1,11 +1,13 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ChangeUsernameMobile from "../components/UI/Profile/ChangeUsernameMobile";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 
 const Profile = () => {
   const [user, setUser] = useState();
   const [role, setRole] = useState("user");
+  const [openChangeUsername, setOpenChangeUsername] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     axios
@@ -16,10 +18,18 @@ const Profile = () => {
       });
   }, []);
 
+  const usernameChangeHandler = (e) => {
+    setOpenChangeUsername(true);
+  };
+
   return (
     <Suspense fallback={<LoadingSpinner />}>
       {window.innerWidth > 820 ? navigate("*", { replace: true }) : null}
       <div>
+        <ChangeUsernameMobile
+          isOpen={openChangeUsername}
+          close={setOpenChangeUsername}
+        />
         <div className="h-screen w-screen ">
           <div className="bg-profileBg h-[30%] w-full bg-no-repeat flex flex-row justify-start items-center">
             <div className="bg-white h-32 w-32 rounded-full mr-3 ml-10"></div>
@@ -34,7 +44,9 @@ const Profile = () => {
             </h1>
 
             <div className="font-raleway font-light text-xl space-y-2">
-              <h1 className="cursor-pointer">Change username</h1>
+              <h1 className="cursor-pointer" onClick={usernameChangeHandler}>
+                Change username
+              </h1>
               <h1 className="cursor-pointer">Change profile picture</h1>
               <h1 className="cursor-pointer pb-2">Change profile banner</h1>
             </div>

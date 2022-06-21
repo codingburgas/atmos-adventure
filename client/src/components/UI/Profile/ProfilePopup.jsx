@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import ChangeUsername from "./ChangeUsername";
 import ChangeBanner from "./ChangeBanner";
 import ChangeProfilePic from "./ChangeProfilePic";

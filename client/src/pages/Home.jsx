@@ -2,7 +2,7 @@ import { useContext, useEffect, lazy, Suspense } from "react";
 import { ThemeContext } from "../components/context/ThemeContext";
 import useThemeMode from "../hooks/useThemeMode";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
-const Navbar = lazy(() => import("../components/UI/Navbar"));
+const Navbar = lazy(() => import("../components/UI/Navbar/Navbar"));
 const Home = () => {
   const themeContext = useContext(ThemeContext);
 
