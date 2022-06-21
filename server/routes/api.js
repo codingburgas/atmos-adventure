@@ -236,6 +236,47 @@ router.post('/changeUsername', (req, res) => {
     }
 });
 
+router.post("/changePassword", (req, res) => {
+    if(req.session.uuid)
+    {
+        db.query('SELECT * FROM users WHERE uuid = (?)', [req.session.uuid], (err, result) => {
+            if (err)
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else if (result.length > 0)
+            {
+                if(bcrypt.compareSync(req.body.oldPassword, result[0].pass_hash))
+                {
+                    db.query('UPDATE users SET pass_hash = (?) WHERE uuid = (?)', [bcrypt.hashSync(req.body.newPassword, 10), req.session.uuid], (err) => {
+                        if(err)
+                        {
+                            console.error("Something went wrong");
+                            res.send({"message":"Something went wrong"});
+                        }
+                        else
+                        {
+                            console.log("Password changed");
+                            res.send({"message":"Password changed"});
+                        }
+                    });
+                }
+                else
+                {
+                    console.log("Wrong password");
+                    res.send({"message":"Wrong password"});
+                }
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
 
 router.get(`/sendConfirmationEmail`,(req,res)=>{
     if(req.session.uuid)
