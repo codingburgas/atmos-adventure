@@ -173,7 +173,6 @@ router.get('/getAllUsers', (req,res) => {
                     }
                     else if (result.length > 0)
                     {
-                        console.log(result);
                         console.log("Retrieved all users");
                         res.send(result);
                     }
@@ -227,6 +226,46 @@ router.post('/changeUsername', (req, res) => {
                     }
                 });
             }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
+router.delete('/deleteUser', (req, res) => {
+    if(req.session.uuid)
+    {
+        db.query('SELECT * FROM users WHERE uuid = (?)', req.session.uuid, (err, result) => {
+            if (err)
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else
+            {
+                db.query('DELETE FROM users WHERE uuid = (?)', req.session.uuid, (err) => {
+                    if(err)
+                    {
+                        console.error("Something went wrong");
+                        res.send({"message":"Something went wrong"});
+                    }
+                    else if(result.length > 0)
+                    {
+                        console.log("User deleted");
+                        req.session.destroy();
+                        res.send({"message":"User deleted"});
+                    }
+                    else
+                    {
+                        console.log("User not found");
+                        res.send({"message":"User not found"});
+                    }
+                });
+            }
+
         });
     }
     else
