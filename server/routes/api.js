@@ -347,10 +347,10 @@ router.post('/changeImage', (req, res) => {
 router.get('/getImage', (req, res) => {
     if(req.session.uuid)
     {
-        res.sendFile(`./public/profile_images/${req.session.uuid}.png`, (err) => {
+        res.sendFile(`${req.session.uuid}.png`, {root:'./public/profile_images'}, (err) => {
             if(err)
             {
-                res.sendFile(`./public/profile_images/default.png`);
+                res.sendFile(`default.png`, {root:'./public/profile_images'});
             }
         });
     }
