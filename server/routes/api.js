@@ -7,10 +7,13 @@ const session = require('express-session');
 const randToken = require('rand-token');
 const mailer = require('../controllers/email.js');
 const moment = require('moment');
+const fileUpload = require('express-fileupload');
 
 const router = express.Router();
 
 router.use(bodyParser.json());
+
+router.use(fileUpload());
 
 router.use(session({
     secret: 'this is our little secret',
@@ -306,6 +309,48 @@ router.post('/changePassword', (req, res) => {
                     console.log("Wrong password");
                     res.send({"message":"Wrong password"});
                 }
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
+router.post('/changeImage', (req, res) => {
+    if(req.session.uuid)
+    {
+        const image = req.files.file;
+        image.mv(`./public/profile_images/${req.session.uuid}.png`, (err) => {
+            if(err)
+            {
+                console.error("Something went wrong");
+                console.log(err)
+                res.send({"message":"Something went wrong"});
+            }
+            else
+            {
+                console.log("Image changed");
+                res.send({"message":"Image changed"});
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
+router.get('/getImage', (req, res) => {
+    if(req.session.uuid)
+    {
+        res.sendFile(`./public/profile_images/${req.session.uuid}.png`, (err) => {
+            if(err)
+            {
+                res.sendFile(`./public/profile_images/default.png`);
             }
         });
     }
