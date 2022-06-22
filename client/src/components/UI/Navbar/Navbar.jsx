@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState, useEffect, useCallback } from "react";
-import ProfilePopup from "../Profile/ProfilePopup";
+import ProfilePopup from "../Profile/Popup/ProfilePopup";
 import BurgerNavbar from "./BurgerNavbar";
 import axios from "axios";
 const Navbar = () => {

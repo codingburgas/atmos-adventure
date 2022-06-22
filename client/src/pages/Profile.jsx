@@ -1,6 +1,10 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import ChangeUsernameMobile from "../components/UI/Profile/ChangeUsernameMobile";
+import { AuthContext } from "../components/context/AuthContext";
+import ChangeUsernameMobile from "../components/UI/Profile/Mobile/ChangeUsernameMobile";
+import ChangePasswordMobile from "../components/UI/Profile/Mobile/ChangePasswordMobile";
+import ChangeBannerMobile from "../components/UI/Profile/Mobile/ChangeBannerMobile";
+import ChangeProfilePicMobile from "../components/UI/Profile/Mobile/ChangeProfilePicMobile";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 
@@ -8,6 +12,10 @@ const Profile = () => {
   const [user, setUser] = useState();
   const [role, setRole] = useState("user");
   const [openChangeUsername, setOpenChangeUsername] = useState(false);
+  const [openChangePassword, setOpenChangePassword] = useState(false);
+  const [openChangeBanner, setOpenChangeBanner] = useState(false);
+  const [openChangePicture, setOpenChangePicture] = useState(false);
+  const authContext = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     axios
@@ -22,6 +30,30 @@ const Profile = () => {
     setOpenChangeUsername(true);
   };
 
+  const changePasswordHandler = (e) => {
+    setOpenChangePassword(true);
+  };
+
+  const changeBannerHandler = (e) => {
+    setOpenChangeBanner(true);
+  };
+
+  const changePictureHandler = (e) => {
+    setOpenChangePicture(true);
+  };
+  const logOutHandler = () => {
+    axios
+      .get("http://localhost:3001/api/logout", { withCredentials: true })
+      .then((res) => {
+        if (res.data.message === "User logged out") {
+          navigate("/", { replace: true });
+          authContext.setIsAuthenticated(false);
+        } else {
+          console.log(res.data.message);
+        }
+      });
+  };
+
   return (
     <Suspense fallback={<LoadingSpinner />}>
       {window.innerWidth > 820 ? navigate("*", { replace: true }) : null}
@@ -29,6 +61,18 @@ const Profile = () => {
         <ChangeUsernameMobile
           isOpen={openChangeUsername}
           close={setOpenChangeUsername}
+        />
+        <ChangePasswordMobile
+          isOpen={openChangePassword}
+          close={setOpenChangePassword}
+        />
+        <ChangeBannerMobile
+          isOpen={openChangeBanner}
+          close={setOpenChangeBanner}
+        />
+        <ChangeProfilePicMobile
+          isOpen={openChangePicture}
+          close={setOpenChangePicture}
         />
         <div className="h-screen w-screen ">
           <div className="bg-profileBg h-[30%] w-full bg-no-repeat flex flex-row justify-start items-center">
@@ -47,8 +91,12 @@ const Profile = () => {
               <h1 className="cursor-pointer" onClick={usernameChangeHandler}>
                 Change username
               </h1>
-              <h1 className="cursor-pointer">Change profile picture</h1>
-              <h1 className="cursor-pointer pb-2">Change profile banner</h1>
+              <h1 className="cursor-pointer" onClick={changePictureHandler}>
+                Change profile picture
+              </h1>
+              <h1 className="cursor-pointer pb-2" onClick={changeBannerHandler}>
+                Change profile banner
+              </h1>
             </div>
             <hr />
           </div>
@@ -58,13 +106,17 @@ const Profile = () => {
             </h1>
 
             <div className="font-raleway font-light text-xl space-y-2 pb-3">
-              <h1 className="cursor-pointer">Edit password</h1>
+              <h1 className="cursor-pointer" onClick={changePasswordHandler}>
+                Edit password
+              </h1>
               <h1 className="cursor-pointer">Verify email</h1>
             </div>
             <hr />
           </div>
           <div className="flex flex-row justify-around relative bottom-0 font-raleway font-light text-xl mt-4 el:text-lg el:mt-0 xl:!text-xl xl:!mt-4">
-            <h1 className="cursor-pointer">Sign out</h1>
+            <h1 className="cursor-pointer" onClick={logOutHandler}>
+              Sign out
+            </h1>
             <h1 className="text-red cursor-pointer">Delete account</h1>
           </div>
         </div>
