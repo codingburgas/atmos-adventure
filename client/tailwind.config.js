@@ -69,11 +69,17 @@ module.exports = {
         "0%": { transform: "rotate(0deg)" },
         "100%": { transform: "rotate(360deg)" },
       },
+      scrollEmoticon: {
+        "0%": { transform: "translateY(0)", opacity: 0 },
+        "10%": { transform: "translateY(0)", opacity: 1 },
+        "100%": { transform: "translateY(15%)", opacity: 0 },
+      },
     },
     animation: {
       trX: "trX 1s ease-in-out",
       trXRev: "trXRev 1s ease-in-out",
       spin: "spin 2s linear infinite",
+      scrollEmoticon: "scrollEmoticon 1.5s infinite",
     },
   },
   variants: {

@@ -48,7 +48,7 @@ const Navbar = () => {
   };
   return (
     <div>
-      <div className="hidden tablet:flex tablet:flex-row tablet:justify-between tablet:items-center tablet:pr-14 tablet:pt-4 z-0 w-full absolute text-white">
+      <div className="hidden tablet:flex tablet:flex-row tablet:justify-between tablet:items-center tablet:pr-14 tablet:pt-4 w-full absolute text-white z-50">
         <div
           className="ml-16 font-sans text-4xl mt-1.5 w-full h-1/3 hover:cursor-pointer"
           onClick={logoRedirectHandler}

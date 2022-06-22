@@ -1,8 +1,9 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 const ChangeProfilePic = (props) => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [image, setImage] = useState(null);
 
   const confirmHandler = () => {
     props.close(false);
@@ -18,6 +19,17 @@ const ChangeProfilePic = (props) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", fileName);
+
+    axios
+      .post("http://localhost:3001/api/changeImage", formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   return (
@@ -28,8 +40,8 @@ const ChangeProfilePic = (props) => {
           : "hidden"
       }
     >
-      <div className="bg-[#1F1F1F] w-[60%] h-1/3 flex-col items-center justify-center extra:w-[46%] el:!w-[40%]">
-        <h1 className="text-white text-5xl font-josefin font-medium text-center pt-5 border-b-4 border-white">
+      <div className="bg-[#1F1F1F] w-[60%] h-1/3 flex-col items-center justify-center extra:w-[46%] el:!w-[40%] z-50">
+        <h1 className="text-white text-5xl font-josefin font-medium text-center pt-5 border-b-4 border-white z-50">
           Change profile picture
         </h1>
         <div className="flex flex-row justify-center items-center text-white cursor-pointer"></div>

@@ -54,10 +54,14 @@ const BurgerNavbar = () => {
 
   return (
     <div className="">
-      <div className="absolute h-11/12 flex flex-row justify-between w-11/12 mt-5 mb-10 tablet:hidden">
-        <h1 className="font-dreamScape text-3xl text-white ml-7 z-50">ATMOS</h1>
+      <div className="absolute h-11/12 flex flex-row justify-between w-11/12 mt-5 mb-10 tablet:hidden z-[60]">
+        <h1 className="font-dreamScape text-3xl text-white ml-7 z-[60]">
+          ATMOS
+        </h1>
 
-        <div className={isOpen ? "hidden" : "flex flex-row-reverse w-[36.7%]"}>
+        <div
+          className={isOpen ? "hidden" : "flex flex-row-reverse w-[36.7%] z-50"}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-9 h-9 text-white hover:cursor-pointer z-50"
@@ -76,7 +80,9 @@ const BurgerNavbar = () => {
         </div>
 
         <div
-          className={isOpen ? "flex flex-row-reverse w-[36.7%] mt-1" : "hidden"}
+          className={
+            isOpen ? "flex flex-row-reverse w-[36.7%] mt-1 z-50" : "hidden"
+          }
           onClick={burgerHandler}
         >
           <svg
@@ -99,11 +105,11 @@ const BurgerNavbar = () => {
       <div
         className={
           isOpen
-            ? "animate-trX opacity-50 flex flex-row-reverse justify-center absolute top-0 backdrop-blur-3xl bg-[#150636] h-full w-full tablet:hidden"
+            ? "animate-trX opacity-50 flex flex-row-reverse justify-center absolute top-0 backdrop-blur-3xl bg-[#150636] h-full w-full tablet:hidden z-50"
             : "hidden"
         }
       >
-        <ul className="font-raleway backdrop-blur-3xl font-semibold text-2xl text-center uppercase text-white flex flex-col items-center justify-start w-full">
+        <ul className="font-raleway backdrop-blur-3xl font-semibold text-2xl text-center uppercase text-white flex flex-col items-center justify-start w-full z-50">
           <li
             className="hover:cursor-pointer mt-16 py-4 border-b border-t-2 w-full text-center border-b-solid border-white"
             onClick={aboutHandler}
