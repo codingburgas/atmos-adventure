@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import ChangeUsername from "./ChangeUsername";
@@ -13,6 +14,7 @@ const ProfilePopup = (props) => {
   const [openChangeBanner, setOpenChangeBanner] = useState(false);
   const [openChangePassword, setOpenChangePassword] = useState(false);
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -45,9 +47,21 @@ const ProfilePopup = (props) => {
       .get("http://localhost:3001/api/logout", { withCredentials: true })
       .then((res) => {
         if (res.data.message === "User logged out") {
+          navigate(0);
           authContext.setIsAuthenticated(false);
         } else {
           console.log(res.data.message);
+        }
+      });
+  };
+
+  const deleteAccountHandler = () => {
+    axios
+      .delete("http://localhost:3001/api/deleteUser", { withCredentials: true })
+      .then((res) => {
+        if (res.data.message === "User deleted") {
+          navigate(0);
+          authContext.setIsAuthenticated(false);
         }
       });
   };
@@ -62,7 +76,12 @@ const ProfilePopup = (props) => {
       <div className="absolute bg-[#F1F1F1] h-1/2 w-1/2 mt-16 mr-3 rounded-xl extra:w-[30%] xl:!w-[20%] z-50">
         <div className="bg-profileBg h-1/3 rounded-tl-xl rounded-tr-xl flex flex-row justify-start items-center bg-no-repeat z-50">
           {/* <div className="bg-white h-24 w-24 rounded-full"></div> */}
-          <div className={`bg-[url('http://localhost:3001/api/getImage')]` + " h-24 w-24 rounded-full mr-3 ml-10 bg-center bg-cover"}></div>
+          <div
+            className={
+              `bg-[url('http://localhost:3001/api/getImage')]` +
+              " h-24 w-24 rounded-full mr-3 ml-10 bg-center bg-cover"
+            }
+          ></div>
           <div className="text-white">
             <h1 className="font-raleway font-semibold text-3xl el:text-2xl xl:!text-3xl">
               {username}
@@ -101,7 +120,12 @@ const ProfilePopup = (props) => {
           <h1 className="cursor-pointer" onClick={logOutHandler}>
             Sign out
           </h1>
-          <h1 className="text-red cursor-pointer">Delete account</h1>
+          <h1
+            className="text-red cursor-pointer"
+            onClick={deleteAccountHandler}
+          >
+            Delete account
+          </h1>
         </div>
       </div>
       <ChangeUsername

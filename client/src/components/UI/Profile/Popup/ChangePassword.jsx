@@ -1,9 +1,10 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const ChangePassword = (props) => {
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
-
+  const navigate = useNavigate();
   const confirmHandler = () => {
     const oldPassword = oldPasswordRef.current.value;
     const newPassword = newPasswordRef.current.value;
@@ -18,6 +19,7 @@ const ChangePassword = (props) => {
       })
       .then((res) => {
         if (res.data.message === "Password changed") {
+          navigate(0);
           props.close(false);
         }
         if (res.data.message === "Wrong password") {

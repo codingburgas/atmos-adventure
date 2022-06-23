@@ -361,6 +361,48 @@ router.get('/getImage', (req, res) => {
     }
 });
 
+router.post('/changeBanner', (req, res) => {
+    if(req.session.uuid)
+    {
+        const image = req.files.file;
+        image.mv(`./public/profile_banners/${req.session.uuid}.png`, (err) => {
+            if(err)
+            {
+                console.error("Something went wrong");
+                console.log(err)
+                res.send({"message":"Something went wrong"});
+            }
+            else
+            {
+                console.log("Image changed");
+                res.send({"message":"Image changed"});
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
+router.get('/getBanner', (req, res) => {
+    if(req.session.uuid)
+    {
+        res.sendFile(`${req.session.uuid}.png`, {root:'./public/profile_banners'}, (err) => {
+            if(err)
+            {
+                res.sendFile(`default.png`, {root:'./public/profile_banners'});
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
 router.post('/sendForgotPasswordEmail', (req, res) => {
     db.query('SELECT * FROM users WHERE email = (?)', req.body.email, (err, result) => {
         if(result.length > 0)

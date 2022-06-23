@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const ChangeProfilePic = (props) => {
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("");
+  const [fileName, setFileName] = useState("Attach a file (jpg, png)");
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   const confirmHandler = () => {
     props.close(false);
@@ -28,7 +30,12 @@ const ChangeProfilePic = (props) => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        if (res.data.message === "Image changed") {
+          navigate(0);
+        } else {
+          console.error(res.data.message);
+        }
       });
   };
 
@@ -69,7 +76,7 @@ const ChangeProfilePic = (props) => {
                       />
                     </svg>
                     <p className="pt-1 text-sm tracking-wider text-white font-raleway font-semibold xl:pb-2">
-                      Attach a file (jpg, png)
+                      {fileName}
                     </p>
                   </div>
                   <input type="file" className="hidden" onChange={saveFile} />

@@ -25,7 +25,7 @@ const ChangeUsername = (props) => {
       .then((res) => {
         if (res.data.message === "Username changed") {
           props.close(false);
-          navigate("/", { replace: true });
+          navigate(0);
         } else if (res.data.message === "Username already exists") {
           alert("Username already exists");
         }
