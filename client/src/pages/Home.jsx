@@ -102,7 +102,7 @@ const Home = () => {
                 data-aos-duration="1500"
               />
             </div>
-            <div className="max-w-xs ">
+            {/* <div className="max-w-xs ">
               <img
                 src="https://i.imgur.com/jdRg3kV.png"
                 alt=""
@@ -110,7 +110,7 @@ const Home = () => {
                 data-aos="fade-right"
                 data-aos-duration="1500"
               />
-            </div>
+            </div> */}
           </div>
         </div>
         <GridSection />
