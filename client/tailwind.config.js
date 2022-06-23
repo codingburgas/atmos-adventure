@@ -86,5 +86,8 @@ module.exports = {
     backgroundColor: ["responsive", "dust"],
     textColor: ["responsive", "dust"],
   },
-  plugins: [require("tailwindcss-multi-theme")],
+  plugins: [
+    require("tailwindcss-multi-theme"),
+    require("tailwind-scrollbar-hide"),
+  ],
 };
