@@ -60,7 +60,7 @@ const GridSection = () => {
         </h1>
       </dir>
       <div
-        className="ml-28 bg-[#5F57E2] rounded-full w-[25%] text-center py-2 text-white text-xl font-serif font-bold el:w-[15%]"
+        className="ml-28 bg-[#5F57E2] rounded-full w-[25%] text-center py-3 text-white text-2xl font-serif font-bold el:w-[15%]"
         data-aos="fade-right"
         data-aos-duration="1500"
       >

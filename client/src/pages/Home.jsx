@@ -4,9 +4,11 @@ import useThemeMode from "../hooks/useThemeMode";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import { BsChevronCompactDown } from "react-icons/bs";
 import GridSection from "../components/UI/Home/GridSection";
+import Cards from "../components/UI/Home/Cards";
+import Footage from "../components/UI/Home/Footage";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Cards from "../components/UI/Home/Cards";
+import FootageGrid from "../components/UI/Home/FootageGrid";
 const Navbar = lazy(() => import("../components/UI/Navbar/Navbar"));
 const Home = () => {
   const themeContext = useContext(ThemeContext);
@@ -22,7 +24,7 @@ const Home = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <div className="">
         <Navbar />
-        <div className="flex flex-row items-center justify-center absolute h-screen w-screen text-[70px] font-dreamScape z-0 desktop:text-[200px]">
+        <div className="flex flex-row items-center justify-center absolute h-screen w-screen text-[70px] font-dreamScape z-0 desktop:text-[200px] el:!text-[350px]">
           <h1 className="text-white z-0">
             {themeContext.theme === "theme-dust" ? "DUST-2" : "NUCLEA"}
           </h1>
@@ -102,7 +104,7 @@ const Home = () => {
                 data-aos-duration="1500"
               />
             </div>
-            {/* <div className="max-w-xs ">
+            <div className="max-w-xs ">
               <img
                 src="https://i.imgur.com/jdRg3kV.png"
                 alt=""
@@ -110,12 +112,13 @@ const Home = () => {
                 data-aos="fade-right"
                 data-aos-duration="1500"
               />
-            </div> */}
+            </div>
           </div>
         </div>
         <GridSection />
         <Cards />
-        <div className="h-screen"></div>
+        <Footage />
+        <FootageGrid />
       </div>
     </Suspense>
   );

@@ -11,7 +11,7 @@ const Cards = () => {
   return (
     <div className="bg-[url('https://i.imgur.com/j4BLlbk.png')] h-[250vh] bg-no-repeat bg-cover z-50 w-screen mt-16 el:h-[160vh]">
       <div
-        className="flex flex-row justify-center text-white text-5xl pt-[100%] font-sans font-semibold desktop:pt-[40%] el:!pt-[15%] el:text-8xl"
+        className="flex flex-row justify-center text-white text-4xl pt-[100%] font-sans font-semibold desktop:pt-[40%] el:!pt-[15%] el:text-8xl"
         data-aos="fade-down"
         data-aos-duration="1500"
       >
