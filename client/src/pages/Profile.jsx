@@ -54,6 +54,17 @@ const Profile = () => {
       });
   };
 
+  const deleteAccountHandler = () => {
+    axios
+      .delete("http://localhost:3001/api/deleteUser", { withCredentials: true })
+      .then((res) => {
+        if (res.data.message === "User deleted") {
+          navigate("/", { replace: true });
+          authContext.setIsAuthenticated(false);
+        }
+      });
+  };
+
   return (
     <Suspense fallback={<LoadingSpinner />}>
       {window.innerWidth > 820 ? navigate("*", { replace: true }) : null}
@@ -75,8 +86,8 @@ const Profile = () => {
           close={setOpenChangePicture}
         />
         <div className="h-screen w-screen ">
-          <div className="bg-profileBg h-[30%] w-full bg-no-repeat flex flex-row justify-start items-center">
-            <div className="bg-white h-32 w-32 rounded-full mr-3 ml-10"></div>
+          <div className="bg-[url('http://localhost:3001/api/getBanner')] h-[30%] w-full bg-cover bg-no-repeat flex flex-row justify-start items-center">
+            <div className="bg-[url('http://localhost:3001/api/getImage')] h-32 w-32 rounded-full bg-cover bg-center mr-3 ml-10"></div>
             <div className="text-white font-raleway">
               <h1 className="font-semibold text-3xl">{user}</h1>
               <h1 className="font-normal text-xl">{role}</h1>
@@ -117,7 +128,12 @@ const Profile = () => {
             <h1 className="cursor-pointer" onClick={logOutHandler}>
               Sign out
             </h1>
-            <h1 className="text-red cursor-pointer">Delete account</h1>
+            <h1
+              className="text-red cursor-pointer"
+              onClick={deleteAccountHandler}
+            >
+              Delete account
+            </h1>
           </div>
         </div>
       </div>
