@@ -367,7 +367,6 @@ router.post('/sendForgotPasswordEmail', (req, res) => {
         {
             const token = randToken.generate(60);
             mailer.sendForgotPasswordEmail(req.body.email, token);
-            console.log(`Successfully sent a password reset email to user with email: ${req.body.email}`);
             res.send({"message":"Sent a password reset email"});
         }
         else
