@@ -55,6 +55,8 @@ module.exports = {
       smoothWhite: "#F6F4EA",
       smoothPurple: "#B08BD6",
       red: "#FF0000",
+      button: "rgba(68, 66, 158, 0.3)",
+      cards: "rgba(70, 100, 118, 0.4)",
     },
     keyframes: {
       trX: {

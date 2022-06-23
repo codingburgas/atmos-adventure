@@ -9,9 +9,9 @@ const GridSection = () => {
   }, []);
 
   return (
-    <div className="hidden desktop:h-screen desktop:block z-0">
+    <div className="hidden desktop:h-screen desktop:block z-[-10]">
       <div
-        className="flex flex-row justify-center items-center font-sans font-semibold text-7xl pt-8"
+        className="flex flex-row justify-center items-center font-sans font-semibold text-7xl pt-8 z-[-10]"
         data-aos="fade-bottom"
         data-aos-duration="1500"
       >
@@ -20,9 +20,9 @@ const GridSection = () => {
       <br />
 
       <div>
-        <div className="ml-28 mt-4">
+        <div className="ml-28 mt-4 z-[-10]">
           <div
-            className="bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] text-transparent bg-clip-text font-serif font-bold text-2xl"
+            className="bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] text-transparent bg-clip-text font-serif font-bold text-2xl z-[-10]"
             data-aos="fade-right"
             data-aos-duration="1500"
           >
@@ -37,7 +37,7 @@ const GridSection = () => {
           </div>
         </div>
       </div>
-      <dir className="grid grid-cols-2 grid-rows-1 !p-0 ml-28 gap-x-10 el:gap-x-40">
+      <dir className="grid grid-cols-2 grid-rows-1 !p-0 ml-28 gap-x-10 el:gap-x-40 z-[-10]">
         <h1
           className="text-lg text-justify"
           data-aos="fade-right"
@@ -60,7 +60,7 @@ const GridSection = () => {
         </h1>
       </dir>
       <div
-        className="ml-28 bg-[#5F57E2] rounded-full w-[25%] text-center py-3 text-white text-2xl font-serif font-bold el:w-[15%]"
+        className="ml-28 bg-[#5F57E2] rounded-full w-[25%] text-center py-3 text-white text-2xl font-serif font-bold el:w-[15%] z-[-10]"
         data-aos="fade-right"
         data-aos-duration="1500"
       >
@@ -68,17 +68,17 @@ const GridSection = () => {
           Check it out <IoIosArrowForward className="inline mb-1 text-3xl" />
         </button>
       </div>
-      <div className="flex flex-row justify-between z-0">
+      <div className="flex flex-row justify-between z-[-10]">
         <img
           src="https://i.imgur.com/w1xKYrd.png"
-          className="h-[18%] w-[18%] ml-28 mt-6"
+          className="h-[18%] w-[18%] ml-28 mt-6 z-[-10]"
           alt=""
           data-aos="fade-right"
           data-aos-duration="1500"
         />
         <img
           src="https://i.imgur.com/jdRg3kV.png"
-          className="h-[40%] w-[40%] pt-10 mr-16"
+          className="h-[40%] w-[40%] pt-10 mr-16 z-[-10]"
           alt=""
           data-aos="fade-left"
           data-aos-duration="1500"

@@ -9,6 +9,7 @@ import Footage from "../components/UI/Home/Footage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import FootageGrid from "../components/UI/Home/FootageGrid";
+import DownloadSection from "../components/UI/Home/DownloadSection";
 const Navbar = lazy(() => import("../components/UI/Navbar/Navbar"));
 const Home = () => {
   const themeContext = useContext(ThemeContext);
@@ -119,6 +120,7 @@ const Home = () => {
         <Cards />
         <Footage />
         <FootageGrid />
+        <DownloadSection />
       </div>
     </Suspense>
   );
