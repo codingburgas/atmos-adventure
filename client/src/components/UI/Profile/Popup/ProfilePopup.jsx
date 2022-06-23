@@ -13,6 +13,7 @@ const ProfilePopup = (props) => {
   const [openChangePicture, setOpenChangePicture] = useState(false);
   const [openChangeBanner, setOpenChangeBanner] = useState(false);
   const [openChangePassword, setOpenChangePassword] = useState(false);
+  const [verified, setVerified] = useState(0);
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
@@ -23,6 +24,7 @@ const ProfilePopup = (props) => {
       .then((res) => {
         setUsername(res.data.username);
         setRole(res.data.role);
+        setVerified(res.data.verified);
       });
   }, []);
 
@@ -65,6 +67,21 @@ const ProfilePopup = (props) => {
         }
       });
   };
+
+  const verifyEmailHandler = () => {
+    if (!verified) {
+      axios
+        .get("http://localhost:3001/api/sendConfirmationEmail", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message === "Created temporary verification token") {
+            alert("Verification email sent");
+          }
+        });
+    }
+  };
+
   return (
     <div
       className={
@@ -112,7 +129,9 @@ const ProfilePopup = (props) => {
             <h1 className="cursor-pointer" onClick={changePasswordHandler}>
               Edit password
             </h1>
-            <h1 className="cursor-pointer">Verify email</h1>
+            <h1 className="cursor-pointer" onClick={verifyEmailHandler}>
+              {verified === 0 ? "Verify email" : "Verified"}
+            </h1>
           </div>
           <hr />
         </div>
