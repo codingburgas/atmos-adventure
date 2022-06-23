@@ -1,5 +1,5 @@
 ---
-name: "Documentation feature request"
+name: "🧾 Documentation feature request"
 about: 'Suggest an improvement for our documentation! '
 title: New docs suggestion
 labels: ''
