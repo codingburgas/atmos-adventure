@@ -74,7 +74,7 @@ const ProfilePopup = (props) => {
       }
     >
       <div className="absolute bg-[#F1F1F1] h-1/2 w-1/2 mt-16 mr-3 rounded-xl extra:w-[30%] xl:!w-[20%] z-50">
-        <div className="bg-profileBg h-1/3 rounded-tl-xl rounded-tr-xl flex flex-row justify-start items-center bg-no-repeat z-50">
+        <div className="bg-[url('http://localhost:3001/api/getBanner')] h-1/3 bg-cover rounded-tl-xl rounded-tr-xl flex flex-row justify-start items-center bg-no-repeat z-50">
           {/* <div className="bg-white h-24 w-24 rounded-full"></div> */}
           <div
             className={
