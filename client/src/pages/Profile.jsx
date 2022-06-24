@@ -18,15 +18,6 @@ const Profile = () => {
   const [verified, setVerified] = useState(0);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/getUser", { withCredentials: true })
-      .then((res) => {
-        setUser(res.data.username);
-        setRole(res.data.role);
-        setVerified(res.data.verified);
-      });
-  }, []);
 
   const usernameChangeHandler = (e) => {
     setOpenChangeUsername(true);
@@ -49,7 +40,6 @@ const Profile = () => {
       .then((res) => {
         if (res.data.message === "User logged out") {
           navigate("/", { replace: true });
-          authContext.setIsAuthenticated(false);
         } else {
           console.log(res.data.message);
         }
@@ -62,7 +52,6 @@ const Profile = () => {
       .then((res) => {
         if (res.data.message === "User deleted") {
           navigate("/", { replace: true });
-          authContext.setIsAuthenticated(false);
         }
       });
   };
@@ -105,8 +94,8 @@ const Profile = () => {
           <div className="bg-[url('http://localhost:3001/api/getBanner')] h-[30%] w-full bg-cover bg-no-repeat flex flex-row justify-start items-center">
             <div className="bg-[url('http://localhost:3001/api/getImage')] h-32 w-32 rounded-full bg-cover bg-center mr-3 ml-10"></div>
             <div className="text-white font-raleway">
-              <h1 className="font-semibold text-3xl">{user}</h1>
-              <h1 className="font-normal text-xl">{role}</h1>
+              <h1 className="font-semibold text-3xl">{authContext.username}</h1>
+              <h1 className="font-normal text-xl">{authContext.role}</h1>
             </div>
           </div>
           <div className="space-x-3 space-y-3 font-raleway">
@@ -137,7 +126,7 @@ const Profile = () => {
                 Edit password
               </h1>
               <h1 className="cursor-pointer" onClick={verifyEmailHandler}>
-                {verified === 0 ? "Verify email" : "Verified"}
+                {authContext.verified === 0 ? "Verify email" : "Verified"}
               </h1>
             </div>
             <hr />

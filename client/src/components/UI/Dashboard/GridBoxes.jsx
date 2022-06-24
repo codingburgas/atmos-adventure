@@ -3,10 +3,12 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useEffect, useState } from "react";
 
 const GridBoxes = () => {
-  const [stars, setStars] = useState();
+  const [stars, setStars] = useState("0");
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/vtivanov20/banka-ksd")
+    fetch(
+      "https://api.github.com/repos/codingburgas/2122-the-games--adventures-atmos-final-project-2022"
+    )
       .then((res) => res.json())
       .then((data) => setStars(data.stargazers_count));
   }, []);

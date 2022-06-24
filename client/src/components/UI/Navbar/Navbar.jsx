@@ -18,8 +18,7 @@ const Navbar = () => {
         .get("http://localhost:3001/api/logout", { withCredentials: true })
         .then((res) => {
           if (res.data.message === "User logged out") {
-            authContext.setIsAuthenticated(false);
-            navigate("/", { replace: true });
+            navigate(0);
           } else {
             console.log(res.data.message);
           }

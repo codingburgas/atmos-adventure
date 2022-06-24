@@ -14,16 +14,9 @@ function App() {
   const authContext = useContext(AuthContext);
   const [role, setRole] = useState("user");
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/getUser", { withCredentials: true })
-      .then((res) => {
-        setRole(res.data.role);
-      });
-  }, []);
-  useEffect(() => {
-    authContext.setIsAuthenticated();
-  }, []);
+  // useEffect(() => {
+  //   authContext.setIsAuthenticated();
+  // }, []);
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
@@ -39,7 +32,7 @@ function App() {
           {authContext.isAuthenticated ? (
             <Route path="Profile" element={<Profile />}></Route>
           ) : null}
-          {role === "admin" ? (
+          {authContext.role === "admin" ? (
             <Route path="Dashboard" element={<Dashboard />}></Route>
           ) : null}
           <Route path="*" element={<NotFound />}></Route>

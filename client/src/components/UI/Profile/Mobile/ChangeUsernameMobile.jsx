@@ -1,17 +1,12 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 
 const ChangeUsernameMobile = (props) => {
   const [username, setUsername] = useState("");
   const usernameRef = useRef();
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/getUser", { withCredentials: true })
-      .then((res) => {
-        setUsername(res.data.username);
-      });
-  }, []);
+  const authContext = useContext(AuthContext);
 
   const confirmHandler = () => {
     const username = {
@@ -50,7 +45,7 @@ const ChangeUsernameMobile = (props) => {
           <input
             type="text"
             className="w-9/12 px-4 py-3 rounded-md bg-[#383838] text-white font-sans text-xl mt-1"
-            placeholder={username}
+            placeholder={authContext.username}
             ref={usernameRef}
           />
         </div>

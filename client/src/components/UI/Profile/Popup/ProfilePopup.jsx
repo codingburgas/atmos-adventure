@@ -18,16 +18,6 @@ const ProfilePopup = (props) => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/getUser", { withCredentials: true })
-      .then((res) => {
-        setUsername(res.data.username);
-        setRole(res.data.role);
-        setVerified(res.data.verified);
-      });
-  }, []);
-
   const changeUsernameHandler = (e) => {
     setOpenChangeUsername(true);
   };
@@ -50,7 +40,6 @@ const ProfilePopup = (props) => {
       .then((res) => {
         if (res.data.message === "User logged out") {
           navigate(0);
-          authContext.setIsAuthenticated(false);
         } else {
           console.log(res.data.message);
         }
@@ -63,7 +52,6 @@ const ProfilePopup = (props) => {
       .then((res) => {
         if (res.data.message === "User deleted") {
           navigate(0);
-          authContext.setIsAuthenticated(false);
         }
       });
   };
@@ -101,9 +89,11 @@ const ProfilePopup = (props) => {
           ></div>
           <div className="text-white">
             <h1 className="font-raleway font-semibold text-3xl el:text-2xl xl:!text-3xl">
-              {username}
+              {authContext.username}
             </h1>
-            <h1 className="font-raleway font-normal text-xl">{role}</h1>
+            <h1 className="font-raleway font-normal text-xl">
+              {authContext.role}
+            </h1>
           </div>
         </div>
         <div className="space-y-2 space-x-3">
@@ -130,7 +120,7 @@ const ProfilePopup = (props) => {
               Edit password
             </h1>
             <h1 className="cursor-pointer" onClick={verifyEmailHandler}>
-              {verified === 0 ? "Verify email" : "Verified"}
+              {authContext.verified === 0 ? "Verify email" : "Verified"}
             </h1>
           </div>
           <hr />

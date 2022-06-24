@@ -3,10 +3,20 @@ import axios from "axios";
 export const AuthContext = createContext({
   isAuthenticated: false,
   setIsAuthenticated: () => {},
+  username: "",
+  role: "",
+  email: "",
+  id: "",
+  verified: 0,
 });
 
 const AuthContextProvider = (props) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("user");
+  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
+  const [verified, setVerified] = useState(0);
 
   const setIsAuthenticatedHandler = () => {
     axios
@@ -18,6 +28,11 @@ const AuthContextProvider = (props) => {
           setIsAuth(false);
         } else {
           setIsAuth(true);
+          setUsername(res.data.username);
+          setRole(res.data.role);
+          setEmail(res.data.email);
+          setId(res.data.id);
+          setVerified(res.data.verified);
         }
       });
   };
@@ -25,6 +40,11 @@ const AuthContextProvider = (props) => {
   const context = {
     isAuthenticated: isAuth,
     setIsAuthenticated: setIsAuthenticatedHandler,
+    username: username,
+    role: role,
+    email: email,
+    id: id,
+    verified: verified,
   };
 
   return (
