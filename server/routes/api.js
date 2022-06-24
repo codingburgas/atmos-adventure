@@ -167,7 +167,7 @@ router.get('/getAllUsers', (req,res) => {
             }
             else if(result.length > 0)
             {
-                db.query('SELECT username, email, role, date_created, verified FROM users', (err, result) => {
+                db.query('SELECT uuid, username, email, role, date_created, verified FROM users', (err, result) => {
                     if (err)
                     {
                         console.log(err);
@@ -306,6 +306,52 @@ router.get('/deleteUserByUUID/:uuid', (req, res) => {
                         {
                             console.log("User has administrator privileges");
                             res.send({"message":"User administrator privileges"});
+                        }
+                    });
+                }
+                else
+                {
+                    console.log("User doesn't have permission to access this endpoint");
+                    res.send({"message":"User doesn't have permission to access this endpoint"});
+                }
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
+router.get('/promoteUserByUUID/:uuid', (req, res) => {
+    if(req.session.uuid)
+    {
+        db.query('SELECT * FROM users WHERE uuid = (?)', req.session.uuid, (err, result) => {
+            if(err)
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else
+            {
+                if(result[0].role == "admin")
+                {
+                    db.query('UPDATE users SET role = "admin" WHERE uuid = (?)', req.params.uuid, (err, results) => {
+                        if(err)
+                        {
+                            console.error("Something went wrong");
+                            res.send({"message":"Something went wrong"});
+                        }
+                        else if(results.affectedRows > 0)
+                        {
+                            console.log("User promoted");
+                            res.send({"message":"User promoted"});
+                        }
+                        else
+                        {
+                            console.log("User already has administrator privileges");
+                            res.send({"message":"User already has administrator privileges"});
                         }
                     });
                 }
