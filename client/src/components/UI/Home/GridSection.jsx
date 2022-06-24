@@ -22,14 +22,14 @@ const GridSection = () => {
       <div>
         <div className="ml-28 mt-4 z-[-10]">
           <div
-            className="bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] text-transparent bg-clip-text font-serif font-bold text-2xl z-[-10]"
+            className="bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] text-transparent bg-clip-text font-serif font-bold text-2xl z-[-10] extraXl:text-4xl"
             data-aos="fade-right"
             data-aos-duration="1500"
           >
             One platform. Three worlds.
           </div>
           <div
-            className="font-serif font-bold text-4xl max-w-md"
+            className="font-serif font-bold text-4xl max-w-md extraXl:text-5xl extraXl:max-w-xl"
             data-aos="fade-right"
             data-aos-duration="1500"
           >
@@ -37,9 +37,9 @@ const GridSection = () => {
           </div>
         </div>
       </div>
-      <dir className="grid grid-cols-2 grid-rows-1 !p-0 ml-28 gap-x-10 el:gap-x-40 z-[-10]">
+      <dir className="grid grid-cols-2 grid-rows-1 !p-0 ml-28 gap-x-10 el:gap-x-40 z-[-10] extraXl:!gap-x-64">
         <h1
-          className="text-lg text-justify"
+          className="text-lg text-justify extraXl:text-2xl"
           data-aos="fade-right"
           data-aos-duration="1500"
         >
@@ -50,7 +50,7 @@ const GridSection = () => {
           desktop publishing software
         </h1>
         <h1
-          className="max-w-sm text-lg text-justify el:max-w-xl"
+          className="max-w-sm text-lg text-justify el:max-w-xl extraXl:text-2xl"
           data-aos="fade-left"
           data-aos-duration="1500"
         >

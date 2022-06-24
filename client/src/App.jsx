@@ -14,9 +14,9 @@ function App() {
   const authContext = useContext(AuthContext);
   const [role, setRole] = useState("user");
 
-  // useEffect(() => {
-  //   authContext.setIsAuthenticated();
-  // }, []);
+  useEffect(() => {
+    authContext.setIsAuthenticated();
+  }, []);
 
   return (
     <Suspense fallback={<LoadingSpinner />}>

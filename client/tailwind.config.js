@@ -4,6 +4,7 @@ module.exports = {
   purge: ["src/**/*.js", "src/**/*.jsx"],
   theme: {
     screens: {
+      extraXl: "2399px",
       xl: "1600px",
       el: "1535px",
       extra: "1281px",
