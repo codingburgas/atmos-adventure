@@ -305,7 +305,7 @@ router.get('/deleteUserByUUID/:uuid', (req, res) => {
                         else
                         {
                             console.log("User has administrator privileges");
-                            res.send({"message":"User administrator privileges"});
+                            res.send({"message":"User has administrator privileges"});
                         }
                     });
                 }
@@ -337,7 +337,7 @@ router.get('/promoteUserByUUID/:uuid', (req, res) => {
             {
                 if(result[0].role == "admin")
                 {
-                    db.query('UPDATE users SET role = "admin" WHERE uuid = (?)', req.params.uuid, (err, results) => {
+                    db.query('UPDATE users SET role = "admin" WHERE uuid = (?) AND role="user"', req.params.uuid, (err, results) => {
                         if(err)
                         {
                             console.error("Something went wrong");
