@@ -57,31 +57,33 @@ const Navbar = () => {
 
         <div>
           <ul className="flex space-x-10">
-            <li
+            {/* <li
               className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
               onClick={aboutHandler}
             >
               About
-            </li>
+            </li> */}
 
             <li
               className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
               onClick={logoutHandler}
             >
-              {authContext.isAuthenticated ? "Logout" : "Login"}
+              {authContext.isAuthenticated ? "Logout" : "LOGIN"}
             </li>
             <li
               className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
               onClick={registerHandler}
             >
-              {authContext.isAuthenticated ? "Profile" : "Register"}
+              {authContext.isAuthenticated ? "Profile" : "REGISTER"}
             </li>
-            <button
-              onClick={downloadButtonHandler}
-              className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl hover:cursor-pointer"
-            >
-              Download
-            </button>
+            {authContext.isAuthenticated ? (
+              <button
+                onClick={downloadButtonHandler}
+                className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl hover:cursor-pointer"
+              >
+                Download
+              </button>
+            ) : null}
           </ul>
         </div>
       </div>

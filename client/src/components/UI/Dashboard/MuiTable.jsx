@@ -8,6 +8,8 @@ import {
   TableBody,
   Paper,
 } from "@mui/material";
+import { BsFillTrashFill } from "react-icons/bs";
+import { FaCrown } from "react-icons/fa";
 import axios from "axios";
 
 const MuiTable = () => {
@@ -46,6 +48,12 @@ const MuiTable = () => {
               <TableCell>
                 <strong>Verified</strong>
               </TableCell>
+              <TableCell>
+                <strong>Delete</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Promote</strong>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -65,9 +73,50 @@ const MuiTable = () => {
                   <TableCell>
                     {account.verified ? "Verified" : "Not verified"}
                   </TableCell>
+                  <TableCell>
+                    <BsFillTrashFill
+                      className="text-red text-xl hover:cursor-pointer"
+                      onClick={() => {
+                        axios
+                          .get(
+                            `http://localhost:3001/api/deleteUserByUUID/${account.uuid}`,
+                            {
+                              withCredentials: true,
+                            }
+                          )
+                          .then((res) => {
+                            if (res.data.message === "User deleted") {
+                              window.location.reload();
+                            } else {
+                              alert(res.data.message);
+                            }
+                          });
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <FaCrown
+                      className="text-[#d6d675] hover:cursor-pointer"
+                      onClick={() => {
+                        axios
+                          .get(
+                            `http://localhost:3001/api/promoteUserByUUID/${account.uuid}`,
+                            {
+                              withCredentials: true,
+                            }
+                          )
+                          .then((res) => {
+                            if (res.data.message === "User promoted") {
+                              window.location.reload();
+                            } else {
+                              alert(res.data.message);
+                            }
+                          });
+                      }}
+                    />
+                  </TableCell>
                 </TableRow>
               );
-              console.log("asd");
             })}
           </TableBody>
         </Table>
