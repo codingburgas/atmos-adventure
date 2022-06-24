@@ -278,6 +278,52 @@ router.delete('/deleteUser', (req, res) => {
     }
 });
 
+router.get('/deleteUserByUUID/:uuid', (req, res) => {
+    if(req.session.uuid)
+    {
+        db.query('SELECT * FROM users WHERE uuid = (?)', req.session.uuid, (err, result) => {
+            if(err)
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else
+            {
+                if(result[0].role == "admin")
+                {
+                    db.query('DELETE FROM users WHERE uuid = (?) AND role = "user"', req.params.uuid, (err, results) => {
+                        if(err)
+                        {
+                            console.error("Something went wrong");
+                            res.send({"message":"Something went wrong"});
+                        }
+                        else if(results.affectedRows > 0)
+                        {
+                            console.log("User deleted");
+                            res.send({"message":"User deleted"});
+                        }
+                        else
+                        {
+                            console.log("User has administrator privileges");
+                            res.send({"message":"User administrator privileges"});
+                        }
+                    });
+                }
+                else
+                {
+                    console.log("User doesn't have permission to access this endpoint");
+                    res.send({"message":"User doesn't have permission to access this endpoint"});
+                }
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
 router.post('/changePassword', (req, res) => {
     if(req.session.uuid)
     {
