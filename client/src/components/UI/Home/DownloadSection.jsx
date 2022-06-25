@@ -19,7 +19,7 @@ const DownloadSection = () => {
       </div>
       <div
         className="flex flex-col justify-center items-center h-[80vh] mt-20 desktop:mt-0"
-        data-aos="fade-up"
+        data-aos="fade-left"
         data-aos-duration="1500"
       >
         <button className="bg-button outline outline-[.0001px] text-white outline-white px-10 py-4 rounded-full font-sans font-bold text-2xl tablet:px-16 el:!px-24 el:text-3xl">

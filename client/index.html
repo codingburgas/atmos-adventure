@@ -32,6 +32,23 @@
       ::-webkit-scrollbar {
         display: none;
       }
+      :-moz::-webkit-scrollbar {
+        display: none;
+      }
+      @-moz-document url-prefix() {
+        html {
+          scrollbar-width: none;
+        }
+      }
+      ::selection {
+        background: rgb(190, 81, 190);
+        color: white;
+      }
+
+      ::-moz-selection {
+        background: rgb(190, 81, 190);
+        color: white;
+      }
     </style>
     <title></title>
   </head>

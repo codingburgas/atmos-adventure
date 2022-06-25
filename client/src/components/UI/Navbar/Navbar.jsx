@@ -65,13 +65,13 @@ const Navbar = () => {
             </li> */}
 
             <li
-              className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
+              className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer transition duration-200 hover:ease-in hover:bg-white hover:text-[#111] rounded-full px-5 py-2"
               onClick={logoutHandler}
             >
               {authContext.isAuthenticated ? "Logout" : "LOGIN"}
             </li>
             <li
-              className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer"
+              className="inline-block space-x-10 font-sans mt-1.5 text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] rounded-full px-5 py-2"
               onClick={registerHandler}
             >
               {authContext.isAuthenticated ? "Profile" : "REGISTER"}
@@ -79,7 +79,7 @@ const Navbar = () => {
             {authContext.isAuthenticated ? (
               <button
                 onClick={downloadButtonHandler}
-                className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl hover:cursor-pointer"
+                className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] hover:border-white"
               >
                 Download
               </button>
