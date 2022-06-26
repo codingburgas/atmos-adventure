@@ -50,7 +50,7 @@ const ProfilePopup = (props) => {
     Sends a confirmation email to the user
   */
   const verifyEmailHandler = () => {
-    if (!verified) {
+    if (!authContext.verified) {
       axios
         .get("http://localhost:3001/api/sendConfirmationEmail", {
           withCredentials: true,

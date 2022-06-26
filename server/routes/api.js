@@ -17,7 +17,7 @@ router.use(fileUpload());
 
 router.use(session({
     secret: 'this is our little secret',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: {
         httpOnly: false,
