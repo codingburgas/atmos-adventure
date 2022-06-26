@@ -96,14 +96,20 @@ const ProfilePopup = (props) => {
           <div className="font-raleway font-light text-xl el:text-sm xl:!text-xl">
             <h1
               className="cursor-pointer"
-              onClick={() => setOpenChangeUsername}
+              onClick={() => setOpenChangeUsername(true)}
             >
               Change username
             </h1>
-            <h1 className="cursor-pointer" onClick={() => setOpenChangePicture}>
+            <h1
+              className="cursor-pointer"
+              onClick={() => setOpenChangePicture(true)}
+            >
               Change profile picture
             </h1>
-            <h1 className="cursor-pointer" onClick={() => setOpenChangeBanner}>
+            <h1
+              className="cursor-pointer"
+              onClick={() => setOpenChangeBanner(true)}
+            >
               Change profile banner
             </h1>
           </div>
@@ -114,7 +120,7 @@ const ProfilePopup = (props) => {
           <div className="font-raleway font-light text-xl el:text-sm xl:!text-xl">
             <h1
               className="cursor-pointer"
-              onClick={() => setOpenChangePassword}
+              onClick={() => setOpenChangePassword(true)}
             >
               Edit password
             </h1>
