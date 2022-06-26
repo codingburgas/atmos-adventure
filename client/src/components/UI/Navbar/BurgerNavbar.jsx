@@ -128,7 +128,12 @@ const BurgerNavbar = () => {
             </li>
           ) : null}
           <li
-            className="hover:cursor-pointer py-4 border-b border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
+            className={
+              authContext.role === "user" ||
+              authContext.isAuthenticated === false
+                ? "hover:cursor-pointer mt-16 py-4 border-b border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
+                : "hover:cursor-pointer py-4 border-b border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
+            }
             onClick={logOutInHandler}
           >
             {authContext.isAuthenticated ? "Log out" : "Log in"}
@@ -139,12 +144,14 @@ const BurgerNavbar = () => {
           >
             {authContext.isAuthenticated ? "Profile" : "Register"}
           </li>
-          <li
-            className="hover:cursor-pointer py-4 border-b-2 border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
-            onClick={downloadButtonHandler}
-          >
-            Download
-          </li>
+          {authContext.isAuthenticated ? (
+            <li
+              className="hover:cursor-pointer py-4 border-b-2 border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
+              onClick={downloadButtonHandler}
+            >
+              Download
+            </li>
+          ) : null}
         </ul>
       </div>
     </div>

@@ -27,6 +27,7 @@ const Profile = () => {
       .then((res) => {
         if (res.data.message === "User logged out") {
           navigate("/", { replace: true });
+          window.location.reload();
         } else {
           enqueueSnackbar("User not authenticated", {
             variant: "error",

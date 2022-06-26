@@ -1,11 +1,14 @@
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
+import { useSnackbar } from "notistack";
 import axios from "axios";
 
 const ChangeUsername = (props) => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const usernameRef = useRef();
 
@@ -13,27 +16,38 @@ const ChangeUsername = (props) => {
    * Tries to change the username
    */
   const confirmHandler = () => {
-    const username = {
-      newUsername: usernameRef.current.value,
+    const USERNAME_REGEX = new RegExp(/^[a-zA-Z0-9.-_$@*!]{4,10}$/);
+    const username = usernameRef.current.value;
+    const userData = {
+      newUsername: username,
     };
-    if (username.newUsername.length > 0) {
-      axios
-        .post("http://localhost:3001/api/changeUsername", username, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          if (res.data.message === "Username changed") {
-            props.close(false);
-            navigate(0);
-          } else if (res.data.message === "Username already exists") {
-            enqueueSnackbar("Username already exists", {
-              variant: "error",
-            });
-            sleep(5000).then(() => {
-              closeSnackbar();
-            });
-          }
+    if (username.length > 0) {
+      if (username.match(USERNAME_REGEX)) {
+        axios
+          .post("http://localhost:3001/api/changeUsername", userData, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            if (res.data.message === "Username changed") {
+              props.close(false);
+              navigate(0, { replace: true });
+            } else if (res.data.message === "Username already exists") {
+              enqueueSnackbar("Username already exists", {
+                variant: "error",
+              });
+              sleep(5000).then(() => {
+                closeSnackbar();
+              });
+            }
+          });
+      } else {
+        enqueueSnackbar("Username must be 4-10 characters long!", {
+          variant: "error",
         });
+        sleep(5000).then(() => {
+          closeSnackbar();
+        });
+      }
     } else props.close(false);
   };
 

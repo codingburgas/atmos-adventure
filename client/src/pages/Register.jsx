@@ -77,7 +77,12 @@ const Register = () => {
           if (res.data.message === "User created") {
             navigate("/", { replace: true });
           } else {
-            console.log(res.data.message);
+            enqueueSnackbar(res.data.message, {
+              variant: "error",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
           }
         });
     }

@@ -71,7 +71,7 @@ const Footage = () => {
         data-aos="fade-right"
         data-aos-duration="1500"
       >
-        <img src="https://i.imgur.com/L98qD2x.png" alt="" />
+        <img src="bg-mockup2" alt="" />
       </div>
     </div>
   );

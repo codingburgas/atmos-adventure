@@ -1,9 +1,12 @@
 import { useRef } from "react";
+import { useSnackbar } from "notistack";
 import axios from "axios";
 
 const ChangePasswordMobile = (props) => {
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   /*
    * Handles the change password request
@@ -12,25 +15,44 @@ const ChangePasswordMobile = (props) => {
     const oldPassword = oldPasswordRef.current.value;
     const newPassword = newPasswordRef.current.value;
 
+    const PASSWORD_REGEX = new RegExp(/^(?=.*[a-z])(?=.{8,})/);
+
     const userData = {
       oldPassword,
       newPassword,
     };
+
     if (oldPassword.length > 0 && newPassword.length > 0) {
-      axios
-        .post("http://localhost:3001/api/changePassword", userData, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          if (res.data.message === "Password changed") {
-            props.close(false);
+      if (!newPassword.match(PASSWORD_REGEX)) {
+        enqueueSnackbar(
+          "New password must be at least 8 characters long and contain at least one letter!",
+          {
+            variant: "error",
           }
-          if (res.data.message === "Wrong password") {
-            oldPasswordRef.current.classList.add(
-              "border-red border-2 border-solid"
-            );
-          }
+        );
+        sleep(5000).then(() => {
+          closeSnackbar();
         });
+      } else {
+        axios
+          .post("http://localhost:3001/api/changePassword", userData, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            if (res.data.message === "Password changed") {
+              navigate(0);
+              props.close(false);
+            }
+            if (res.data.message === "Wrong password") {
+              enqueueSnackbar("Wrong password!", {
+                variant: "error",
+              });
+              sleep(5000).then(() => {
+                closeSnackbar();
+              });
+            }
+          });
+      }
     } else props.close(false);
   };
 

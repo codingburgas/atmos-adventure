@@ -75,7 +75,7 @@ const DashboardShowcase = () => {
           </button>
         </div>
         <img
-          src="https://i.imgur.com/w1xKYrd.png"
+          src="bg-mockup"
           alt=""
           className="h-[40%] w-[40%] mt-5"
           data-aos="fade-left"
@@ -84,7 +84,7 @@ const DashboardShowcase = () => {
       </div>
       <div className="max-w-xs ">
         <img
-          src="https://i.imgur.com/jdRg3kV.png"
+          src="bg-mockup1"
           alt=""
           className="mt-5"
           data-aos="fade-right"
