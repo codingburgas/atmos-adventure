@@ -4,8 +4,8 @@ CREATE DATABASE `atmos`;
 USE `atmos`;
 CREATE TABLE `users` (
     `uuid` VARCHAR(36) NOT NULL,
-    `username` VARCHAR(16) NOT NULL,
-    `email` VARCHAR(30) NOT NULL,
+    `username` VARCHAR(32) NOT NULL,
+    `email` VARCHAR(50) NOT NULL,
     `pass_hash` VARCHAR(60) NOT NULL,
     `role` VARCHAR(10) DEFAULT "user",
     `date_created` DATETIME NOT NULL,

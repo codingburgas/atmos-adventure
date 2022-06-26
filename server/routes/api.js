@@ -553,7 +553,7 @@ router.get('/confirm/:token',(req,res)=>{
         if (err)
         {
             console.error("Something went wrong");
-            res.send({"message":"Something went wrong"});
+            res.redirect('http://localhost:3000/notfound');
         }
         else if (result.length > 0)
         {
@@ -561,19 +561,19 @@ router.get('/confirm/:token',(req,res)=>{
                 if(err)
                 {
                     console.error("Something went wrong");
-                    res.send({"message":"Something went wrong"});
+                    res.redirect('http://localhost:3000/notfound');
                 }
                 else
                 {
                     console.log("Email confirmed");
-                    res.send({"message":"Email confirmed"});
+                    res.redirect('http://localhost:3000/verificationemail');
                 }
             });
         }
         else
         {
-            console.log("Invalid token or email already confirmed");
-            res.send({"message":"Invalid token or email already confirmed"});
+            console.log("Invalid token or email already verified");
+            res.redirect('http://localhost:3000/notfound');
         }
     });
 });

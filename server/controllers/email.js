@@ -1,7 +1,5 @@
 const nodemailer = require('nodemailer');
 const db = require('../db/db_config.js');
-const fs = require('fs');
-const handlebars = require('handlebars');
 
 const transporter = nodemailer.createTransport({
 	host: 'smtp.titan.email',
@@ -25,7 +23,7 @@ function sendConfirmationEmail(uuid, token)
 			const mailOptions = {
 				from: 'Atmos Team <no-reply@atmos.systems>',
 				to: result[0].email,
-				subject: 'Atmos Account Confirmation',
+				subject: '👋 Please verify your email!',
 				html: `
 				<!DOCTYPE html>
 					<html lang="en">
@@ -67,6 +65,12 @@ function sendConfirmationEmail(uuid, token)
 								text-align: center;
 							}
 
+							.text>p {
+								text-align: center;
+							}
+
+
+
 							span {
 								font-weight: bold;
 							}
@@ -87,6 +91,11 @@ function sendConfirmationEmail(uuid, token)
 								font-size: 1rem;
 							}
 
+							button:hover {
+								background-color: #2e2c9e;
+								cursor: pointer;
+							}
+
 							@media (min-width: 1023px) {
 								.logo>img {
 									margin-top: 10vh;
@@ -101,7 +110,7 @@ function sendConfirmationEmail(uuid, token)
 								.text {
 									max-width: 65vw;
 									font-family: "Inter", sans-serif;
-									text-align: justify;
+									text-align: center;
 									font-size: 1.2rem;
 								}
 
@@ -111,6 +120,11 @@ function sendConfirmationEmail(uuid, token)
 									font-family: "Dreamscape Sans";
 									font-size: 1.7rem;
 									margin-top: 2rem;
+								}
+
+								button:hover {
+									background-color: #2e2c9e;
+									cursor: pointer;
 								}
 							}
 
@@ -128,7 +142,7 @@ function sendConfirmationEmail(uuid, token)
 								.text {
 									max-width: 60vw;
 									font-family: "Inter", sans-serif;
-									text-align: justify;
+									text-align: center;
 									font-size: 1.4rem;
 								}
 
@@ -139,6 +153,11 @@ function sendConfirmationEmail(uuid, token)
 									font-size: 1.8rem;
 									margin-top: 2rem;
 								}
+
+								button:hover {
+									background-color: #2e2c9e;
+									cursor: pointer;
+								}
 							}
 						</style>
 					</head>
@@ -148,10 +167,10 @@ function sendConfirmationEmail(uuid, token)
 							<tr>
 								<td style="text-align: center;">
 									<div class="logo">
-										<img src="https://1000logos.net/wp-content/uploads/2017/03/McDonalds-logo.png" alt="" />
+										<img src="https://1000logos.net/wp-content/uploads/2017/03/McDonalds-logo.png" alt="logo" />
 									</div>
 									<div class="banner">
-										<img src="https://i.pinimg.com/originals/3b/7c/93/3b7c9391b0dba6a892abd4c244e4f8c6.jpg" alt="" />
+										<img src="https://i.pinimg.com/originals/3b/7c/93/3b7c9391b0dba6a892abd4c244e4f8c6.jpg" alt="banner" />
 									</div>
 									<div class="text">
 										<p>
@@ -165,7 +184,7 @@ function sendConfirmationEmail(uuid, token)
 											us at support@atmos.systems 📭! 
 										</p>
 									</div>
-									<button>Confirm email</button>
+									<a href="http://localhost:3001/api/confirm/${token}"><button>Confirm email</button></a>
 								</td>
 							</tr>
 						</table>
@@ -174,7 +193,7 @@ function sendConfirmationEmail(uuid, token)
 				</html>`
 			}
 			
-			transporter.sendMail(mailOptions, (err, info) => {
+			transporter.sendMail(mailOptions, (err) => {
 				if (err) {
 					console.error("Something went wrong");
 				} 
