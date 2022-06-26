@@ -604,4 +604,17 @@ router.get('/getStats', (req, res) => {
     })
 });
 
+router.get('/downloadCounter', (req, res) => {
+    if(req.session.uuid)
+    {
+        db.query('UPDATE statistics SET downloads = downloads + 1');
+        res.sendStatus(200);
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.sendStatus(200);
+    }
+});
+
 module.exports = router;
