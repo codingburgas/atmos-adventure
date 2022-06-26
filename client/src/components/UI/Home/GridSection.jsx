@@ -80,7 +80,7 @@ const GridSection = () => {
           data-aos-duration="1500"
         />
         <img
-          src="https://i.imgur.com/jdRg3kV.png"
+          src="https://i.imgur.com/GiV0H77.png"
           className="h-[40%] w-[40%] pt-10 mr-16 z-[-10]"
           alt=""
           data-aos="fade-left"

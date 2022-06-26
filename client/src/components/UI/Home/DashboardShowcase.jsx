@@ -84,7 +84,7 @@ const DashboardShowcase = () => {
         </div>
         <div className="max-w-xs ">
           <img
-            src="https://i.imgur.com/jdRg3kV.png"
+            src="https://i.imgur.com/GiV0H77.png"
             alt=""
             className="mt-5"
             data-aos="fade-right"
