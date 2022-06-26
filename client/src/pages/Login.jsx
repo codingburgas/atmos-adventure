@@ -52,6 +52,44 @@ const Login = () => {
       });
   };
 
+  const forgotPasswordHandler = () => {
+    const email = username.current.value;
+    const EMAIL_REGEX = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/);
+
+    const userData = {
+      email: email,
+    };
+    if (!email.match(EMAIL_REGEX)) {
+      enqueueSnackbar("Email must be valid!", {
+        variant: "error",
+      });
+      sleep(5000).then(() => {
+        closeSnackbar();
+      });
+    } else {
+      axios
+        .post("http://localhost:3001/api/sendForgotPasswordEmail", userData, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message === "Sent a password reset email") {
+            enqueueSnackbar("Email sent!", {
+              variant: "success",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
+          } else if (res.data.message === "User doesn't exist") {
+            enqueueSnackbar("User not found!", {
+              variant: "error",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
+          }
+        });
+    }
+  };
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <div className="h-screen bg-form bg-center bg-no-repeat bg-cover object-cover">
@@ -74,7 +112,7 @@ const Login = () => {
               type="text"
               name=""
               className="border-solid border focus:border-2 border-stroke bg-account bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
-              placeholder="Username"
+              placeholder="Username/Email"
               ref={username}
               required
               key={username}
@@ -99,12 +137,11 @@ const Login = () => {
               Log in
             </button>
           </div>
-          <div
-            className="flex flex-col items-center justify-center text-white font-serif text-xl hover:cursor-pointer mt-2"
-            onClick={() => navigate("/Register", { replace: false })}
-          >
-            <h1>Don't have an account?</h1>
-            <h1>Forgot your password?</h1>
+          <div className="flex flex-col items-center justify-center text-white font-serif text-xl hover:cursor-pointer mt-2">
+            <h1 onClick={() => navigate("/Register", { replace: false })}>
+              Don't have an account?
+            </h1>
+            <h1 onClick={forgotPasswordHandler}>Forgot your password?</h1>
           </div>
         </div>
       </div>
