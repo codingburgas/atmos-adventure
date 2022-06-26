@@ -1,7 +1,8 @@
- <h1 align="center">Team Banka KSD</h1>
+ <h1 align="center">Team ATMOS</h1>
 
 <p align="center">
-    banners go here.
+    <img src="/docs/assets/banners/banner_dark.png#gh-dark-mode-only"/>
+    <img src="/docs/assets/banners/banner_light.png#gh-light-mode-only"/>
 </p>
 
 <p align = "center">
@@ -69,11 +70,11 @@
 ## 📄 Documents
 ### QA Documentation
   - [Test Plan]()
-  - [QA Documentation]()
+  - [QA Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20client%20QA%20Doc.xlsx)
 
 ### Code & Team Documentation
-  - [Jupyter Notebook]()
-  - [Team Documentation]()
+  - [Jupyter Notebook](https://docs.atmos.systems)
+  - [Team Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos_-_Documentation.docx)
 
 ### Presenting
   - [Presentation]()
@@ -81,7 +82,34 @@
 <hr>
 
 ## 📥 Installation
-
+You can visit us <a href="https://atmos.systems">here</a> <br>
+And see our Jupyter Notebook <a href="https://docs.atmos.systems">here</a> <br>
+<br>
+Or if you want to clone our repo locally you can paste the following command in your preferred terminal:
+<pre>https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022</pre>
+<br>
+Then, you can launch the web application by following these commands:
+<br>
+<pre>
+cd client<br>
+npm install<br>
+npm run dev
+</pre>
+<br>
+You will need another terminal to launch the server, paste the following commands:
+<pre>
+cd server<br>
+npm install<br>
+npm run dev<br>
+</pre>
+<br>
+If you want to run our Jupyter Notebook documentation locally, you will need Python ^3.9 install on your machine, then you run the following commands:
+<br>
+<pre>
+cd notebook<br>
+jupyter notebook
+</pre>
+<br>
 <hr>
 
 ## 🧒 Our Team
