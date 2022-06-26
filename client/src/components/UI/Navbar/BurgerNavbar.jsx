@@ -57,10 +57,6 @@ const BurgerNavbar = () => {
     the Login button will be displayed
   */
 
-  const downloadButtonHandler = () => {
-    authContext.isAuthenticated ? null : navigate("/login", { replace: false });
-  };
-
   return (
     <div className="">
       <div className="absolute h-11/12 flex flex-row justify-between w-11/12 mt-5 mb-10 tablet:hidden z-[60]">
@@ -144,14 +140,6 @@ const BurgerNavbar = () => {
           >
             {authContext.isAuthenticated ? "Profile" : "Register"}
           </li>
-          {authContext.isAuthenticated ? (
-            <li
-              className="hover:cursor-pointer py-4 border-b-2 border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
-              onClick={downloadButtonHandler}
-            >
-              Download
-            </li>
-          ) : null}
         </ul>
       </div>
     </div>

@@ -48,10 +48,11 @@ const Footage = () => {
           data-aos="fade-right"
           data-aos-duration="1500"
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s. It has survived not only five centuries, but also the
-          leap into
+          You play as an amnesiac astronaut. Your goal is to collect every
+          stranded part of your ship and head back home. While doing that, you
+          can admire the local scenery of these strange new worlds - Nuclea and
+          Dust-2. You find yourself alone on these planets. Perhaps they are
+          hiding something long forgotten? Only one way to find out…
         </div>
       </div>
       <div className="flex fles-row justify-center items-center text-center pt-5">
