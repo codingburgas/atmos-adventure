@@ -119,12 +119,14 @@ const BurgerNavbar = () => {
         }
       >
         <ul className="font-raleway backdrop-blur-3xl font-semibold text-2xl text-center uppercase text-white flex flex-col items-center justify-start w-full z-50">
-          <li
-            className="hover:cursor-pointer mt-16 py-4 border-b border-t-2 w-full text-center border-b-solid border-white"
-            onClick={() => navigate("/")}
-          >
-            About
-          </li>
+          {authContext.role === "admin" ? (
+            <li
+              className="hover:cursor-pointer mt-16 py-4 border-b border-t-2 w-full text-center border-b-solid border-white"
+              onClick={() => navigate("/Dashboard")}
+            >
+              Dashboard
+            </li>
+          ) : null}
           <li
             className="hover:cursor-pointer py-4 border-b border-t w-full text-center border-b-solid border-white backdrop-blur-3xl"
             onClick={logOutInHandler}

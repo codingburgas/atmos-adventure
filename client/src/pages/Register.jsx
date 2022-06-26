@@ -1,5 +1,6 @@
 import { useRef, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 import AOS from "aos";
@@ -10,7 +11,8 @@ const Register = () => {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   /*
     Initializes AOS library
   */
@@ -33,13 +35,30 @@ const Register = () => {
     const password = passwordRef.current.value;
 
     if (!username.match(USERNAME_REGEX)) {
-      alert("Username must be 4-10 characters long");
+      // alert("Username must be 4-10 characters long");
+      enqueueSnackbar("Username must be 4-10 characters long!", {
+        variant: "error",
+      });
+      sleep(5000).then(() => {
+        closeSnackbar();
+      });
     } else if (!email.match(EMAIL_REGEX)) {
-      alert("Email must be valid");
+      enqueueSnackbar("Email must be valid!", {
+        variant: "error",
+      });
+      sleep(5000).then(() => {
+        closeSnackbar();
+      });
     } else if (!password.match(PASSWORD_REGEX)) {
-      alert(
-        "Password must be at least 8 characters long and contain at least one letter"
+      enqueueSnackbar(
+        "Password must be at least 8 characters long and contain at least one letter!",
+        {
+          variant: "error",
+        }
       );
+      sleep(5000).then(() => {
+        closeSnackbar();
+      });
     }
     const user = {
       username: username,

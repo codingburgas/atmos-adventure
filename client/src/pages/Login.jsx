@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useEffect, Suspense } from "react";
+import { useSnackbar } from "notistack";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 import AOS from "aos";
@@ -8,7 +9,8 @@ const Login = () => {
   const navigate = useNavigate();
   const username = useRef();
   const password = useRef();
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   /*
     Initializes AOS library
   */
@@ -33,16 +35,19 @@ const Login = () => {
         if (res.data.message === "User logged in") {
           navigate("/", { replace: true });
         } else if (res.data.message === "Wrong password") {
-          password.current.classList.remove("border-stroke");
-          password.current.classList.add("border-red");
-          password.current.value = "";
+          enqueueSnackbar("Wrong password!", {
+            variant: "error",
+          });
+          sleep(5000).then(() => {
+            closeSnackbar();
+          });
         } else if (res.data.message === "User not found") {
-          username.current.classList.remove("border-stroke");
-          username.current.classList.add("border-red");
-          username.current.value = "";
-          password.current.classList.remove("border-stroke");
-          password.current.classList.add("border-red");
-          password.current.value = "";
+          enqueueSnackbar("User not found!", {
+            variant: "error",
+          });
+          sleep(5000).then(() => {
+            closeSnackbar();
+          });
         }
       });
   };
