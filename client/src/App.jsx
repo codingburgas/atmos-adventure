@@ -7,6 +7,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Profile = lazy(() => import("./pages/Profile"));
+const VerificationEmail = lazy(() => import("./pages/EmailVerification"));
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import "./index.css";
 function App() {
@@ -35,6 +36,12 @@ function App() {
           ) : null}
           {authContext.role === "admin" ? (
             <Route path="Dashboard" element={<Dashboard />}></Route>
+          ) : null}
+          {authContext.verified ? (
+            <Route
+              path="VerificationEmail"
+              element={<VerificationEmail />}
+            ></Route>
           ) : null}
           <Route path="*" element={<NotFound />}></Route>
         </Routes>

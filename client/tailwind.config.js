@@ -37,6 +37,7 @@ module.exports = {
         forms: "url('./assets/forms.png')",
         dashboardBg: "url('./assets/dashboardBg.jpg')",
         profileBg: "url('./assets/profileBg.jpg')",
+        Blobs: "url('./assets/Blobs.png')",
       },
       backgroundSize: {
         20: "27px",
