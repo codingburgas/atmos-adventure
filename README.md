@@ -1,4 +1,4 @@
- <h1 align="center">Team Banka KSD</h1>
+ <h1 align="center">Team ATMOS</h1>
 
 <p align="center">
     banners go here.
