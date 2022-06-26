@@ -17,6 +17,16 @@
 <p align="center">You can find out more about our modern web app & our Unity game!</p>
 
 ## 📄 Documents
+### QA Documentation
+  - [Test Plan]()
+  - [QA Documentation]()
+
+### Code & Team Documentation
+  - [Jupyter Notebook]()
+  - [Team Documentation]()
+
+### Presenting
+  - [Presentation]()
 
 ## 📥 Installation
 
