@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState, useContext } from "react";
+import React, { Suspense, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/context/AuthContext";
 import ChangeUsernameMobile from "../components/UI/Profile/Mobile/ChangeUsernameMobile";
@@ -9,31 +9,13 @@ import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 
 const Profile = () => {
-  const [user, setUser] = useState();
-  const [role, setRole] = useState("user");
   const [openChangeUsername, setOpenChangeUsername] = useState(false);
   const [openChangePassword, setOpenChangePassword] = useState(false);
   const [openChangeBanner, setOpenChangeBanner] = useState(false);
   const [openChangePicture, setOpenChangePicture] = useState(false);
-  const [verified, setVerified] = useState(0);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const usernameChangeHandler = (e) => {
-    setOpenChangeUsername(true);
-  };
-
-  const changePasswordHandler = (e) => {
-    setOpenChangePassword(true);
-  };
-
-  const changeBannerHandler = (e) => {
-    setOpenChangeBanner(true);
-  };
-
-  const changePictureHandler = (e) => {
-    setOpenChangePicture(true);
-  };
   const logOutHandler = () => {
     axios
       .get("http://localhost:3001/api/logout", { withCredentials: true })
@@ -104,13 +86,22 @@ const Profile = () => {
             </h1>
 
             <div className="font-raleway font-light text-xl space-y-2">
-              <h1 className="cursor-pointer" onClick={usernameChangeHandler}>
+              <h1
+                className="cursor-pointer"
+                onClick={() => setOpenChangeUsername(true)}
+              >
                 Change username
               </h1>
-              <h1 className="cursor-pointer" onClick={changePictureHandler}>
+              <h1
+                className="cursor-pointer"
+                onClick={() => setOpenChangeProfilePic(true)}
+              >
                 Change profile picture
               </h1>
-              <h1 className="cursor-pointer pb-2" onClick={changeBannerHandler}>
+              <h1
+                className="cursor-pointer pb-2"
+                onClick={() => setOpenChangeBanner(true)}
+              >
                 Change profile banner
               </h1>
             </div>
@@ -122,7 +113,10 @@ const Profile = () => {
             </h1>
 
             <div className="font-raleway font-light text-xl space-y-2 pb-3">
-              <h1 className="cursor-pointer" onClick={changePasswordHandler}>
+              <h1
+                className="cursor-pointer"
+                onClick={() => setOpenChangePassword(true)}
+              >
                 Edit password
               </h1>
               <h1 className="cursor-pointer" onClick={verifyEmailHandler}>

@@ -7,7 +7,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Register = () => {
-  const authContext = useContext(AuthContext);
   const navigate = useNavigate();
   const username = useRef();
   const email = useRef();

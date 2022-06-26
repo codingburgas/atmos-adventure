@@ -7,17 +7,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 const Login = () => {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
   const username = useRef();
   const password = useRef();
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
-
-  const redirectHandler = () => {
-    navigate("/Register", { replace: false });
-  };
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -95,7 +90,7 @@ const Login = () => {
           </div>
           <div
             className="flex flex-row items-center justify-center text-white font-serif text-xl hover:cursor-pointer mt-2"
-            onClick={redirectHandler}
+            onClick={() => navigate("/Register", { replace: false })}
           >
             <h1>Don't have an account?</h1>
           </div>

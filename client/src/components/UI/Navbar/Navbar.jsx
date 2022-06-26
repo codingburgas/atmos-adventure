@@ -12,6 +12,7 @@ const Navbar = () => {
   useEffect(() => {
     authContext.setIsAuthenticated();
   }, []);
+
   const logoutHandler = () => {
     if (authContext.isAuthenticated) {
       axios
@@ -20,7 +21,7 @@ const Navbar = () => {
           if (res.data.message === "User logged out") {
             navigate(0);
           } else {
-            console.log(res.data.message);
+            alert(res.data.message);
           }
         });
     } else {
@@ -30,14 +31,6 @@ const Navbar = () => {
 
   const downloadButtonHandler = () => {
     authContext.isAuthenticated ? null : navigate("/login", { replace: false });
-  };
-
-  const logoRedirectHandler = () => {
-    navigate("/", { replace: false });
-  };
-
-  const aboutHandler = () => {
-    navigate("*", { replace: false });
   };
 
   const registerHandler = () => {
@@ -50,7 +43,7 @@ const Navbar = () => {
       <div className="hidden tablet:flex tablet:flex-row tablet:justify-between tablet:items-center tablet:pr-14 tablet:pt-4 w-full absolute text-white z-50">
         <div
           className="ml-16 font-sans text-4xl mt-1.5 w-full h-1/3 hover:cursor-pointer"
-          onClick={logoRedirectHandler}
+          onClick={() => navigate(0)}
         >
           ATMOS
         </div>

@@ -17,10 +17,6 @@ const BurgerNavbar = () => {
     AOS.refresh();
   }, []);
 
-  // useEffect(() => {
-  //   authContext.setIsAuthenticated();
-  // }, []);
-
   const logOutInHandler = () => {
     if (authContext.isAuthenticated) {
       axios
@@ -47,14 +43,6 @@ const BurgerNavbar = () => {
     authContext.isAuthenticated ? null : navigate("/login", { replace: false });
   };
 
-  const aboutHandler = () => {
-    navigate("*", { replace: false });
-  };
-
-  const burgerHandler = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <div className="">
       <div className="absolute h-11/12 flex flex-row justify-between w-11/12 mt-5 mb-10 tablet:hidden z-[60]">
@@ -71,7 +59,7 @@ const BurgerNavbar = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            onClick={burgerHandler}
+            onClick={() => setIsOpen(!isOpen)}
           >
             <path
               strokeLinecap="round"
@@ -86,7 +74,7 @@ const BurgerNavbar = () => {
           className={
             isOpen ? "flex flex-row-reverse w-[36.7%] mt-1 z-50" : "hidden"
           }
-          onClick={burgerHandler}
+          onClick={() => setIsOpen(!isOpen)}
         >
           <svg
             width="24"
@@ -115,7 +103,7 @@ const BurgerNavbar = () => {
         <ul className="font-raleway backdrop-blur-3xl font-semibold text-2xl text-center uppercase text-white flex flex-col items-center justify-start w-full z-50">
           <li
             className="hover:cursor-pointer mt-16 py-4 border-b border-t-2 w-full text-center border-b-solid border-white"
-            onClick={aboutHandler}
+            onClick={() => navigate("/")}
           >
             About
           </li>
