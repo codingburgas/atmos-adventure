@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 
 //Create connection config
 const db = mysql.createConnection({
-    host: '95.42.176.84',
+    host: 'sql.atmos.systems',
     user: 'atmos',
     password: 'AtmosDatabase.123',
     database: 'atmos'
