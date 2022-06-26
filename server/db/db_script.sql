@@ -14,3 +14,10 @@ CREATE TABLE `users` (
     PRIMARY KEY(`uuid`)
 );
 INSERT INTO `users` VALUES ("6706aae5-7ca0-4915-b688-098c8644407c", "admin", "admin@atmos.systems", "$2b$10$KiqYHZJlmzl7G0fvA1XY2uYuR3QeHAA71Dn05AzfwsPcsIEeItxZS", "admin", "2022-06-10 17:00:00", FALSE, NULL);
+
+CREATE TABLE `statistics` (
+    `visitors` INT DEFAULT 0,
+    `downloads` INT DEFAULT 0
+);
+
+INSERT INTO `statistics` VALUES (0, 0);

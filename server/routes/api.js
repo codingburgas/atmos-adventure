@@ -30,6 +30,11 @@ router.get('/', (req, res) => {
     res.send({"message":"Invalid API endpoint"});
 });
 
+router.get('/countVisitors', (req, res) =>{
+    db.query('UPDATE statistics SET visitors = visitors + 1');
+    res.sendStatus(200);
+}) 
+
 router.post('/register',(req,res)=>{
     const date = moment().format('YYYY-MM-DD HH:mm:ss');
     const data = [
