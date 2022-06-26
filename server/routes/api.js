@@ -504,9 +504,20 @@ router.post('/sendForgotPasswordEmail', (req, res) => {
     db.query('SELECT * FROM users WHERE email = (?)', req.body.email, (err, result) => {
         if(result.length > 0)
         {
-            const token = randToken.generate(60);
-            mailer.sendForgotPasswordEmail(req.body.email, token);
-            res.send({"message":"Sent a password reset email"});
+            const tempPass = randToken.generate(10);
+            db.query('UPDATE users SET pass_hash = (?) WHERE email = (?)', [bcrypt.hashSync(tempPass, 10), req.body.email], (err) => {
+                if(err)
+                {
+                    console.error("Something went wrong");
+                    res.send({"message":"Something went wrong"});
+                }
+                else
+                {
+                    console.log("Generated a temporary password");
+                    mailer.sendForgotPasswordEmail(req.body.email, tempPass);
+                    res.send({"message":"Sent a password reset email"});
+                }
+            });
         }
         else
         {
@@ -581,6 +592,16 @@ router.get('/confirm/:token',(req,res)=>{
             res.redirect('http://localhost:3000/notfound');
         }
     });
+});
+
+router.get('/getStats', (req, res) => {
+    db.query('SELECT * FROM statistics', (err, result) => {
+        const stats = result[0];
+        db.query('SELECT COUNT(uuid) AS users FROM users', (err, results) => {
+            stats.users = results[0].users;
+            res.send(stats);
+        });
+    })
 });
 
 module.exports = router;

@@ -207,7 +207,7 @@ function sendConfirmationEmail(uuid, token)
 				
 }
 
-function sendForgotPasswordEmail(email, token)
+function sendForgotPasswordEmail(email, tempPass)
 {
 	const mailOptions = {
 		from: 'Atmos Team <no-reply@atmos.systems>',
