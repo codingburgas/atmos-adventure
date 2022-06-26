@@ -29,9 +29,7 @@ const Home = () => {
         <Navbar />
         <Parallax
           strength={-500}
-          bgImage={
-            "https://bulgarianfood.ie/wp-content/uploads/2020/04/travel-landscape-01.jpg"
-          }
+          bgImage={"https://i.imgur.com/nrGRJTb.png"}
           className="w-screen h-screen"
         >
           {/* <h1 className="text-[350px] h-screen w-screen flex items-center justify-center">
