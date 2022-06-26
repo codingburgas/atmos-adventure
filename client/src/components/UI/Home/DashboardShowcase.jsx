@@ -3,6 +3,10 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 
 const DashboardShowcase = () => {
+  /*
+   * Initializes the AOS library
+   */
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();

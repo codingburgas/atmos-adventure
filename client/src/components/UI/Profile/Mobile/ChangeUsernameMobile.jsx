@@ -4,10 +4,13 @@ import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 
 const ChangeUsernameMobile = (props) => {
-  const [username, setUsername] = useState("");
   const usernameRef = useRef();
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
 
+  /*
+   * Tries to change the username
+   */
   const confirmHandler = () => {
     const username = {
       newUsername: usernameRef.current.value,
@@ -20,6 +23,7 @@ const ChangeUsernameMobile = (props) => {
         .then((res) => {
           if (res.data.message === "Username changed") {
             props.close(false);
+            navigate(0, { replace: true });
           } else if (res.data.message === "Username already exists") {
             alert("Username already exists");
           }

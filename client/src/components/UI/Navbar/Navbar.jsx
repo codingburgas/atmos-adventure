@@ -9,10 +9,16 @@ const Navbar = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
+  /*
+    Checks if the user is authenticated
+  */
   useEffect(() => {
     authContext.setIsAuthenticated();
   }, []);
 
+  /*
+    Tries to logout the user
+  */
   const logoutHandler = () => {
     if (authContext.isAuthenticated) {
       axios
@@ -29,10 +35,11 @@ const Navbar = () => {
     }
   };
 
-  const downloadButtonHandler = () => {
-    authContext.isAuthenticated ? null : navigate("/login", { replace: false });
-  };
-
+  /*
+    If the user is authenticated,
+    the profile popup will be shown
+    else the user will be redirected to the register page
+  */
   const registerHandler = () => {
     authContext.isAuthenticated
       ? setIsOpen(!isOpen)
@@ -70,10 +77,7 @@ const Navbar = () => {
               {authContext.isAuthenticated ? "Profile" : "REGISTER"}
             </li>
             {authContext.isAuthenticated ? (
-              <button
-                onClick={downloadButtonHandler}
-                className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] hover:border-white"
-              >
+              <button className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] hover:border-white">
                 Download
               </button>
             ) : null}

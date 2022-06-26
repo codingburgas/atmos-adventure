@@ -3,6 +3,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Cards = () => {
+  /*
+   * Initializes the AOS library
+   */
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();

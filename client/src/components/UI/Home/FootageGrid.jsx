@@ -4,6 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const FootageGrid = () => {
+  /*
+   * Initializes the AOS library
+   */
   useEffect(() => {
     AOS.init();
     AOS.refresh();

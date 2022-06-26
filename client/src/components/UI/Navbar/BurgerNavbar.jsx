@@ -9,6 +9,9 @@ const BurgerNavbar = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
+  /*
+   Initializes AOS library
+   */
   useEffect(() => {
     AOS.init({
       once: true,
@@ -16,6 +19,10 @@ const BurgerNavbar = () => {
     });
     AOS.refresh();
   }, []);
+
+  /*
+    Tries to logout the user
+  */
 
   const logOutInHandler = () => {
     if (authContext.isAuthenticated) {
@@ -33,11 +40,22 @@ const BurgerNavbar = () => {
     }
   };
 
+  /*
+    If the user is authenticated,
+    the Register button will be displayed
+    else the Profile button will be displayed
+  */
+
   const registerHandler = () => {
     authContext.isAuthenticated
       ? navigate("/Profile", { replace: true })
       : navigate("/Register", { replace: false });
   };
+
+  /*
+    If the user is not authenticated,
+    the Login button will be displayed
+  */
 
   const downloadButtonHandler = () => {
     authContext.isAuthenticated ? null : navigate("/login", { replace: false });

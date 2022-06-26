@@ -7,15 +7,18 @@ const ChangeProfilePicMobile = (props) => {
   const [fileName, setFileName] = useState("Attach a file (jpg, png)");
   const navigate = useNavigate();
 
-  const confirmHandler = () => {
-    props.close(false);
-  };
+  /*
+   * Set the state to the file and the file name
+   */
 
   const saveFile = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
 
+  /*
+   * Tries to upload the file
+   */
   const uploadImageHandler = (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -87,7 +90,7 @@ const ChangeProfilePicMobile = (props) => {
             <div className="flex flex-row justify-center items-start">
               <button
                 className="text-white text-sm font-sans font-bold bg-[#12B46F] rounded-full px-12 py-2 xl:text-xl"
-                onClick={confirmHandler}
+                onClick={() => props.close(false)}
               >
                 Confirm
               </button>

@@ -15,6 +15,10 @@ import axios from "axios";
 const MuiTable = () => {
   const [accounts, setAccounts] = useState([]);
 
+  /*
+   * Fetches the accounts from the database
+   */
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/getAllUsers", { withCredentials: true })
@@ -77,6 +81,10 @@ const MuiTable = () => {
                     <BsFillTrashFill
                       className="text-red text-xl hover:cursor-pointer"
                       onClick={() => {
+                        /*
+                         * Deletes the account from the database
+                         * and updates the state
+                         */
                         axios
                           .get(
                             `http://localhost:3001/api/deleteUserByUUID/${account.uuid}`,
@@ -98,6 +106,10 @@ const MuiTable = () => {
                     <FaCrown
                       className="text-[#d6d675] hover:cursor-pointer"
                       onClick={() => {
+                        /*
+                         * Promotes the account to admin
+                         * and updates the state
+                         */
                         axios
                           .get(
                             `http://localhost:3001/api/promoteUserByUUID/${account.uuid}`,

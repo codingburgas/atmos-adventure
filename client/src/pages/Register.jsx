@@ -1,5 +1,4 @@
-import { useRef, useEffect, useContext, Suspense } from "react";
-import { AuthContext } from "../components/context/AuthContext";
+import { useRef, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
@@ -12,11 +11,17 @@ const Register = () => {
   const email = useRef();
   const password = useRef();
 
+  /*
+    Initializes AOS library
+  */
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
 
+  /*
+    Tries to register the user
+  */
   const registerHandler = (e) => {
     e.preventDefault();
     const USERNAME_REGEX = "/^[a-zA-Z0-9.-_$@*!]{3,30}$/";

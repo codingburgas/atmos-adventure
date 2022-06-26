@@ -7,33 +7,16 @@ import ChangeBanner from "./ChangeBanner";
 import ChangeProfilePic from "./ChangeProfilePic";
 import ChangePassword from "./ChangePassword";
 const ProfilePopup = (props) => {
-  const [username, setUsername] = useState("");
-  const [role, setRole] = useState("");
   const [openChangeUsername, setOpenChangeUsername] = useState(false);
   const [openChangePicture, setOpenChangePicture] = useState(false);
   const [openChangeBanner, setOpenChangeBanner] = useState(false);
   const [openChangePassword, setOpenChangePassword] = useState(false);
-  const [verified, setVerified] = useState(0);
-  const [image, setImage] = useState(null);
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
-  const changeUsernameHandler = (e) => {
-    setOpenChangeUsername(true);
-  };
-
-  const changeBannerHandler = (e) => {
-    setOpenChangeBanner(true);
-  };
-
-  const changeProfilePicHandler = (e) => {
-    setOpenChangePicture(true);
-  };
-
-  const changePasswordHandler = (e) => {
-    setOpenChangePassword(true);
-  };
-
+  /*
+    Tries to logout the user
+  */
   const logOutHandler = () => {
     axios
       .get("http://localhost:3001/api/logout", { withCredentials: true })
@@ -46,6 +29,9 @@ const ProfilePopup = (props) => {
       });
   };
 
+  /*
+    Tries to delete the user's account
+  */
   const deleteAccountHandler = () => {
     if (window.confirm("Are you sure you want to delete your account?")) {
       axios
@@ -60,6 +46,9 @@ const ProfilePopup = (props) => {
     }
   };
 
+  /*
+    Sends a confirmation email to the user
+  */
   const verifyEmailHandler = () => {
     if (!verified) {
       axios
@@ -105,13 +94,16 @@ const ProfilePopup = (props) => {
             Account
           </h1>
           <div className="font-raleway font-light text-xl el:text-sm xl:!text-xl">
-            <h1 className="cursor-pointer" onClick={changeUsernameHandler}>
+            <h1
+              className="cursor-pointer"
+              onClick={() => setOpenChangeUsername}
+            >
               Change username
             </h1>
-            <h1 className="cursor-pointer" onClick={changeProfilePicHandler}>
+            <h1 className="cursor-pointer" onClick={() => setOpenChangePicture}>
               Change profile picture
             </h1>
-            <h1 className="cursor-pointer" onClick={changeBannerHandler}>
+            <h1 className="cursor-pointer" onClick={() => setOpenChangeBanner}>
               Change profile banner
             </h1>
           </div>
@@ -120,7 +112,10 @@ const ProfilePopup = (props) => {
             Credentials
           </h1>
           <div className="font-raleway font-light text-xl el:text-sm xl:!text-xl">
-            <h1 className="cursor-pointer" onClick={changePasswordHandler}>
+            <h1
+              className="cursor-pointer"
+              onClick={() => setOpenChangePassword}
+            >
               Edit password
             </h1>
             <h1

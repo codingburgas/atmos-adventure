@@ -9,11 +9,12 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Profile = lazy(() => import("./pages/Profile"));
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import "./index.css";
-import axios from "axios";
 function App() {
   const authContext = useContext(AuthContext);
-  const [role, setRole] = useState("user");
 
+  /*
+    Checks if the user is authenticated
+  */
   useEffect(() => {
     authContext.setIsAuthenticated();
   }, []);

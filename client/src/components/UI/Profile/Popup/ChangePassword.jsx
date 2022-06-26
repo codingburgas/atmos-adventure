@@ -5,6 +5,10 @@ const ChangePassword = (props) => {
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
   const navigate = useNavigate();
+
+  /*
+   * Tries to change the password
+   */
   const confirmHandler = () => {
     const oldPassword = oldPasswordRef.current.value;
     const newPassword = newPasswordRef.current.value;

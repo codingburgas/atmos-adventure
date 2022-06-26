@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useEffect, useContext, Suspense } from "react";
-import { AuthContext } from "./../components/context/AuthContext";
+import { useRef, useEffect, Suspense } from "react";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 import AOS from "aos";
@@ -9,11 +8,18 @@ const Login = () => {
   const navigate = useNavigate();
   const username = useRef();
   const password = useRef();
+
+  /*
+    Initializes AOS library
+  */
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
 
+  /*
+    Tries to login hte user
+  */
   const loginHandler = (e) => {
     e.preventDefault();
     const user = {

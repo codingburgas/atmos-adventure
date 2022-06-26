@@ -4,6 +4,10 @@ import axios from "axios";
 const ChangePasswordMobile = (props) => {
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
+
+  /*
+   * Handles the change password request
+   */
   const confirmHandler = () => {
     const oldPassword = oldPasswordRef.current.value;
     const newPassword = newPasswordRef.current.value;

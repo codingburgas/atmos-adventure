@@ -6,8 +6,14 @@ const NotFound = () => {
 
   const navigate = useNavigate();
 
+  /*
+    Creates a new promise that resolves timeout ends
+  */
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  /*
+    Redirects the user to the home page after 5 seconds
+  */
   const automaticRedirect = () => {
     for (let i = 0; i < 5; i++) {
       sleep(1000).then(() => {

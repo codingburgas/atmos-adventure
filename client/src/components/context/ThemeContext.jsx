@@ -9,6 +9,10 @@ const ThemeContextProvider = (props) => {
 
   const random = Math.floor(Math.random() * 2);
 
+  /*
+   *Chooses a random theme for the user
+   *and sets it to the state
+   */
   useMemo(() => {
     random === 0 ? setUserTheme("theme-dust") : setUserTheme("theme-nuclea");
   }, []);

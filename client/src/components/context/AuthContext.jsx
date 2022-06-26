@@ -18,6 +18,13 @@ const AuthContextProvider = (props) => {
   const [id, setId] = useState("");
   const [verified, setVerified] = useState(0);
 
+  /*
+   * Tries to check if
+   * the user is authenticated
+   * and if so, sets the state
+   * to true
+   */
+
   const setIsAuthenticatedHandler = () => {
     axios
       .get("http://localhost:3001/api/getUser", {

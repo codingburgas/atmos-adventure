@@ -16,6 +16,9 @@ const Profile = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
+  /*
+    Tries to logout the user
+  */
   const logOutHandler = () => {
     axios
       .get("http://localhost:3001/api/logout", { withCredentials: true })
@@ -28,6 +31,9 @@ const Profile = () => {
       });
   };
 
+  /*
+    Tries to delete the user's account
+  */
   const deleteAccountHandler = () => {
     axios
       .delete("http://localhost:3001/api/deleteUser", { withCredentials: true })
@@ -38,6 +44,9 @@ const Profile = () => {
       });
   };
 
+  /*
+    Sends a comfirmation email to the user
+  */
   const verifyEmailHandler = () => {
     if (!authContext.verified) {
       axios

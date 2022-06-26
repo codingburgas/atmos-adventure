@@ -8,6 +8,10 @@ const ChangeUsername = (props) => {
   const authContext = useContext(AuthContext);
 
   const usernameRef = useRef();
+
+  /*
+   * Tries to change the username
+   */
   const confirmHandler = () => {
     const username = {
       newUsername: usernameRef.current.value,

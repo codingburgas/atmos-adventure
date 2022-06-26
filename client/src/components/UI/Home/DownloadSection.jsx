@@ -3,6 +3,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const DownloadSection = () => {
+  /*
+   * Initializes the AOS library
+   */
   useEffect(() => {
     AOS.init();
     AOS.refresh();
