@@ -67,7 +67,7 @@ const FootageGrid = () => {
             data-aos="fade-left"
             data-aos-duration="1500"
           >
-            <img src="bg-mockup2" alt="" />
+            <img src="https://i.imgur.com/QjOjVCm.png" alt="" />
           </div>
         </div>
         <div

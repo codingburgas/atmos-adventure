@@ -38,7 +38,7 @@ module.exports = {
         dashboardBg: "url('./assets/dashboardBg.jpg')",
         Blobs: "url('./assets/Blobs.png')",
         cardsWave: "url('./assets/cardsWave.png')",
-        mockup: "url('./assets/iphoneMockup.png')",
+        iphone: "url('./assets/iphoneMockup.png')",
         mockup1: "url('./assets/macMockup.png')",
         mockup2: "url('./assets/macbookMockup.png')",
         downloadMobile: "url('./assets/downloadMobile.png')",

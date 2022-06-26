@@ -73,14 +73,14 @@ const GridSection = () => {
       </div>
       <div className="flex flex-row justify-between z-[-10]">
         <img
-          src="bg-mockup"
+          src="https://i.imgur.com/d8ZPSXE.png"
           className="h-[18%] w-[18%] ml-28 mt-6 z-[-10]"
           alt=""
           data-aos="fade-right"
           data-aos-duration="1500"
         />
         <img
-          src="bg-mockup2"
+          src="https://i.imgur.com/6aXCE95.png"
           className="h-[40%] w-[40%] pt-10 mr-16 z-[-10]"
           alt=""
           data-aos="fade-left"
