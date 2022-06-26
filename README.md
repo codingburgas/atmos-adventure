@@ -1,4 +1,4 @@
- <h1 align="center">Team Banka KSD</h1>
+ <h1 align="center">Team ATMOS</h1>
 
 <p align="center">
     <img src="/docs/assets/banners/banner_dark.png#gh-dark-mode-only"/>
@@ -70,11 +70,11 @@
 ## 📄 Documents
 ### QA Documentation
   - [Test Plan]()
-  - [QA Documentation]()
+  - [QA Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20client%20QA%20Doc.xlsx)
 
 ### Code & Team Documentation
-  - [Jupyter Notebook]()
-  - [Team Documentation]()
+  - [Jupyter Notebook](https://docs.atmos.systems)
+  - [Team Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos_-_Documentation.docx)
 
 ### Presenting
   - [Presentation]()
