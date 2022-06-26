@@ -27,31 +27,16 @@ const Home = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <div className="">
         <Navbar />
-        <Parallax
-          strength={-50}
-          // bgImage={"https://i.imgur.com/4C0Z4BJ.png"}
-          bgImage={
-            themeContext.theme === "theme-dust"
-              ? "https://i.imgur.com/4C0Z4BJ.png"
-              : "https://i.imgur.com/nrGRJTb.png"
-          }
-          className="w-screen h-screen bg-center"
-        >
-          {/* <h1 className="text-[350px] h-screen w-screen flex items-center justify-center">
-            NUCLEA
-          </h1> */}
-          <div className="flex flex-row items-center justify-center h-screen w-screen text-[70px] font-dreamScape z-[0] desktop:text-[200px] el:!text-[350px]">
-            <h1 className="text-white z-[0]">
-              {themeContext.theme === "theme-dust" ? "DUST-2" : "NUCLEA"}
-            </h1>
-          </div>
-        </Parallax>
 
-        <Navbar />
+        <div className="flex flex-row items-center justify-center absolute w-screen h-screen text-[70px] font-dreamScape z-[10] desktop:text-[200px] el:!text-[350px]">
+          <h1 className="text-white z-[0]">
+            {themeContext.theme === "theme-dust" ? "DUST-2" : "NUCLEA"}
+          </h1>
+        </div>
+        <div className="bg-[url('https://i.imgur.com/hIUOMul.png')] tablet:nuclea:bg-[url('https://i.imgur.com/nrGRJTb.png')] h-screen bg-center bg-no-repeat bg-cover object-cover dust:bg-[url('https://i.imgur.com/K3KUSHX.png')] tablet:dust:bg-[url('https://i.imgur.com/4C0Z4BJ.png')] z-0"></div>
         <div className="flex flex-row items-center justify-center absolute bottom-0 w-screen mb-5">
           <BsChevronCompactDown className="text-white text-5xl animate-scrollEmoticon" />
         </div>
-        {/* <div className="nuclea:bg-nuclea h-screen bg-center bg-no-repeat bg-cover object-cover dust:bg-dust z-0"></div> */}
         <DashboardShowcase />
         <GridSection />
         <Cards />
