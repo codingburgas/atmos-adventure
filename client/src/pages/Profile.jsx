@@ -17,7 +17,7 @@ const Profile = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   /*
     Tries to logout the user
   */

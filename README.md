@@ -13,11 +13,14 @@
 <br>
 
 ## 💻 About
+
 <p align="center">This repository contains our submission for the final 2021-2022 project - "The Games - Adventure"!</p>
 <p align="center">You can find out more about our modern web app & our Unity game!</p>
 
 ## 🗂️ Our Tech Stack
+
 ### Used code editor & collaborative service:
+
 <p align="left">
     <a href="https://code.visualstudio.com/"><img src="https://img.icons8.com/color/344/visual-studio-code-2019.png" alt="VS code logo" width=48px /></a>
     <a href="https://github.com/"><img src="https://img.icons8.com/nolan/344/github.png" alt="GitHub logo" width=52px /></a>
@@ -25,6 +28,7 @@
 </p>
 
 ### Used tools for our visual elements:
+
 <p align="left">
     <a href="https://www.figma.com/"><img src="https://img.icons8.com/color/344/figma--v1.png" alt="Figma logo" width=48px/></a>
     <a href="https://marketplace.visualstudio.com/items?itemName=adpyke.codesnap"><img src="https://adpyke.gallerycdn.vsassets.io/extensions/adpyke/codesnap/1.3.4/1625238962906/Microsoft.VisualStudio.Services.Icons.Default" alt="adobe creative cloud" width=48px /></a>
@@ -32,6 +36,7 @@
 </p>
 
 ### Used tools for our frontend development:
+
 <p align="left">
     <a href="https://www.javascript.com/"><img src="https://img.icons8.com/color/344/javascript--v1.png" alt="javascript" width=48px /></a>
     <a href="https://vitejs.dev/"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--bp9HIjTK--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/77ripvyhwi6xl0gqkvj9.png" alt="vitejs" width=48px /></a>
@@ -40,6 +45,7 @@
 </p>
 
 ### Used technologies for our backend development:
+
 <p align="left">
     <a href="https://www.python.org/"><img src="https://img.icons8.com/color/344/python--v1.png" alt="python" width=48px /></a>
     <a href="https://nodejs.org/en/"><img src="https://s3.amazonaws.com/clarityfm-production/attachments/32059/default/nodejs-512.png?1573156678" alt="nodejs" width=58px /></a>
@@ -50,12 +56,14 @@
 </p>
 
 ### Used tools for our game development:
+
 <p align="left">
     <a href="https://docs.microsoft.com/en-us/dotnet/csharp/"><img src="https://miro.medium.com/max/375/1*NhpIIUL7AFgKKn30gKoDUw.png" alt="csharp" width=48px /></a>
     <a href="https://unity.com/"><img src="https://gpuopen.com/wp-content/uploads/2021/10/U_Logo_White_RGB.png" alt="unity" width=128px /></a>
 </p>
 
 ### Used tools for our documentation, presentation & communication:
+
 <p align="left">
     <a href="https://jupyter.org/"><img src="https://img.icons8.com/fluency/344/jupyter.png" alt="jupyter notebook" width=48px /></a>
     <a href="https://www.microsoft.com/en-ww/microsoft-365/word"><img src="https://img.icons8.com/color/344/ms-word.png" alt="MS Word logo" width=48px /></a>
@@ -67,24 +75,30 @@
 <hr>
 
 ## 📄 Documents
+
 ### QA Documentation
-  - [Test Plan]()
-  - [QA Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20client%20QA%20Doc.xlsx)
+
+- [Test Plan]()
+- [QA Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20client%20QA%20Doc.xlsx)
 
 ### Code & Team Documentation
-  - [Jupyter Notebook](https://docs.atmos.systems)
-  - [Team Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos_-_Documentation.docx)
+
+- [Jupyter Notebook](https://docs.atmos.systems)
+- [Team Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos_-_Documentation.docx)
 
 ### Presenting
-  - [Presentation]()
+
+- [Presentation](https://codingburgas-my.sharepoint.com/:p:/r/personal/mmmarinov20_codingburgas_bg/Documents/Atmos%20-%20Presentation.pptx?d=w0037c9cbc4574819b33001072a4d2cf2&csf=1&web=1&e=6UnMzP)
 
 <hr>
 
 ## 📥 Installation
+
 You can visit us <a href="https://atmos.systems">here</a> <br>
 And see our Jupyter Notebook <a href="https://docs.atmos.systems">here</a> <br>
 <br>
 Or if you want to clone our repo locally you can paste the following command in your preferred terminal:
+
 <pre>https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022</pre>
 <br>
 Then, you can launch the web application by following these commands:
