@@ -28,9 +28,14 @@ const Home = () => {
       <div className="">
         <Navbar />
         <Parallax
-          strength={-500}
-          bgImage={"https://i.imgur.com/nrGRJTb.png"}
-          className="w-screen h-screen"
+          strength={-50}
+          // bgImage={"https://i.imgur.com/4C0Z4BJ.png"}
+          bgImage={
+            themeContext.theme === "theme-dust"
+              ? "https://i.imgur.com/4C0Z4BJ.png"
+              : "https://i.imgur.com/nrGRJTb.png"
+          }
+          className="w-screen h-screen bg-center"
         >
           {/* <h1 className="text-[350px] h-screen w-screen flex items-center justify-center">
             NUCLEA

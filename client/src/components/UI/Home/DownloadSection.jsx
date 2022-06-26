@@ -12,7 +12,7 @@ const DownloadSection = () => {
   }, []);
 
   return (
-    <div className="h-full bg-downloadMobile tablet:bg-download bg-cover bg-no-repeat object-cover mt-20">
+    <div className="h-full bg-downloadMobile tablet:bg-[url('https://i.imgur.com/F8ntcMm.png')] bg-cover bg-no-repeat object-cover mt-20">
       <div
         className="flex flex-row justify-center items-center pt-20 text-white font-sans font-semibold text-4xl desktop:pt-60 desktop:text-6xl el:!text-8xl"
         data-aos="fade-down"

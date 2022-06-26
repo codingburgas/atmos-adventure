@@ -46,20 +46,20 @@ const GridSection = () => {
           data-aos="fade-right"
           data-aos-duration="1500"
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s. It has survived not only five centuries, but also the
-          leap into electronic. Lorem Ipsum passages, and more recently with
-          desktop publishing software
+          We’ve built a full stack application from the ground up, that manages
+          to balance perfectly backend and frontend. To accomplish this, we’ve
+          built used React as our web framework of choice, Tailwind CSS as our
+          style components library, as well as other technologies that you can
+          learn more about in our repository.
         </h1>
         <h1
           className="max-w-sm text-lg text-justify el:max-w-xl extraXl:text-2xl"
           data-aos="fade-left"
           data-aos-duration="1500"
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since.
+          Our powerful express-based backend pairs flawlessly with the mySQL
+          database. Admins can easily add, promote and delete users from the
+          admin panel.
         </h1>
       </dir>
       <div
@@ -73,14 +73,14 @@ const GridSection = () => {
       </div>
       <div className="flex flex-row justify-between z-[-10]">
         <img
-          src="https://i.imgur.com/d8ZPSXE.png"
+          src="https://i.imgur.com/w1xKYrd.png"
           className="h-[18%] w-[18%] ml-28 mt-6 z-[-10]"
           alt=""
           data-aos="fade-right"
           data-aos-duration="1500"
         />
         <img
-          src="https://i.imgur.com/6aXCE95.png"
+          src="https://i.imgur.com/jdRg3kV.png"
           className="h-[40%] w-[40%] pt-10 mr-16 z-[-10]"
           alt=""
           data-aos="fade-left"
