@@ -92,7 +92,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SurfaceAlbedo:
-        m_Texture: {fileID: 2800000, guid: 52d710db9977654448c84faa8721e497, type: 3}
+        m_Texture: {fileID: 2800000, guid: 05e9c8f8688e1874db9e8f92af1395d1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SurfaceNormal:

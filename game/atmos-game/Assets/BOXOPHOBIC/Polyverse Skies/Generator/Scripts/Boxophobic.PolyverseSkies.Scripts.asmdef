@@ -1,0 +1,15 @@
+{
+    "name": "Boxophobic.PolyverseSkies.Scripts",
+    "references": [
+        "Boxophobic.Utils.Editor",
+        "Boxophobic.Utils.Scripts"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

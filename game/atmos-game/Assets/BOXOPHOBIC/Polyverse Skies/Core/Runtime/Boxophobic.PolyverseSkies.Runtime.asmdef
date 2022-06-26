@@ -1,0 +1,14 @@
+{
+    "name": "Boxophobic.PolyverseSkies.Runtime",
+    "references": [
+        "Boxophobic.Utils.Scripts"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

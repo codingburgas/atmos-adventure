@@ -122,7 +122,7 @@ Material:
     - _Color2Level1: 0.7
     - _Color2OverlayType: 1
     - _Color2Power: 0
-    - _Cutoff: 0.45
+    - _Cutoff: 0.471
     - _Cutoff1: 0.35
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -140,7 +140,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SNOW: 0
-    - _Smoothness: 0.07
+    - _Smoothness: 0.167
     - _Smoothness1: 0
     - _SmoothnessTextureChannel: 0
     - _Snow: 0
@@ -159,7 +159,7 @@ Material:
     - _TessPhongStrength: 0.5
     - _TessValue: 16
     - _ThicknessLevel1: 10
-    - _TransAmbient: 0
+    - _TransAmbient: 0.657
     - _TransDirect: 1
     - _TransNormal: 0
     - _TransNormalDistortion: 0
@@ -173,7 +173,7 @@ Material:
     - _WIND: 1
     - _Wind: 1
     - _Wind1: 1
-    - _WindForce: 0.48
+    - _WindForce: 0.587
     - _WindForce1: 0.3
     - _WindSpeed: 0.2
     - _WindSpeed1: 0.5
@@ -183,8 +183,8 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.13867483, g: 0.461, b: 0.2773496, a: 0}
-    - _Color2: {r: 0.15972951, g: 0.4433962, b: 0.04433963, a: 0}
+    - _Color1: {r: 0.9150943, g: 0.3237362, b: 0.42869452, a: 0}
+    - _Color2: {r: 0.6431373, g: 0.62400275, b: 0.40392157, a: 0}
     - _Color3: {r: 0, g: 0, b: 0, a: 0}
     - _CoverageColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

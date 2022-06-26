@@ -12,7 +12,7 @@ public class RenderTerrainMap : MonoBehaviour
     LayerMask layer;
     // objects to render
     [SerializeField]
-    Renderer[] renderers;
+    Terrain[] renderers;
     // unity terrain to render
     [SerializeField]
     Terrain[] terrains;
@@ -36,9 +36,9 @@ public class RenderTerrainMap : MonoBehaviour
         bounds = new Bounds(transform.position, Vector3.zero);
         if (renderers.Length > 0)
         {
-            foreach (Renderer renderer in renderers)
+            foreach (Terrain renderer in renderers)
             {
-                bounds.Encapsulate(renderer.bounds);
+                bounds.Encapsulate(renderer.terrainData.bounds);
             }
         }
 
