@@ -92,3 +92,6 @@
 - <a href = "https://github.com/VDVichev20"> Vicho Vichev </a> (QA Engineer)
 
 ## Credits
+<hr>
+
+<p align="center">Thanks for checking out our repo, show us some ❤️ by giving our repo a ⭐️!</p>
