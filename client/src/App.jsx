@@ -8,6 +8,7 @@ const Register = lazy(() => import("./pages/Register"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Profile = lazy(() => import("./pages/Profile"));
 const VerificationEmail = lazy(() => import("./pages/EmailVerification"));
+import axios from "axios";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import "./index.css";
 function App() {
@@ -18,6 +19,9 @@ function App() {
   */
   useEffect(() => {
     authContext.setIsAuthenticated();
+    axios
+      .get("http://localhost:3001/api/countVisitors")
+      .then((res) => console.log(res.data));
   }, []);
 
   return (
