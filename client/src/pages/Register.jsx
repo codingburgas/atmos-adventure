@@ -7,9 +7,9 @@ import "aos/dist/aos.css";
 
 const Register = () => {
   const navigate = useNavigate();
-  const username = useRef();
-  const email = useRef();
-  const password = useRef();
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   /*
     Initializes AOS library
@@ -24,24 +24,45 @@ const Register = () => {
   */
   const registerHandler = (e) => {
     e.preventDefault();
-    const USERNAME_REGEX = "/^[a-zA-Z0-9.-_$@*!]{3,30}$/";
-    const user = {
-      username: username.current.value,
-      email: email.current.value,
-      password: password.current.value,
-    };
+    const USERNAME_REGEX = new RegExp(/^[a-zA-Z0-9.-_$@*!]{4,10}$/);
+    const EMAIL_REGEX = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/);
+    const PASSWORD_REGEX = new RegExp(/^(?=.*[a-z])(?=.{8,})/);
 
-    axios
-      .post("http://localhost:3001/api/register", user, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.data.message === "User created") {
-          navigate("/", { replace: true });
-        } else {
-          console.log(res.data.message);
-        }
-      });
+    const username = usernameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    if (!username.match(USERNAME_REGEX)) {
+      alert("Username must be 4-10 characters long");
+    } else if (!email.match(EMAIL_REGEX)) {
+      alert("Email must be valid");
+    } else if (!password.match(PASSWORD_REGEX)) {
+      alert(
+        "Password must be at least 8 characters long and contain at least one letter"
+      );
+    }
+    const user = {
+      username: username,
+      email: email,
+      password: email,
+    };
+    if (
+      username.match(USERNAME_REGEX) &&
+      email.match(EMAIL_REGEX) &&
+      password.match(PASSWORD_REGEX)
+    ) {
+      axios
+        .post("http://localhost:3001/api/register", user, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message === "User created") {
+            navigate("/", { replace: true });
+          } else {
+            console.log(res.data.message);
+          }
+        });
+    }
   };
 
   return (
@@ -67,9 +88,9 @@ const Register = () => {
               name=""
               className="border-solid border focus:border-2 border-stroke bg-account bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
               placeholder="Username"
-              ref={username}
+              ref={usernameRef}
               required
-              key={username}
+              key={usernameRef}
             />
           </div>
           <div className="flex flex-row items-center justify-center pt-10 ">
@@ -78,9 +99,9 @@ const Register = () => {
               name=""
               className="border-solid border focus:border-2 border-stroke bg-lock bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
               placeholder="Password"
-              ref={password}
+              ref={passwordRef}
               required
-              key={password}
+              key={passwordRef}
             />
           </div>
           <div className="flex flex-row items-center justify-center pt-10 ">
@@ -89,7 +110,7 @@ const Register = () => {
               name=""
               className="border-solid border focus:border-2 border-stroke bg-email bg-no-repeat font-bold [background-position-x:1%] [background-position-y:48%] bg-45 w-9/12 py-5 px-14 text-lg extra:w-8/12 extra:py-6 extra:bg-70 extra:[background-position-x:-1%] extra:[background-position-y:60%] extra:placeholder:text-2xl extra:text-2xl leading-tight appearance-none box-border rounded-xl backdrop-blur-sm bg-darkBlue z-0 text-white placeholder:font-bold placeholder:text-lg placeholder:text-white focus:outline-none"
               placeholder="Email"
-              ref={email}
+              ref={emailRef}
               required
             />
           </div>
