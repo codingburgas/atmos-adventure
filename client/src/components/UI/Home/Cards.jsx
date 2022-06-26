@@ -1,8 +1,13 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Cards = () => {
+  const [downloads, setDownloads] = useState();
+  const [visitors, setVisitors] = useState();
+  const [users, setUsers] = useState();
+
   /*
    * Initializes the AOS library
    */
@@ -10,6 +15,14 @@ const Cards = () => {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
+
+    axios
+      .get("http://localhost:3001/api/getStats", { withCredentials: true })
+      .then((res) => {
+        setDownloads(res.data.downloads);
+        setVisitors(res.data.visitors);
+        setUsers(res.data.users);
+      });
   }, []);
 
   return (
@@ -29,7 +42,7 @@ const Cards = () => {
           data-aos-duration="1500"
         >
           <h1 className="font-raleway font-medium text-4xl">Downloads</h1>
-          <h1 className="font-sans font-extrabold text-8xl">184</h1>
+          <h1 className="font-sans font-extrabold text-8xl">{downloads}</h1>
           <h1 className="font-sans font-light text-3xl">and counting...</h1>
         </div>
         <div
@@ -37,8 +50,8 @@ const Cards = () => {
           data-aos="fade-up"
           data-aos-duration="1500"
         >
-          <h1 className="font-raleway font-medium text-4xl">Downloads</h1>
-          <h1 className="font-sans font-extrabold text-8xl">184</h1>
+          <h1 className="font-raleway font-medium text-4xl">Visitors</h1>
+          <h1 className="font-sans font-extrabold text-8xl">{visitors}</h1>
           <h1 className="font-sans font-light text-3xl">and counting...</h1>
         </div>
         <div
@@ -46,8 +59,8 @@ const Cards = () => {
           data-aos="fade-down"
           data-aos-duration="1500"
         >
-          <h1 className="font-raleway font-medium text-4xl">Downloads</h1>
-          <h1 className="font-sans font-extrabold text-8xl">184</h1>
+          <h1 className="font-raleway font-medium text-4xl">Players</h1>
+          <h1 className="font-sans font-extrabold text-8xl">{users}</h1>
           <h1 className="font-sans font-light text-3xl">and counting...</h1>
         </div>
       </div>

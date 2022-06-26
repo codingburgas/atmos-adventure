@@ -26,7 +26,12 @@ const ChangeUsername = (props) => {
             props.close(false);
             navigate(0);
           } else if (res.data.message === "Username already exists") {
-            alert("Username already exists");
+            enqueueSnackbar("Username already exists", {
+              variant: "error",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
           }
         });
     } else props.close(false);

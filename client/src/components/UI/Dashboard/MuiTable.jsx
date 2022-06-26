@@ -10,11 +10,12 @@ import {
 } from "@mui/material";
 import { BsFillTrashFill } from "react-icons/bs";
 import { FaCrown } from "react-icons/fa";
+import { useSnackbar } from "notistack";
 import axios from "axios";
 
 const MuiTable = () => {
   const [accounts, setAccounts] = useState([]);
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   /*
    * Fetches the accounts from the database
    */
@@ -96,7 +97,12 @@ const MuiTable = () => {
                             if (res.data.message === "User deleted") {
                               window.location.reload();
                             } else {
-                              alert(res.data.message);
+                              enqueueSnackbar("User has admin privileges", {
+                                variant: "error",
+                              });
+                              sleep(5000).then(() => {
+                                closeSnackbar();
+                              });
                             }
                           });
                       }}
@@ -121,7 +127,12 @@ const MuiTable = () => {
                             if (res.data.message === "User promoted") {
                               window.location.reload();
                             } else {
-                              alert(res.data.message);
+                              enqueueSnackbar("User has admin privileges", {
+                                variant: "error",
+                              });
+                              sleep(5000).then(() => {
+                                closeSnackbar();
+                              });
                             }
                           });
                       }}

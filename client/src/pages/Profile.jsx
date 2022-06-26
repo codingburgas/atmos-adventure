@@ -1,6 +1,7 @@
 import React, { Suspense, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/context/AuthContext";
+import { useSnackbar } from "notistack";
 import ChangeUsernameMobile from "../components/UI/Profile/Mobile/ChangeUsernameMobile";
 import ChangePasswordMobile from "../components/UI/Profile/Mobile/ChangePasswordMobile";
 import ChangeBannerMobile from "../components/UI/Profile/Mobile/ChangeBannerMobile";
@@ -15,6 +16,7 @@ const Profile = () => {
   const [openChangePicture, setOpenChangePicture] = useState(false);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   /*
     Tries to logout the user
@@ -26,7 +28,12 @@ const Profile = () => {
         if (res.data.message === "User logged out") {
           navigate("/", { replace: true });
         } else {
-          console.log(res.data.message);
+          enqueueSnackbar("User not authenticated", {
+            variant: "error",
+          });
+          sleep(5000).then(() => {
+            closeSnackbar();
+          });
         }
       });
   };
@@ -55,7 +62,12 @@ const Profile = () => {
         })
         .then((res) => {
           if (res.data.message === "Created temporary verification token") {
-            alert("Verification email sent");
+            enqueueSnackbar("Verification email sent", {
+              variant: "success",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
           }
         });
     }

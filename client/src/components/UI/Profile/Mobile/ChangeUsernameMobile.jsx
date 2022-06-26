@@ -1,13 +1,14 @@
-import { useEffect, useState, useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
+import { useSnackbar } from "notistack";
 import axios from "axios";
 
 const ChangeUsernameMobile = (props) => {
   const usernameRef = useRef();
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   /*
    * Tries to change the username
    */
@@ -25,7 +26,12 @@ const ChangeUsernameMobile = (props) => {
             props.close(false);
             navigate(0, { replace: true });
           } else if (res.data.message === "Username already exists") {
-            alert("Username already exists");
+            enqueueSnackbar("Username already exists", {
+              variant: "error",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
           }
         });
     } else props.close(false);

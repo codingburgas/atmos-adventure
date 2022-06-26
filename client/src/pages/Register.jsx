@@ -35,7 +35,6 @@ const Register = () => {
     const password = passwordRef.current.value;
 
     if (!username.match(USERNAME_REGEX)) {
-      // alert("Username must be 4-10 characters long");
       enqueueSnackbar("Username must be 4-10 characters long!", {
         variant: "error",
       });

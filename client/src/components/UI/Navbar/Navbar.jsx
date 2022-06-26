@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState, useEffect } from "react";
+import { useSnackbar } from "notistack";
 import ProfilePopup from "../Profile/Popup/ProfilePopup";
 import BurgerNavbar from "./BurgerNavbar";
 import axios from "axios";
@@ -8,6 +9,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   /*
     Checks if the user is authenticated
@@ -27,7 +29,12 @@ const Navbar = () => {
           if (res.data.message === "User logged out") {
             navigate(0);
           } else {
-            alert(res.data.message);
+            enqueueSnackbar("User not authenticated", {
+              variant: "error",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
           }
         });
     } else {

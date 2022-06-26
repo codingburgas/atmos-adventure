@@ -1,5 +1,6 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import ChangeUsername from "./ChangeUsername";
@@ -13,6 +14,7 @@ const ProfilePopup = (props) => {
   const [openChangePassword, setOpenChangePassword] = useState(false);
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   /*
     Tries to logout the user
@@ -57,7 +59,12 @@ const ProfilePopup = (props) => {
         })
         .then((res) => {
           if (res.data.message === "Created temporary verification token") {
-            alert("Verification email sent");
+            enqueueSnackbar("Verification email sent", {
+              variant: "success",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
           }
         });
     }

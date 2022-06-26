@@ -1,8 +1,11 @@
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const GridBoxes = () => {
+  const [downloads, setDownloads] = useState();
+  const [visitors, setVisitors] = useState();
+  const [users, setUsers] = useState();
   const [stars, setStars] = useState("0");
 
   /*
@@ -16,6 +19,14 @@ const GridBoxes = () => {
     )
       .then((res) => res.json())
       .then((data) => setStars(data.stargazers_count));
+
+    axios
+      .get("http://localhost:3001/api/getStats", { withCredentials: true })
+      .then((res) => {
+        setDownloads(res.data.downloads);
+        setVisitors(res.data.visitors);
+        setUsers(res.data.users);
+      });
   }, []);
 
   return (
@@ -23,25 +34,25 @@ const GridBoxes = () => {
       <div className="col-span-1 row-span-1 bg-[#F3F9FF] text-center py-3 rounded-xl outline outline-2 outline-[#B9B9B9]">
         <h1 className="underline font-dreamScapeSans font-normal">Downloads</h1>
         <h1 className="font-dreamScapeSans font-normal text-3xl">
-          420
+          {downloads}
           <MdOutlineKeyboardArrowUp className="inline text-[#009E06]" />
         </h1>
         <h1 className="font-serif text-xs">increase 10%</h1>
       </div>
 
       <div className="col-span-1 row-span-1 bg-[#F3F9FF] text-center py-3 rounded-xl outline outline-2 outline-[#B9B9B9]">
-        <h1 className="underline font-dreamScapeSans font-normal">Views</h1>
+        <h1 className="underline font-dreamScapeSans font-normal">Visitors</h1>
         <h1 className="font-dreamScapeSans font-normal text-3xl">
-          100
-          <MdOutlineKeyboardArrowDown className="inline text-[#9E0000]" />
+          {visitors}
+          <MdOutlineKeyboardArrowUp className="inline text-[#009E06]" />
         </h1>
         <h1 className="font-serif text-xs">decrease 10%</h1>
       </div>
 
       <div className="col-span-1 row-span-1 bg-[#F3F9FF] text-center py-3 rounded-xl outline outline-2 outline-[#B9B9B9]">
-        <h1 className="underline font-dreamScapeSans font-normal">Players</h1>
+        <h1 className="underline font-dreamScapeSans font-normal">Users</h1>
         <h1 className="font-dreamScapeSans font-normal text-3xl">
-          1000
+          {users}
           <MdOutlineKeyboardArrowUp className="inline text-[#009E06]" />
         </h1>
         <h1 className="font-serif text-xs">increase 10%</h1>
