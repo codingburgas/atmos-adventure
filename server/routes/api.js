@@ -608,12 +608,12 @@ router.get('/downloadCounter', (req, res) => {
     if(req.session.uuid)
     {
         db.query('UPDATE statistics SET downloads = downloads + 1');
-        res.sendStatus(200);
+        res.send({"message":"Updated download counter"});
     }
     else
     {
         console.log("User not authenticated");
-        res.sendStatus(200);
+        res.send({"message":"User not authenticated"});
     }
 });
 
