@@ -19,6 +19,7 @@ const Register = () => {
 
   const registerHandler = (e) => {
     e.preventDefault();
+    const USERNAME_REGEX = "/^[a-zA-Z0-9.-_$@*!]{3,30}$/";
     const user = {
       username: username.current.value,
       email: email.current.value,

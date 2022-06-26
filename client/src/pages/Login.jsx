@@ -89,10 +89,11 @@ const Login = () => {
             </button>
           </div>
           <div
-            className="flex flex-row items-center justify-center text-white font-serif text-xl hover:cursor-pointer mt-2"
+            className="flex flex-col items-center justify-center text-white font-serif text-xl hover:cursor-pointer mt-2"
             onClick={() => navigate("/Register", { replace: false })}
           >
             <h1>Don't have an account?</h1>
+            <h1>Forgot your password?</h1>
           </div>
         </div>
       </div>

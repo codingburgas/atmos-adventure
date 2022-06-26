@@ -19,22 +19,23 @@ const ChangeBannerMobile = (props) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", fileName);
-
-    axios
-      .post("http://localhost:3001/api/changeBanner", formData, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        // console.log(res);
-        if (res.data.message === "Image changed") {
-          navigate(0);
-        } else {
-          console.error(res.data.message);
-        }
-      });
+    if (file) {
+      axios
+        .post("http://localhost:3001/api/changeBanner", formData, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          // console.log(res);
+          if (res.data.message === "Image changed") {
+            navigate(0);
+          } else {
+            console.error(res.data.message);
+          }
+        });
+    } else props.close(false);
   };
 
   return (

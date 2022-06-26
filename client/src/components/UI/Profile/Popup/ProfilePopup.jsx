@@ -47,13 +47,17 @@ const ProfilePopup = (props) => {
   };
 
   const deleteAccountHandler = () => {
-    axios
-      .delete("http://localhost:3001/api/deleteUser", { withCredentials: true })
-      .then((res) => {
-        if (res.data.message === "User deleted") {
-          navigate(0);
-        }
-      });
+    if (window.confirm("Are you sure you want to delete your account?")) {
+      axios
+        .delete("http://localhost:3001/api/deleteUser", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message === "User deleted") {
+            navigate(0);
+          }
+        });
+    }
   };
 
   const verifyEmailHandler = () => {
@@ -119,7 +123,10 @@ const ProfilePopup = (props) => {
             <h1 className="cursor-pointer" onClick={changePasswordHandler}>
               Edit password
             </h1>
-            <h1 className="cursor-pointer" onClick={verifyEmailHandler}>
+            <h1
+              className={authContext.verified ? "" : "cursor-pointer"}
+              onClick={verifyEmailHandler}
+            >
               {authContext.verified === 0 ? "Verify email" : "Verified"}
             </h1>
           </div>

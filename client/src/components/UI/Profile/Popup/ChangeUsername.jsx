@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 
 const ChangeUsername = (props) => {
-  const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
@@ -13,18 +12,20 @@ const ChangeUsername = (props) => {
     const username = {
       newUsername: usernameRef.current.value,
     };
-    axios
-      .post("http://localhost:3001/api/changeUsername", username, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.data.message === "Username changed") {
-          props.close(false);
-          navigate(0);
-        } else if (res.data.message === "Username already exists") {
-          alert("Username already exists");
-        }
-      });
+    if (username.newUsername.length > 0) {
+      axios
+        .post("http://localhost:3001/api/changeUsername", username, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message === "Username changed") {
+            props.close(false);
+            navigate(0);
+          } else if (res.data.message === "Username already exists") {
+            alert("Username already exists");
+          }
+        });
+    } else props.close(false);
   };
 
   return (

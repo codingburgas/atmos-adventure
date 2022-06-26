@@ -12,17 +12,19 @@ const ChangeUsernameMobile = (props) => {
     const username = {
       newUsername: usernameRef.current.value,
     };
-    axios
-      .post("http://localhost:3001/api/changeUsername", username, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.data.message === "Username changed") {
-          props.close(false);
-        } else if (res.data.message === "Username already exists") {
-          alert("Username already exists");
-        }
-      });
+    if (username.newUsername.length > 0) {
+      axios
+        .post("http://localhost:3001/api/changeUsername", username, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message === "Username changed") {
+            props.close(false);
+          } else if (res.data.message === "Username already exists") {
+            alert("Username already exists");
+          }
+        });
+    } else props.close(false);
   };
 
   return (

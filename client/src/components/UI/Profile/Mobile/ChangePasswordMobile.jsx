@@ -12,20 +12,22 @@ const ChangePasswordMobile = (props) => {
       oldPassword,
       newPassword,
     };
-    axios
-      .post("http://localhost:3001/api/changePassword", userData, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.data.message === "Password changed") {
-          props.close(false);
-        }
-        if (res.data.message === "Wrong password") {
-          oldPasswordRef.current.classList.add(
-            "border-red border-2 border-solid"
-          );
-        }
-      });
+    if (oldPassword.length > 0 && newPassword.length > 0) {
+      axios
+        .post("http://localhost:3001/api/changePassword", userData, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message === "Password changed") {
+            props.close(false);
+          }
+          if (res.data.message === "Wrong password") {
+            oldPasswordRef.current.classList.add(
+              "border-red border-2 border-solid"
+            );
+          }
+        });
+    } else props.close(false);
   };
 
   return (

@@ -39,7 +39,7 @@ const Profile = () => {
   };
 
   const verifyEmailHandler = () => {
-    if (!verified) {
+    if (!authContext.verified) {
       axios
         .get("http://localhost:3001/api/sendConfirmationEmail", {
           withCredentials: true,
@@ -94,7 +94,7 @@ const Profile = () => {
               </h1>
               <h1
                 className="cursor-pointer"
-                onClick={() => setOpenChangeProfilePic(true)}
+                onClick={() => setOpenChangePicture(true)}
               >
                 Change profile picture
               </h1>
