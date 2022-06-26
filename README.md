@@ -64,7 +64,7 @@
     <a href="https://www.microsoft.com/en/microsoft-teams/group-chat-software"><img src="https://img.icons8.com/color/344/microsoft-teams.png" alt = "MS Teams logo" width=46px /></a>
 </p>
 
-
+<hr>
 
 ## 📄 Documents
 ### QA Documentation
@@ -78,7 +78,11 @@
 ### Presenting
   - [Presentation]()
 
+<hr>
+
 ## 📥 Installation
+
+<hr>
 
 ## 🧒 Our Team
 
@@ -91,7 +95,6 @@
 - <a href = "https://github.com/MVKoleva20"> Mariya Koleva </a> (QA Engineer)
 - <a href = "https://github.com/VDVichev20"> Vicho Vichev </a> (QA Engineer)
 
-## Credits
 <hr>
 
 <p align="center">Thanks for checking out our repo, show us some ❤️ by giving our repo a ⭐️!</p>
