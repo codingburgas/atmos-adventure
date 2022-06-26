@@ -1,5 +1,7 @@
-<p align="center">
+ <h1 align="center">Team Banka KSD</h1>
 
+<p align="center">
+    banners go here.
 </p>
 
 <p align = "center">
@@ -11,6 +13,8 @@
 <br>
 
 ## 💻 About
+<p align="center">This repository contains our submission for the final 2021-2022 project - "The Games - Adventure"!</p>
+<p align="center">You can find out more about our modern web app & our Unity game!</p>
 
 ## 📄 Documents
 
