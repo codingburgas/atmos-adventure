@@ -1072,7 +1072,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7538578009276306860}
-  m_LocalRotation: {x: 0.10052204, y: -0.000000004279807, z: 4.324051e-10, w: 0.99493486}
+  m_LocalRotation: {x: 0.097593285, y: -0.23841628, z: 0.024088105, w: 0.9659467}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1117,7 +1117,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0709677, y: 1}
+    m_SensorSize: {x: 2.0380795, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1205,7 +1205,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: -27.729511
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -1277,7 +1277,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7538578009430821222}
-  m_LocalRotation: {x: 0.068200916, y: 0.00000001716632, z: -0.0000000011734913, w: 0.9976716}
+  m_LocalRotation: {x: 0.06621386, y: -0.23907207, z: 0.016342992, w: 0.96860373}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1322,7 +1322,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0709677, y: 1}
+    m_SensorSize: {x: 2.0380795, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1358,8 +1358,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7538578010011498293}
-  m_LocalRotation: {x: 0.10052206, y: -0.000000005983281, z: 2.603026e-10, w: 0.99493486}
-  m_LocalPosition: {x: 0, y: 0.32800007, z: -1.2}
+  m_LocalRotation: {x: 0.09759332, y: -0.2384163, z: 0.024088107, w: 0.96594673}
+  m_LocalPosition: {x: 0.55835575, y: 0.32800007, z: -1.0621856}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1508,7 +1508,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7538578010029520410}
-  m_LocalRotation: {x: 0.13301268, y: -0, z: -0, w: 0.9911144}
+  m_LocalRotation: {x: 0.12913728, y: -0.23750077, z: 0.03187384, w: 0.96223754}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1553,7 +1553,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0709677, y: 1}
+    m_SensorSize: {x: 2.0380795, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1641,7 +1641,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: -27.729511
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -1715,7 +1715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7538578010104898374}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.32800007, z: -1.2}
+  m_LocalPosition: {x: 0.55835575, y: 0.32800007, z: -1.0621856}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1755,7 +1755,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0709677, y: 1}
+    m_SensorSize: {x: 2.0380795, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1766,11 +1766,11 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 3
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
-    m_InputAxisValue: 0
+    m_InputAxisValue: -0.2
     m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
@@ -1788,9 +1788,9 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: -27.729511
     m_SpeedMode: 0
-    m_MaxSpeed: 120
+    m_MaxSpeed: 180
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -1969,7 +1969,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: -27.729511
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
