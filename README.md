@@ -1,8 +1,7 @@
  <h1 align="center">Team ATMOS</h1>
 
 <p align="center">
-    <img src="/docs/assets/banners/banner_dark.png#gh-dark-mode-only"/>
-    <img src="/docs/assets/banners/banner_light.png#gh-light-mode-only"/>
+    <img src="/docs/assets/banners/banner.png"/>
 </p>
 
 <p align = "center">

@@ -156,7 +156,7 @@ function sendConfirmationEmail(uuid, token)
 									<tr>
 										<td style="text-align: center;">
 											<div class="banner">
-												<img src="https://i.imgur.com/0yF00Ro.png"
+												<img src="https://i.imgur.com/Y627Tgg.png"
 													alt="banner" />
 											</div>
 											<div class="text">
@@ -332,7 +332,7 @@ function sendForgotPasswordEmail(email, tempPass)
 						<tr>
 							<td style="text-align: center;">
 								<div class="banner">
-									<img src="https://i.imgur.com/0yF00Ro.png"
+									<img src="https://i.imgur.com/Y627Tgg.png"
 										alt="banner" />
 								</div>
 								<div class="text">
