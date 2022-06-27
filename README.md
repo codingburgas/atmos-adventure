@@ -79,13 +79,13 @@
 
 ### QA Documentation
 
-- [Test Plan]()
+- [Test Plan](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20Test%20plan.docx)
 - [QA Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20client%20QA%20Doc.xlsx)
 
 ### Code & Team Documentation
 
 - [Jupyter Notebook](https://docs.atmos.systems)
-- [Team Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos_-_Documentation.docx)
+- [Team Documentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20Documentation.docx)
 
 ### Presenting
 
