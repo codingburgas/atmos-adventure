@@ -175,7 +175,7 @@ router.get('/getAllUsers', (req,res) => {
             }
             else if(result.length > 0)
             {
-                db.query('SELECT uuid, username, email, role, date_created, verified FROM users', (err, result) => {
+                db.query('SELECT uuid, username, email, role, date_created, verified FROM users ORDER BY role, date_created ASC', (err, result) => {
                     if (err)
                     {
                         console.log(err);
@@ -315,6 +315,26 @@ router.get('/deleteUserByUUID/:uuid', (req, res) => {
             {
                 if(result[0].role == "admin")
                 {
+                    db.query('DELETE FROM users WHERE uuid = (?) AND (role = "user" OR role = "moderator")', req.params.uuid, (err, results) => {
+                        if(err)
+                        {
+                            console.error("Something went wrong");
+                            res.send({"message":"Something went wrong"});
+                        }
+                        else if(results.affectedRows > 0)
+                        {
+                            console.log("User deleted");
+                            res.send({"message":"User deleted"});
+                        }
+                        else
+                        {
+                            console.log("User has administrator privileges");
+                            res.send({"message":"User has administrator privileges"});
+                        }
+                    });
+                }
+                else if(result[0].role == "moderator")
+                {
                     db.query('DELETE FROM users WHERE uuid = (?) AND role = "user"', req.params.uuid, (err, results) => {
                         if(err)
                         {
@@ -361,7 +381,7 @@ router.get('/promoteUserByUUID/:uuid', (req, res) => {
             {
                 if(result[0].role == "admin")
                 {
-                    db.query('UPDATE users SET role = "admin" WHERE uuid = (?) AND role="user"', req.params.uuid, (err, results) => {
+                    db.query('UPDATE users SET role = "moderator" WHERE uuid = (?) AND role="user"', req.params.uuid, (err, results) => {
                         if(err)
                         {
                             console.error("Something went wrong");
