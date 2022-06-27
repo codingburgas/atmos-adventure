@@ -75,7 +75,10 @@ router.post('/register',(req,res)=>{
                 }
                 else 
                 {
+                    const token = randToken.generate(60);
                     req.session.uuid = data[0];
+                    mailer.sendConfirmationEmail(req.session.uuid, token);
+                    req.session.sentEmail = true;
                     console.log("User created"); 
                     res.send({"message":"User created"});
                 }
@@ -558,12 +561,18 @@ router.get('/sendConfirmationEmail', (req,res)=>{
             }
             else 
             {
-                if(result.affectedRows > 0)
+                if(result.affectedRows > 0 && !req.session.sentEmail)
                 {
                     console.log("Created temporary verification token"); 
                     mailer.sendConfirmationEmail(req.session.uuid, token);
+                    req.session.sentEmail = true;
                     res.send({"message":"Created temporary verification token"});
                 }
+                else if(result.affectedRows > 0 && req.session.sentEmail)
+                {
+                    console.log("Email already sent");
+                    res.send({"message":"Email already sent"});
+                }   
                 else 
                 {
                     console.log("User already verified");

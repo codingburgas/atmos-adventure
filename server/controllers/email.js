@@ -183,6 +183,7 @@ function sendConfirmationEmail(uuid, token)
 			transporter.sendMail(mailOptions, (err) => {
 				if (err) {
 					console.error("Something went wrong");
+					console.error(err);
 				} 
 				else 
 				{
