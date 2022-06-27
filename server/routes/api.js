@@ -414,6 +414,52 @@ router.get('/promoteUserByUUID/:uuid', (req, res) => {
     }
 });
 
+router.get('/demoteUserByUUID/:uuid', (req, res) => {
+    if(req.session.uuid)
+    {
+        db.query('SELECT * FROM users WHERE uuid = (?)', req.session.uuid, (err, result) => {
+            if(err)
+            {
+                console.error("Something went wrong");
+                res.send({"message":"Something went wrong"});
+            }
+            else
+            {
+                if(result[0].role == "admin")
+                {
+                    db.query('UPDATE users SET role = "user" WHERE uuid = (?) AND role="moderator"', req.params.uuid, (err, results) => {
+                        if(err)
+                        {
+                            console.error("Something went wrong");
+                            res.send({"message":"Something went wrong"});
+                        }
+                        else if(results.affectedRows > 0)
+                        {
+                            console.log("User demoted");
+                            res.send({"message":"User demoted"});
+                        }
+                        else
+                        {
+                            console.log("User doesn't have administrator privileges");
+                            res.send({"message":"User doesn't have administrator privileges"});
+                        }
+                    });
+                }
+                else
+                {
+                    console.log("User doesn't have permission to access this endpoint");
+                    res.send({"message":"User doesn't have permission to access this endpoint"});
+                }
+            }
+        });
+    }
+    else
+    {
+        console.log("User not authenticated");
+        res.send({"message":"User not authenticated"});
+    }
+});
+
 router.post('/changePassword', (req, res) => {
     if(req.session.uuid)
     {
