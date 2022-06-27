@@ -51,7 +51,7 @@ const ChangeProfilePicMobile = (props) => {
           : "hidden"
       }
     >
-      <div className="bg-[#1F1F1F] w-[80%] h-1/2 flex-col items-center justify-center extra:w-[46%] el:!w-[40%]">
+      <div className="bg-[#1F1F1F] rounded-xl w-[80%] h-1/2 flex-col items-center justify-center extra:w-[46%] el:!w-[40%]">
         <h1 className="text-white text-3xl font-josefin font-medium text-center pt-5 border-b-4 border-white">
           Chnage profile picture
         </h1>

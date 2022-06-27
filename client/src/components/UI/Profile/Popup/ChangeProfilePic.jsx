@@ -49,7 +49,7 @@ const ChangeProfilePic = (props) => {
           : "hidden"
       }
     >
-      <div className="bg-[#1F1F1F] w-[60%] h-1/3 flex-col items-center justify-center extra:w-[46%] el:!w-[40%] z-50">
+      <div className="bg-[#1F1F1F] rounded-xl w-[60%] h-1/3 flex-col items-center justify-center extra:w-[46%] el:!w-[40%] z-50">
         <h1 className="text-white text-5xl font-josefin font-medium text-center pt-5 border-b-4 border-white z-50">
           Change profile picture
         </h1>

@@ -14,11 +14,13 @@ const GridBoxes = () => {
    */
 
   useEffect(() => {
-    fetch(
-      "https://api.github.com/repos/codingburgas/2122-the-games--adventures-atmos-final-project-2022"
-    )
-      .then((res) => res.json())
-      .then((data) => setStars(data.stargazers_count));
+    axios
+      .get(
+        "https://api.github.com/repos/codingburgas/2122-the-games--adventures-atmos-final-project-2022"
+      )
+      .then((res) => {
+        setStars(res.data.stargazers_count);
+      });
 
     axios
       .get("http://localhost:3001/api/getStats", { withCredentials: true })

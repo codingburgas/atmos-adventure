@@ -106,7 +106,7 @@ const Navbar = () => {
             </li>
             {authContext.isAuthenticated ? (
               <button
-                className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] hover:border-white"
+                className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-full text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] hover:border-white"
                 onClick={downloadHandler}
               >
                 Download
