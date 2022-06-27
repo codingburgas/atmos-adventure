@@ -33,7 +33,7 @@ const Home = () => {
             {themeContext.theme === "theme-dust" ? "DUST-2" : "NUCLEA"}
           </h1>
         </div>
-        <div className="bg-[url('https://i.imgur.com/hIUOMul.png')] tablet:nuclea:bg-[url('https://i.imgur.com/nrGRJTb.png')] h-screen bg-center bg-no-repeat bg-cover object-cover dust:bg-[url('https://i.imgur.com/K3KUSHX.png')] tablet:dust:bg-[url('https://i.imgur.com/4C0Z4BJ.png')] z-0"></div>
+        <div className="nuclea:bg-[url('https://i.imgur.com/hIUOMul.png')] tablet:nuclea:bg-[url('https://i.imgur.com/nrGRJTb.png')] h-screen bg-center bg-no-repeat bg-cover object-cover dust:bg-[url('https://i.imgur.com/K3KUSHX.png')] tablet:dust:bg-[url('https://i.imgur.com/4C0Z4BJ.png')] z-0"></div>
         <div className="flex flex-row items-center justify-center absolute bottom-0 w-screen mb-5">
           <BsChevronCompactDown className="text-white text-5xl animate-scrollEmoticon" />
         </div>

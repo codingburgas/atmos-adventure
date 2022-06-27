@@ -30,14 +30,14 @@ const Footage = () => {
 
       <div className="mt-16 flex flex-col items-center justify-center">
         <div
-          className="bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] text-transparent bg-clip-text font-serif font-bold text-lg"
+          className="nuclea:bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] dust:bg-[#F67E0F] text-transparent bg-clip-text font-serif font-bold text-lg"
           data-aos="fade-right"
           data-aos-duration="1500"
         >
           Clock is ticking. Moments last once.
         </div>
         <div
-          className="font-serif font-bold text-3xl"
+          className="font-serif font-bold text-3xl nuclea:text-[#111] dust:text-[#F6620F]"
           data-aos="fade-left"
           data-aos-duration="1500"
         >
@@ -57,7 +57,7 @@ const Footage = () => {
       </div>
       <div className="flex fles-row justify-center items-center text-center pt-5">
         <div
-          className="bg-[#5F57E2] w-[60%] text-white rounded-full px-5 py-2 text-2xl font-serif font-bold"
+          className="nuclea:bg-[#5F57E2] dust:bg-[#F6A70F] w-[60%] text-white rounded-full px-5 py-2 text-2xl font-serif font-bold"
           data-aos="fade-left"
           data-aos-duration="1500"
         >
@@ -68,7 +68,7 @@ const Footage = () => {
         </div>
       </div>
       <div
-        className="mt-10 flex flex-row justify-center items-center"
+        className="mt-10 flex flex-row justify-center items-center select-none"
         data-aos="fade-right"
         data-aos-duration="1500"
       >

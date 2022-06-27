@@ -3,12 +3,14 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { AuthContext } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const GridSection = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const authContext = useContext(AuthContext);
+  const themeContext = useContext(ThemeContext);
   const navigate = useNavigate();
   /*
    * Initializes the AOS library
@@ -16,6 +18,7 @@ const GridSection = () => {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
+    console.log(themeContext.theme);
   }, []);
 
   const buttonHandler = () => {
@@ -45,14 +48,14 @@ const GridSection = () => {
       <div>
         <div className="ml-28 mt-4 z-[-10]">
           <div
-            className="bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] text-transparent bg-clip-text font-serif font-bold text-2xl z-[-10] extraXl:text-4xl"
+            className="nuclea:bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] dust:bg-[#F6A70F] text-transparent bg-clip-text font-serif font-bold text-2xl z-[-10] extraXl:text-4xl"
             data-aos="fade-right"
             data-aos-duration="1500"
           >
             One platform. Three worlds.
           </div>
           <div
-            className="font-serif font-bold text-4xl max-w-md extraXl:text-5xl extraXl:max-w-xl"
+            className="nuclea:text-[#111] dust:text-[#F6620F] font-serif font-bold text-4xl max-w-md extraXl:text-5xl extraXl:max-w-xl"
             data-aos="fade-right"
             data-aos-duration="1500"
           >
@@ -83,7 +86,7 @@ const GridSection = () => {
         </h1>
       </dir>
       <div
-        className="ml-28 bg-[#5F57E2] rounded-full w-[25%] text-center py-3 text-white text-2xl font-serif font-bold el:w-[15%] z-[-10]"
+        className="ml-28 nuclea:bg-[#5F57E2] dust:bg-[#F6620F] rounded-full w-[25%] text-center py-3 text-white text-2xl font-serif font-bold el:w-[15%] z-[-10]"
         data-aos="fade-right"
         data-aos-duration="1500"
       >
@@ -91,16 +94,26 @@ const GridSection = () => {
           Check it out <IoIosArrowForward className="inline mb-1 text-3xl" />
         </button>
       </div>
-      <div className="flex flex-row justify-between z-[-10]">
+      <div className="flex flex-row justify-between z-[-10] select-none">
         <img
-          src="https://i.imgur.com/w1xKYrd.png"
+          // src="https://i.imgur.com/w1xKYrd.png"
+          src={
+            themeContext.theme === "theme-dust"
+              ? "https://i.imgur.com/F8Jv0au.png"
+              : "https://i.imgur.com/w1xKYrd.png"
+          }
           className="h-[18%] w-[18%] ml-28 mt-6 z-[-10]"
           alt=""
           data-aos="fade-right"
           data-aos-duration="1500"
         />
         <img
-          src="https://i.imgur.com/GiV0H77.png"
+          // src="https://i.imgur.com/GiV0H77.png"
+          src={
+            themeContext.theme === "theme-dust"
+              ? "https://i.imgur.com/Myih41l.png"
+              : "https://i.imgur.com/GiV0H77.png"
+          }
           className="h-[40%] w-[40%] pt-10 mr-16 z-[-10]"
           alt=""
           data-aos="fade-left"
