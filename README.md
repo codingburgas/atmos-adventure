@@ -103,24 +103,42 @@ Or if you want to clone our repo locally you can paste the following command in 
 <br>
 Then, you can launch the web application by following these commands:
 <br>
-<pre>
-cd client<br>
-npm install<br>
-npm run dev
-</pre>
+
+1. Navigate to our client folder using:
+<pre>cd client</pre>
+2. Install the node modules using:
+<pre>npm install</pre>
+3. Run the development server using:
+<pre>npm run dev</pre>
+
 <br>
 You will need another terminal to launch the server, paste the following commands:
+
+1. Navigate to our server folder using:
+<pre>cd server</pre>
+2. Install the node modules using:
+<pre>npm install</pre>
+3. Create .env file for the DB by using the following example
 <pre>
-cd server<br>
-npm install<br>
-npm run dev<br>
+DB_HOST = &ltDATABASE IP&gt
+DB_NAME = &ltDATABASE NAME&gt
+DB_USERNAME = &ltDATABASE USERNAME&gt
+DB_PASSWORD = &ltDATABASE PASSWORD&gt
+EMAIL_HOST = &ltEMAIL IP&gt
+EMAIL_USERNAME = &ltEMAIL&gt
+EMAIL_PASSWORD = &ltEMAIL PASSWORD&gt
+</pre>
+4. Run the development server using:
+<pre>npm run dev</pre>
 </pre>
 <br>
 If you want to run our Jupyter Notebook documentation locally, you will need Python ^3.9 install on your machine, then you run the following commands:
-<br>
-<pre>
-cd notebook<br>
-jupyter notebook
+<br><br>
+
+1. Navigate to the notebook folder using:
+<pre>cd notebook</pre>
+2. Run the notebook using the following command:
+<pre>jupyter notebook</pre>
 </pre>
 <br>
 <hr>
