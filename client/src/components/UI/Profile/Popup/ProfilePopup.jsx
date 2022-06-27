@@ -12,6 +12,7 @@ const ProfilePopup = (props) => {
   const [openChangePicture, setOpenChangePicture] = useState(false);
   const [openChangeBanner, setOpenChangeBanner] = useState(false);
   const [openChangePassword, setOpenChangePassword] = useState(false);
+  const [emailLimit, setEmailLimit] = useState(false);
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -61,6 +62,14 @@ const ProfilePopup = (props) => {
           if (res.data.message === "Created temporary verification token") {
             enqueueSnackbar("Verification email sent", {
               variant: "success",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
+          } else if (res.data.message === "Email already sent") {
+            setEmailLimit(true);
+            enqueueSnackbar("Verification email already sent", {
+              variant: "warning",
             });
             sleep(5000).then(() => {
               closeSnackbar();
@@ -132,10 +141,14 @@ const ProfilePopup = (props) => {
               Edit password
             </h1>
             <h1
-              className={authContext.verified ? "" : "cursor-pointer"}
+              className={
+                authContext.verified || emailLimit
+                  ? "pointer-events-none"
+                  : "cursor-pointer"
+              }
               onClick={verifyEmailHandler}
             >
-              {authContext.verified === 0 ? "Verify email" : "Verified"}
+              {authContext.verified === 0 ? "Resend email" : "Verified"}
             </h1>
           </div>
           <hr />

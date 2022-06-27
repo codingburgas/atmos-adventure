@@ -77,7 +77,7 @@ router.post('/register',(req,res)=>{
                 else 
                 {
                     req.session.uuid = data[0];
-                    mailer.sendConfirmationEmail(data[0], data.token);
+                    mailer.sendConfirmationEmail(data[0], data[5]);
                     req.session.sentEmail = true;
                     console.log("User created"); 
                     res.send({"message":"User created"});
