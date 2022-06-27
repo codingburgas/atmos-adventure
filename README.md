@@ -139,4 +139,4 @@ jupyter notebook
 
 <hr>
 
-<p align="center">Thanks for checking out our repo, show us some ❤️ by giving our repo a ⭐️!</p>
+<h1 align="center">Thanks for checking out our repo, show us some ❤️ by giving our repo a ⭐️!</h1>
