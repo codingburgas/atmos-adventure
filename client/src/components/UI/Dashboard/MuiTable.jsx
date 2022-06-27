@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { BsFillTrashFill } from "react-icons/bs";
 import { FaCrown } from "react-icons/fa";
+import { MdGavel } from "react-icons/md";
 import { useSnackbar } from "notistack";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
@@ -18,6 +19,7 @@ const MuiTable = () => {
   const [accounts, setAccounts] = useState([]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const authContext = useContext(AuthContext);
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   /*
    * Fetches the accounts from the database
    */
@@ -57,7 +59,8 @@ const MuiTable = () => {
               <TableCell>
                 <strong>Verified</strong>
               </TableCell>
-              {authContext.role === "admin" ? (
+              {authContext.role === "admin" ||
+              authContext.role === "moderator" ? (
                 <TableCell>
                   <strong>Delete</strong>
                 </TableCell>
@@ -65,6 +68,11 @@ const MuiTable = () => {
               {authContext.role === "admin" ? (
                 <TableCell>
                   <strong>Promote</strong>
+                </TableCell>
+              ) : null}
+              {authContext.role === "admin" ? (
+                <TableCell>
+                  <strong>Demote</strong>
                 </TableCell>
               ) : null}
             </TableRow>
@@ -88,7 +96,8 @@ const MuiTable = () => {
                   <TableCell>
                     {account.verified ? "Verified" : "Not verified"}
                   </TableCell>
-                  {authContext.role === "admin" ? (
+                  {authContext.role === "admin" ||
+                  authContext.role === "moderator" ? (
                     <TableCell>
                       <BsFillTrashFill
                         className="text-red text-xl hover:cursor-pointer"
@@ -138,6 +147,39 @@ const MuiTable = () => {
                             )
                             .then((res) => {
                               if (res.data.message === "User promoted") {
+                                window.location.reload();
+                              } else {
+                                enqueueSnackbar("User has admin privileges", {
+                                  variant: "error",
+                                });
+                                sleep(5000).then(() => {
+                                  closeSnackbar();
+                                });
+                              }
+                            });
+                        }}
+                      />
+                    </TableCell>
+                  ) : null}
+                  {authContext.role === "admin" ? (
+                    <TableCell>
+                      <MdGavel
+                        className="text-[#d6d675] hover:cursor-pointer"
+                        onClick={() => {
+                          /*
+
+                            * Demotes the account to user
+                            * and updates the state
+                            * */
+                          axios
+                            .get(
+                              `http://localhost:3001/api/demoteUserByUUID/${account.uuid}`,
+                              {
+                                withCredentials: true,
+                              }
+                            )
+                            .then((res) => {
+                              if (res.data.message === "User demoted") {
                                 window.location.reload();
                               } else {
                                 enqueueSnackbar("User has admin privileges", {

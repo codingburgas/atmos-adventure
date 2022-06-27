@@ -87,7 +87,8 @@ const Navbar = () => {
 
           <div>
             <ul className="flex space-x-10">
-              {authContext.role === "admin" ? (
+              {authContext.role === "admin" ||
+              authContext.role === "moderator" ? (
                 <li
                   className="inline-block space-x-10 font-sans mt-1.5 text-xl hover:cursor-pointer transition duration-200 hover:ease-in hover:bg-white hover:text-[#111] rounded-full px-5 py-2"
                   onClick={() => navigate("/dashboard")}
