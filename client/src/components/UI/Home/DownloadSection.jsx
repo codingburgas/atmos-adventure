@@ -29,7 +29,8 @@ const DownloadSection = () => {
             closeSnackbar();
           });
         } else {
-          window.location.href = "link";
+          window.location.href =
+            "https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/releases/download/v1.0/Atmos.zip";
         }
       });
   };

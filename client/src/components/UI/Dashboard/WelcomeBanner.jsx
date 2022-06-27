@@ -8,7 +8,7 @@ const WelcomeBanner = () => {
    */
 
   return (
-    <div className="h-[25vh] w-screen bg-dashboardBg bg-center bg-no-repeat bg-cover object-cover flex flex-col items-center justify-center desktop:items-start desktop:pl-20">
+    <div className="h-[25vh] w-screen nuclea:bg-dashboardBg dust:bg-[url('https://i.imgur.com/wd4CqQQ.png')] bg-center bg-no-repeat bg-cover object-cover flex flex-col items-center justify-center desktop:items-start desktop:pl-20">
       <h1 className="text-white font-raleway font-semibold text-2xl tablet:text-5xl extra:text-8xl">
         Welcome back, {authContext.username}!
       </h1>

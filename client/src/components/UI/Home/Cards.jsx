@@ -26,7 +26,7 @@ const Cards = () => {
   }, []);
 
   return (
-    <div className="bg-cardsWave h-[250vh] bg-no-repeat bg-cover z-50 w-screen mt-16 el:h-[170vh] el:mt-36 xl:!mt-0">
+    <div className="nuclea:bg-cardsWave dust:bg-[url('https://i.imgur.com/5ZpFapn.png')] h-[250vh] bg-no-repeat bg-cover z-50 w-screen mt-16 el:h-[170vh] el:mt-36 xl:!mt-0">
       <div
         className="flex flex-row justify-center text-white text-4xl pt-[100%] font-sans font-semibold desktop:pt-[40%] el:!pt-[20%] el:text-8xl"
         data-aos="fade-down"

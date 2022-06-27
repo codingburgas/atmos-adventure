@@ -4,10 +4,12 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { AuthContext } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 const DashboardShowcase = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const authContext = useContext(AuthContext);
+  const themeContext = useContext(ThemeContext);
   const navigate = useNavigate();
   /*
    * Initializes the AOS library
@@ -43,7 +45,7 @@ const DashboardShowcase = () => {
 
         <div className="flex flex-col justify-center items-center mt-5">
           <div
-            className="bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] text-transparent bg-clip-text"
+            className="nuclea:bg-gradient-to-r from-[#687CC9] to-[#AA7DD0] dust:bg-[#F6A70F] text-transparent bg-clip-text"
             data-aos="fade-left"
             data-aos-duration="1500"
           >
@@ -56,7 +58,7 @@ const DashboardShowcase = () => {
             data-aos="fade-right"
             data-aos-duration="1500"
           >
-            <h1 className="font-serif font-bold text-2xl text-center break-normal">
+            <h1 className="font-serif font-bold text-2xl text-center break-normal nuclea:text-[#111] dust:text-[#F6620F]">
               A decked out supply of system management.
             </h1>
           </div>
@@ -85,7 +87,7 @@ const DashboardShowcase = () => {
             </h1>
           </div>
           <div
-            className="mt-7 bg-[#5F57E2] rounded-full"
+            className="mt-7 nuclea:bg-[#5F57E2] dust:bg-[#F6620F] rounded-full"
             data-aos="fade-top"
             data-aos-duration="1500"
           >
@@ -97,16 +99,24 @@ const DashboardShowcase = () => {
             </button>
           </div>
           <img
-            src="https://i.imgur.com/w1xKYrd.png"
+            src={
+              themeContext.theme === "theme-dust"
+                ? "https://i.imgur.com/F8Jv0au.png"
+                : "https://i.imgur.com/w1xKYrd.png"
+            }
             alt=""
             className="h-[40%] w-[40%] mt-5"
             data-aos="fade-left"
             data-aos-duration="1500"
           />
         </div>
-        <div className="max-w-xs ">
+        <div className="max-w-xs select-none">
           <img
-            src="https://i.imgur.com/GiV0H77.png"
+            src={
+              themeContext.theme === "theme-dust"
+                ? "https://i.imgur.com/Myih41l.png"
+                : "https://i.imgur.com/GiV0H77.png"
+            }
             alt=""
             className="mt-5"
             data-aos="fade-right"

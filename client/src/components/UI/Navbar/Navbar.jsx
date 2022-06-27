@@ -52,6 +52,26 @@ const Navbar = () => {
       ? setIsOpen(!isOpen)
       : navigate("/register", { replace: false });
   };
+
+  const downloadHandler = () => {
+    axios
+      .get("http://localhost:3001/api/downloadCounter", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.message === "User not authenticated") {
+          enqueueSnackbar("You must be logged in to download the file!", {
+            variant: "error",
+          });
+          sleep(5000).then(() => {
+            closeSnackbar();
+          });
+        } else {
+          window.location.href =
+            "https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/releases/download/v1.0/Atmos.zip";
+        }
+      });
+  };
   return (
     <div>
       <div className="hidden tablet:flex tablet:flex-row tablet:justify-between tablet:items-center tablet:pr-14 tablet:pt-4 w-full absolute text-white z-50">
@@ -85,7 +105,10 @@ const Navbar = () => {
               {authContext.isAuthenticated ? "Profile" : "REGISTER"}
             </li>
             {authContext.isAuthenticated ? (
-              <button className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-md text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] hover:border-white">
+              <button
+                className="font-sans border-solid border-2 pt-1 pb-1 pl-2 pr-2 rounded-full text-xl transition duration-200 hover:ease-in hover:cursor-pointer hover:bg-white hover:text-[#111] hover:border-white"
+                onClick={downloadHandler}
+              >
                 Download
               </button>
             ) : null}

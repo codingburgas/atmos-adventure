@@ -92,7 +92,7 @@ const Login = () => {
   };
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <div className="h-screen bg-form bg-center bg-no-repeat bg-cover object-cover">
+      <div className="h-screen dust:bg-[url('https://i.imgur.com/cp0omX9.png')] nuclea:bg-[url('https://i.imgur.com/qGLbueu.png')] tablet:dust:bg-[url('https://i.imgur.com/MVk2oEU.png')] tablet:nuclea:bg-[url('https://i.imgur.com/nrGRJTb.png')] bg-center bg-no-repeat bg-cover object-cover">
         <div
           className="h-screen w-full backdrop-blur-sm desktop:w-half extra:backdrop-blur-md"
           data-aos="fade-right"
