@@ -166,7 +166,7 @@ router.get('/getUser', (req,res) => {
 router.get('/getAllUsers', (req,res) => {
     if(req.session.uuid)
     {
-        db.query('SELECT * FROM users WHERE uuid = (?) AND role="admin"', [req.session.uuid], (err,result)=>{
+        db.query('SELECT * FROM users WHERE uuid = (?) AND (role="admin" OR role="moderator"))', [req.session.uuid], (err,result)=>{
             if(err)
             {
                 console.log(err)
@@ -196,7 +196,7 @@ router.get('/getAllUsers', (req,res) => {
             }
             else
             {
-                db.query('SELECT username, role, date_created, verified FROM users', (err, result) => {
+                db.query('SELECT username, role, date_created, verified FROM users ORDER BY role, date_created ASC', (err, result) => {
                     if (err)
                     {
                         console.log(err);
