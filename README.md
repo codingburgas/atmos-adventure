@@ -95,8 +95,7 @@
 
 ## 📥 Installation
 
-You can visit us <a href="https://atmos.systems">here</a> <br>
-And see our Jupyter Notebook <a href="https://docs.atmos.systems">here</a> <br>
+You can view our Jupyter Notebook by visiting <a href="https://docs.atmos.systems">this</a> link! <br>
 <br>
 Or if you want to clone our repo locally you can paste the following command in your preferred terminal:
 
@@ -133,9 +132,9 @@ jupyter notebook
 - <a href = "https://github.com/VTIvanov20"> Valeri Ivanov </a> (Designer)
 - <a href = "https://github.com/MMMarinov20"> Maxim Marinov </a> (Frontend Developer)
 - <a href = "https://github.com/SHHristov20"> Stefan Hristov </a> (Backend Developer)
-- <a href = "https://github.com/DKByandov20"> Dimitar Byandov </a> (Designer)
-- <a href = "https://github.com/MVKoleva20"> Mariya Koleva </a> (QA Engineer)
-- <a href = "https://github.com/VDVichev20"> Vicho Vichev </a> (QA Engineer)
+- <a href = "https://github.com/DKByandov21"> Dimitar Byandov </a> (Designer)
+- <a href = "https://github.com/MVKoleva21"> Mariya Koleva </a> (QA Engineer)
+- <a href = "https://github.com/VDVichev21"> Vicho Vichev </a> (QA Engineer)
 
 <hr>
 
