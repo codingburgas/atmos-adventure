@@ -163,7 +163,7 @@ router.get('/getUser', (req,res) => {
 router.get('/getAllUsers', (req,res) => {
     if(req.session.uuid)
     {
-        db.query('SELECT * FROM users WHERE uuid = (?) AND role = "admin"', [req.session.uuid], (err,result)=>{
+        db.query('SELECT * FROM users WHERE uuid = (?)', [req.session.uuid], (err,result)=>{
             if(err)
             {
                 console.log(err)
@@ -190,11 +190,6 @@ router.get('/getAllUsers', (req,res) => {
                         res.send({"message":"No users found"});
                     }
                 });
-            }
-            else
-            {
-                console.log("User doesn't have permission to access this endpoint");
-                res.send({"message":"User doesn't have permission to access this endpoint"});
             }
         })
     }
