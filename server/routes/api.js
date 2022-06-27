@@ -163,7 +163,7 @@ router.get('/getUser', (req,res) => {
 router.get('/getAllUsers', (req,res) => {
     if(req.session.uuid)
     {
-        db.query('SELECT * FROM users WHERE uuid = (?)', [req.session.uuid], (err,result)=>{
+        db.query('SELECT * FROM users WHERE uuid = (?) AND role="admin"', [req.session.uuid], (err,result)=>{
             if(err)
             {
                 console.log(err)
@@ -173,6 +173,27 @@ router.get('/getAllUsers', (req,res) => {
             else if(result.length > 0)
             {
                 db.query('SELECT uuid, username, email, role, date_created, verified FROM users', (err, result) => {
+                    if (err)
+                    {
+                        console.log(err);
+                        console.error("Something went wrong");
+                        res.send({"message":"Something went wrong"});
+                    }
+                    else if (result.length > 0)
+                    {
+                        console.log("Retrieved all users");
+                        res.send(result);
+                    }
+                    else
+                    {
+                        console.log("No users found");
+                        res.send({"message":"No users found"});
+                    }
+                });
+            }
+            else
+            {
+                db.query('SELECT username, role, date_created, verified FROM users', (err, result) => {
                     if (err)
                     {
                         console.log(err);
