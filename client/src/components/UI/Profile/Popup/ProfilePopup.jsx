@@ -27,7 +27,12 @@ const ProfilePopup = (props) => {
         if (res.data.message === "User logged out") {
           navigate(0);
         } else {
-          console.log(res.data.message);
+          enqueueSnackbar("Your session has expired please log in again!", {
+            variant: "error",
+          });
+          sleep(5000).then(() => {
+            closeSnackbar();
+          });
         }
       });
   };

@@ -18,7 +18,6 @@ const GridSection = () => {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
-    console.log(themeContext.theme);
   }, []);
 
   const buttonHandler = () => {

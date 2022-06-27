@@ -28,7 +28,6 @@ const MuiTable = () => {
     axios
       .get("http://localhost:3001/api/getAllUsers", { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
         setAccounts(res.data);
       });
   }, []);

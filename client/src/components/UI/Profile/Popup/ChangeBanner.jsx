@@ -33,7 +33,6 @@ const ChangeBanner = (props) => {
           },
         })
         .then((res) => {
-          // console.log(res);
           if (res.data.message === "Image changed") {
             navigate(0);
           } else {

@@ -18,6 +18,7 @@ const Profile = () => {
   const [openChangePassword, setOpenChangePassword] = useState(false);
   const [openChangeBanner, setOpenChangeBanner] = useState(false);
   const [openChangePicture, setOpenChangePicture] = useState(false);
+  const [emailLimit, setEmailLimit] = useState(false);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -33,7 +34,7 @@ const Profile = () => {
           navigate("/", { replace: true });
           window.location.reload();
         } else {
-          enqueueSnackbar("User not authenticated", {
+          enqueueSnackbar("Your session has expired please log in again!", {
             variant: "error",
           });
           sleep(5000).then(() => {
@@ -73,11 +74,18 @@ const Profile = () => {
             sleep(5000).then(() => {
               closeSnackbar();
             });
+          } else if (res.data.message === "Email already sent") {
+            setEmailLimit(true);
+            enqueueSnackbar("Verification email already sent", {
+              variant: "warning",
+            });
+            sleep(5000).then(() => {
+              closeSnackbar();
+            });
           }
         });
     }
   };
-
   return (
     <Suspense fallback={<LoadingSpinner />}>
       {window.innerWidth > 820 ? navigate("*", { replace: true }) : null}
@@ -145,8 +153,15 @@ const Profile = () => {
               >
                 Edit password
               </h1>
-              <h1 className="cursor-pointer" onClick={verifyEmailHandler}>
-                {authContext.verified === 0 ? "Verify email" : "Verified"}
+              <h1
+                className={
+                  authContext.verified || emailLimit
+                    ? "pointer-events-none"
+                    : "cursor-pointer"
+                }
+                onClick={verifyEmailHandler}
+              >
+                {authContext.verified === 0 ? "Resend email" : "Verified"}
               </h1>
             </div>
             <hr />
