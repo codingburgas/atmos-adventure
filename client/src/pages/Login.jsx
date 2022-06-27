@@ -19,7 +19,7 @@ const Login = () => {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
-    console.log(themeContext.theme);
+    document.title = "ATMOS | Login";
   }, []);
 
   /*

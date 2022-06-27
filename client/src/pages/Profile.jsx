@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useContext } from "react";
+import React, { Suspense, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/context/AuthContext";
 import { useSnackbar } from "notistack";
@@ -10,6 +10,10 @@ import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 
 const Profile = () => {
+  useEffect(() => {
+    document.title = "ATMOS | Profile";
+  }, []);
+
   const [openChangeUsername, setOpenChangeUsername] = useState(false);
   const [openChangePassword, setOpenChangePassword] = useState(false);
   const [openChangeBanner, setOpenChangeBanner] = useState(false);

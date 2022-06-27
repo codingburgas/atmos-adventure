@@ -21,6 +21,7 @@ const Register = () => {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
+    document.title = "ATMOS | Register";
   }, []);
 
   /*

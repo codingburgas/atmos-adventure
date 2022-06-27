@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 const VerificationEmail = () => {
+  useEffect(() => {
+    document.title = "ATMOS | Email Verification";
+  }, []);
+
   const [time, setTime] = useState(5);
 
   const navigate = useNavigate();
