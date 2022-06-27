@@ -1,12 +1,13 @@
 //Require the MySQL module
 const mysql = require('mysql2');
+require('dotenv').config();
 
 //Create connection config
 const db = mysql.createConnection({
-    host: 'sql.atmos.systems',
-    user: 'atmos',
-    password: 'AtmosDatabase.123',
-    database: 'atmos'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 //Connect to the database

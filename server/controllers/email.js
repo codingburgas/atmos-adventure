@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
 const db = require('../db/db_config.js');
-const fs = require('fs');
+const dotenv = require('dotenv');
 const transporter = nodemailer.createTransport({
-	host: 'smtp.titan.email',
+	host: process.env.EMAIL_HOST,
 	port: 465,
 	secure: true,
 	auth: {
-		user: "no-reply@atmos.systems",
-		pass: "AtmosMail.123"
+		user: process.env.EMAIL_USERNAME,
+		pass: process.env.EMAIL_PASSWORD
 	}
 });
 
@@ -21,7 +21,7 @@ function sendConfirmationEmail(uuid, token)
 		else if (result.length > 0)
 		{
 			const mailOptions = {
-				from: 'Atmos Team <no-reply@atmos.systems>',
+				from: `Atmos Team <${process.env.EMAIL_USERNAME}>`,
 				to: result[0].email,
 				subject: '👋 Please verify your email!',
 				html: `<!DOCTYPE html>
@@ -197,7 +197,7 @@ function sendConfirmationEmail(uuid, token)
 function sendForgotPasswordEmail(email, tempPass)
 {
 	const mailOptions = {
-		from: 'Atmos Team <no-reply@atmos.systems>',
+		from: `Atmos Team <${process.env.EMAIL_USERNAME}>`,
 		to: email,
 		subject: 'Atmos Password Reset',
 		html:`<!DOCTYPE html>
