@@ -89,7 +89,7 @@
 
 ### Presenting
 
-- [Presentation](https://codingburgas-my.sharepoint.com/:p:/r/personal/mmmarinov20_codingburgas_bg/Documents/Atmos%20-%20Presentation.pptx?d=w0037c9cbc4574819b33001072a4d2cf2&csf=1&web=1&e=6UnMzP)
+- [Presentation](https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022/raw/main/docs/Atmos%20-%20Presentation.pptx)
 
 <hr>
 
