@@ -173,13 +173,24 @@ You may want to style our documentation even more. To do this, just **paste thes
 <b>4.4</b> Pick out a theme and apply it by pasting this line:
 <pre>jt -t *your theme of choice*</pre>
 <br>
+<b>4.5.</b> If you have followed this optional guide, you can just resume with option №5 and option №6.
+<br><br>
+
+<hr>
+
+<br>
+
+### 📑 Notes:
 <b>NOTE:</b> You can apply a different theme just by running the command above again with a different theme.
 <br><br>
 <b>NOTE:</b> You can remove your theme by running: <pre>jt -r</pre>
 <br>
-<b>4.5.</b> If you have followed this optional guide, you can just resume with option №5 and option №6.
-<br>
+<b>NOTE:</b> Any additional changes to the styling can be made locally by referencing <a href="https://github.com/dunovank/jupyter-themes#description-of-command-line-options">the official jupyter themes documentation</a>!
+<br><br>
+
 <hr>
+
+<br>
 
 ## 🧒 Our Team
 
