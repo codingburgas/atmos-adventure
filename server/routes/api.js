@@ -66,7 +66,8 @@ router.post('/register',(req,res)=>{
         }
         else
         {
-            db.query('INSERT INTO users (uuid, username, email, pass_hash, date_created) VALUES (?)', [data], (err) => {
+            data[5] = randToken.generate(60)
+            db.query('INSERT INTO users (uuid, username, email, pass_hash, date_created, token) VALUES (?)', [data], (err) => {
                 if(err) 
                 {
                     console.log(err)
@@ -75,9 +76,8 @@ router.post('/register',(req,res)=>{
                 }
                 else 
                 {
-                    const token = randToken.generate(60);
                     req.session.uuid = data[0];
-                    mailer.sendConfirmationEmail(req.session.uuid, token);
+                    mailer.sendConfirmationEmail(data[0], data.token);
                     req.session.sentEmail = true;
                     console.log("User created"); 
                     res.send({"message":"User created"});
