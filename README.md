@@ -97,28 +97,28 @@
 
 You can view our Jupyter Notebook by visiting <a href="https://docs.atmos.systems">this</a> link! <br>
 <br>
-Or if you want to clone our repo locally you can paste the following command in your preferred terminal:
+If you want to clone our repo locally you can paste the following command in your preferred terminal:
 
 <pre>https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022</pre>
 <br>
 Then, you can launch the web application by following these commands:
 <br>
 
-1. Navigate to our client folder using:
+<b>1.</b> Navigate to our client folder using:
 <pre>cd client</pre>
-2. Install the node modules using:
+<b>2.</b> Install the node modules using:
 <pre>npm install</pre>
-3. Run the development server using:
+<b>3.</b> Run the development server using:
 <pre>npm run dev</pre>
 
 <br>
 You will need another terminal to launch the server, paste the following commands:
 
-1. Navigate to our server folder using:
+<b>1.</b> Navigate to our server folder using:
 <pre>cd server</pre>
-2. Install the node modules using:
+<b>2.</b> Install the node modules using:
 <pre>npm install</pre>
-3. Create .env file for the DB by using the following example
+<b>3.</b> Create .env file for the DB by using the following example
 <pre>
 DB_HOST = &ltDATABASE IP&gt
 DB_NAME = &ltDATABASE NAME&gt
@@ -128,18 +128,44 @@ EMAIL_HOST = &ltEMAIL IP&gt
 EMAIL_USERNAME = &ltEMAIL&gt
 EMAIL_PASSWORD = &ltEMAIL PASSWORD&gt
 </pre>
-4. Run the development server using:
+<b>4.</b> Run the development server using:
 <pre>npm run dev</pre>
 </pre>
-<br>
-If you want to run our Jupyter Notebook documentation locally, you will need Python ^3.9 install on your machine, then you run the following commands:
-<br><br>
 
-1. Navigate to the notebook folder using:
+<hr>
+
+If you want to run our Jupyter Notebook documentation locally, you will need Python 3.9+ installed on your machine, then you can run the following commands:
+<br><br>
+<b>1.</b> Upgrade pip for later usage:
+<pre>pip3 install --upgrade pip</pre>
+<b>2.</b> Install Jupyter Notebook via Python:
+<pre>pip3 install jupyter</pre>
+<b>3.</b> Install the NodeJS kernel:
+<pre>npm install -g ijavascript</pre>
+<b>4.</b> Run the kernel:
+<pre>ijsinstall</pre>
+<b>5.</b> Navigate to the notebook folder using:
 <pre>cd notebook</pre>
-2. Run the notebook using the following command:
+<b>6.</b> Run the notebook using the following command:
 <pre>jupyter notebook</pre>
-</pre>
+<br>
+
+### OPTIONAL:
+You may want to style our documentation even more. To do this, just **paste these two commands after step №4**:<br>
+<b>4.1</b> Go to the `notebook` folder, in case you weren't there already and install the *Jupyter Notebook* theme packages:
+<pre>python -m pip install jupytertheme</pre>
+<b>4.2</b> Upgrade the theme packages:
+<pre>python -m pip install --upgrade jupytertheme</pre>
+<b>4.3</b> Use the list command in the newly installed theme package:
+<pre>jt -l</pre>
+<b>4.4</b> Pick out a theme and apply it by pasting this line:
+<pre>jt -t *your theme of choice*</pre>
+<br>
+<b>NOTE:</b> You can apply a different theme just by running the command above again with a different theme.
+<br><br>
+<b>NOTE:</b> You can remove your theme by running: <pre>jt -r</pre>
+<br>
+<b>4.5</b>If you have followed this optional guide, you can just resume with option №5 and option №6.
 <br>
 <hr>
 
