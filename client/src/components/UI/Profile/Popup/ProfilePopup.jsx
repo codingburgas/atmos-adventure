@@ -88,7 +88,7 @@ const ProfilePopup = (props) => {
             }
           ></div>
           <div className="text-white">
-            <h1 className="font-raleway font-semibold text-3xl el:text-2xl xl:!text-3xl">
+            <h1 className="font-raleway font-semibold text-3xl el:text-2xl xl:!text-2xl">
               {authContext.username}
             </h1>
             <h1 className="font-raleway font-normal text-xl">

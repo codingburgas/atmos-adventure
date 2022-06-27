@@ -15,7 +15,9 @@ const ChangePassword = (props) => {
   const confirmHandler = () => {
     const oldPassword = oldPasswordRef.current.value;
     const newPassword = newPasswordRef.current.value;
-    const PASSWORD_REGEX = new RegExp(/^(?=.*[a-z])(?=.{8,})/);
+    const PASSWORD_REGEX = new RegExp(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}/
+    );
 
     const userData = {
       oldPassword,
@@ -25,7 +27,7 @@ const ChangePassword = (props) => {
     if (oldPassword.length > 0 && newPassword.length > 0) {
       if (!newPassword.match(PASSWORD_REGEX)) {
         enqueueSnackbar(
-          "New password must be at least 8 characters long and contain at least one letter!",
+          "New password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one number!",
           {
             variant: "error",
           }

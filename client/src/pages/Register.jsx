@@ -29,16 +29,18 @@ const Register = () => {
   */
   const registerHandler = (e) => {
     e.preventDefault();
-    const USERNAME_REGEX = new RegExp(/^[a-zA-Z0-9.-_$@*!]{4,10}$/);
+    const USERNAME_REGEX = new RegExp(/^[a-zA-Z0-9.-_$@*!]{4,16}$/);
     const EMAIL_REGEX = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/);
-    const PASSWORD_REGEX = new RegExp(/^(?=.*[a-z])(?=.{8,})/);
+    const PASSWORD_REGEX = new RegExp(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}/
+    );
 
     const username = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
     if (!username.match(USERNAME_REGEX)) {
-      enqueueSnackbar("Username must be 4-10 characters long!", {
+      enqueueSnackbar("Username must be 4-16 characters long!", {
         variant: "error",
       });
       sleep(5000).then(() => {
@@ -53,7 +55,7 @@ const Register = () => {
       });
     } else if (!password.match(PASSWORD_REGEX)) {
       enqueueSnackbar(
-        "Password must be at least 8 characters long and contain at least one letter!",
+        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one number!",
         {
           variant: "error",
         }

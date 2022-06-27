@@ -4,15 +4,17 @@ import { Parallax } from "react-parallax";
 import { BsChevronCompactDown } from "react-icons/bs";
 import useThemeMode from "../hooks/useThemeMode";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
-import FootageGrid from "../components/UI/Home/FootageGrid";
-import DownloadSection from "../components/UI/Home/DownloadSection";
-import GridSection from "../components/UI/Home/GridSection";
-import Cards from "../components/UI/Home/Cards";
-import Footage from "../components/UI/Home/Footage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import DashboardShowcase from "../components/UI/Home/DashboardShowcase";
 const Navbar = lazy(() => import("../components/UI/Navbar/Navbar"));
+const FootageGrid = lazy(() => import("../components/UI/Home/FootageGrid"));
+const DownloadSection = lazy(() =>
+  import("../components/UI/Home/DownloadSection")
+);
+const GridSection = lazy(() => import("../components/UI/Home/GridSection"));
+const Cards = lazy(() => import("../components/UI/Home/Cards"));
+const Footage = lazy(() => import("../components/UI/Home/Footage"));
 const Home = () => {
   const themeContext = useContext(ThemeContext);
 
@@ -25,7 +27,7 @@ const Home = () => {
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <div className="">
+      <div>
         <Navbar />
 
         <div className="flex flex-row items-center justify-center absolute w-screen h-screen text-[70px] font-dreamScape z-[10] desktop:text-[200px] el:!text-[350px]">

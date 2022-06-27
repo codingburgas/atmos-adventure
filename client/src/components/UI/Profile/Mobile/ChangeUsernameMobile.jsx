@@ -14,7 +14,7 @@ const ChangeUsernameMobile = (props) => {
    * Tries to change the username
    */
   const confirmHandler = () => {
-    const USERNAME_REGEX = new RegExp(/^[a-zA-Z0-9.-_$@*!]{4,10}$/);
+    const USERNAME_REGEX = new RegExp(/^[a-zA-Z0-9.-_$@*!]{4,16}$/);
     const username = usernameRef.current.value;
     const userData = {
       newUsername: username,
@@ -39,7 +39,7 @@ const ChangeUsernameMobile = (props) => {
             }
           });
       } else {
-        enqueueSnackbar("Username must be 4-10 characters long!", {
+        enqueueSnackbar("Username must be 4-16 characters long!", {
           variant: "error",
         });
         sleep(5000).then(() => {
