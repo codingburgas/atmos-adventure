@@ -1,8 +1,15 @@
 import { IoIosArrowForward } from "react-icons/io";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { AuthContext } from "../../context/AuthContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const GridSection = () => {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   /*
    * Initializes the AOS library
    */
@@ -10,6 +17,19 @@ const GridSection = () => {
     AOS.init();
     AOS.refresh();
   }, []);
+
+  const buttonHandler = () => {
+    if (!authContext.isAuthenticated) {
+      enqueueSnackbar("You should authenticate first!", {
+        variant: "error",
+      });
+      sleep(5000).then(() => {
+        closeSnackbar();
+      });
+    } else {
+      navigate("/dashboard");
+    }
+  };
 
   return (
     <div className="hidden desktop:h-screen desktop:block z-[-10]">
@@ -67,7 +87,7 @@ const GridSection = () => {
         data-aos="fade-right"
         data-aos-duration="1500"
       >
-        <button>
+        <button onClick={buttonHandler}>
           Check it out <IoIosArrowForward className="inline mb-1 text-3xl" />
         </button>
       </div>

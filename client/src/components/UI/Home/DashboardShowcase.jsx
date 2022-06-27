@@ -1,8 +1,14 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
-
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { AuthContext } from "../../context/AuthContext";
 const DashboardShowcase = () => {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   /*
    * Initializes the AOS library
    */
@@ -11,6 +17,19 @@ const DashboardShowcase = () => {
     AOS.init();
     AOS.refresh();
   }, []);
+
+  const buttonHandler = () => {
+    if (!authContext.isAuthenticated) {
+      enqueueSnackbar("You must authenticate first!", {
+        variant: "error",
+      });
+      sleep(5000).then(() => {
+        closeSnackbar();
+      });
+    } else {
+      navigate("/dashboard");
+    }
+  };
   return (
     <div className="h-[150vh] w-screen desktop:hidden">
       <div className="flex flex-col items-center justify-center pt-10">
@@ -70,7 +89,10 @@ const DashboardShowcase = () => {
             data-aos="fade-top"
             data-aos-duration="1500"
           >
-            <button className="text-white font-serif font-bold px-8 py-2">
+            <button
+              className="text-white font-serif font-bold px-8 py-2"
+              onClick={buttonHandler}
+            >
               Check it out
             </button>
           </div>

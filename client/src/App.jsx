@@ -38,7 +38,7 @@ function App() {
           {authContext.isAuthenticated ? (
             <Route path="Profile" element={<Profile />}></Route>
           ) : null}
-          {authContext.role === "admin" ? (
+          {authContext.isAuthenticated ? (
             <Route path="Dashboard" element={<Dashboard />}></Route>
           ) : null}
           {authContext.verified ? (

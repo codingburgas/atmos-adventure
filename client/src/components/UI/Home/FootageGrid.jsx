@@ -76,10 +76,15 @@ const FootageGrid = () => {
           data-aos="fade-right"
           data-aos-duration="1500"
         >
-          <button>
-            Check it out
-            <IoIosArrowForward className="text-white inline" />
-          </button>
+          <a
+            href="https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022"
+            target="_blank"
+          >
+            <button>
+              Check it out
+              <IoIosArrowForward className="text-white inline" />
+            </button>
+          </a>
         </div>
       </div>
     </div>
