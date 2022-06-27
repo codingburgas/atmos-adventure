@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useEffect, Suspense } from "react";
+import { useRef, useEffect, Suspense, useContext } from "react";
 import { useSnackbar } from "notistack";
+import { ThemeContext } from "../components/context/ThemeContext";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import axios from "axios";
 import AOS from "aos";
@@ -10,6 +11,7 @@ const Login = () => {
   const username = useRef();
   const password = useRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const themeContext = useContext(ThemeContext);
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   /*
     Initializes AOS library
@@ -17,6 +19,7 @@ const Login = () => {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
+    console.log(themeContext.theme);
   }, []);
 
   /*
@@ -92,7 +95,13 @@ const Login = () => {
   };
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <div className="h-screen dust:bg-[url('https://i.imgur.com/cp0omX9.png')] nuclea:bg-[url('https://i.imgur.com/qGLbueu.png')] tablet:dust:bg-[url('https://i.imgur.com/MVk2oEU.png')] tablet:nuclea:bg-[url('https://i.imgur.com/nrGRJTb.png')] bg-center bg-no-repeat bg-cover object-cover">
+      <div
+        className={
+          themeContext.theme === "theme-dust"
+            ? "h-screen bg-loginDustMobile tablet:bg-loginDust bg-center bg-no-repeat bg-cover object-cover"
+            : "h-screen bg-loginNucleaMobile tablet:bg-loginNuclea bg-center bg-no-repeat bg-cover object-cover"
+        }
+      >
         <div
           className="h-screen w-full backdrop-blur-sm desktop:w-half extra:backdrop-blur-md"
           data-aos="fade-right"

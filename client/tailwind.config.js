@@ -44,6 +44,10 @@ module.exports = {
         mockup2: "url('./assets/macbookMockup.png')",
         downloadMobile: "url('./assets/downloadMobile.png')",
         download: "url('./assets/download.png')",
+        loginNuclea: "url('./assets/loginNuclea.png')",
+        loginDust: "url('./assets/loginDust.png')",
+        loginNucleaMobile: "url('./assets/loginNucleaMobile.png')",
+        loginDustMobile: "url('./assets/loginDustMobile.png')",
       },
       backgroundSize: {
         20: "27px",
