@@ -101,6 +101,8 @@ If you want to clone our repo locally you can paste the following command in you
 
 <pre>https://github.com/codingburgas/2122-the-games--adventures-atmos-final-project-2022</pre>
 <br>
+
+<h3>🖥 Client</h3>
 Then, you can launch the web application by following these commands:
 <br>
 
@@ -112,6 +114,8 @@ Then, you can launch the web application by following these commands:
 <pre>npm run dev</pre>
 
 <br>
+
+<h3>🌎 Server</h3>
 You will need another terminal to launch the server, paste the following commands:
 
 <b>1.</b> Navigate to our server folder using:
@@ -134,6 +138,7 @@ EMAIL_PASSWORD = &ltEMAIL PASSWORD&gt
 
 <hr>
 
+### 📓 Jupyter Notebook
 If you want to run our Jupyter Notebook documentation locally, you will need Python 3.9+ installed on your machine, then you can run the following commands:
 <br><br>
 <b>1.</b> Upgrade pip for later usage:
@@ -150,7 +155,7 @@ If you want to run our Jupyter Notebook documentation locally, you will need Pyt
 <pre>jupyter notebook</pre>
 <br>
 
-### OPTIONAL:
+### ✔ OPTIONAL:
 You may want to style our documentation even more. To do this, just **paste these two commands after step №4**:<br>
 <b>4.1</b> Go to the `notebook` folder, in case you weren't there already and install the *Jupyter Notebook* theme packages:
 <pre>python -m pip install jupytertheme</pre>
