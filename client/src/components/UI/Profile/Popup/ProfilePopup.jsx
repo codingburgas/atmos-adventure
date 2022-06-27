@@ -84,7 +84,7 @@ const ProfilePopup = (props) => {
           <div
             className={
               `bg-[url('http://localhost:3001/api/getImage')]` +
-              " h-24 w-24 rounded-full mr-3 ml-10 bg-center bg-cover"
+              " h-24 w-24 rounded-full mr-3 ml-10 bg-center bg-cover bg-no-repeat"
             }
           ></div>
           <div className="text-white">

@@ -96,7 +96,7 @@ const Profile = () => {
         />
         <div className="h-screen w-screen ">
           <div className="bg-[url('http://localhost:3001/api/getBanner')] h-[30%] w-full bg-cover bg-no-repeat flex flex-row justify-start items-center">
-            <div className="bg-[url('http://localhost:3001/api/getImage')] h-32 w-32 rounded-full bg-cover bg-center mr-3 ml-10"></div>
+            <div className="bg-[url('http://localhost:3001/api/getImage')] h-32 w-32 rounded-full bg-cover bg-center mr-3 ml-10 bg-no-repeat"></div>
             <div className="text-white font-raleway">
               <h1 className="font-semibold text-3xl">{authContext.username}</h1>
               <h1 className="font-normal text-xl">{authContext.role}</h1>
