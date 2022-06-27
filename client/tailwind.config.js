@@ -36,6 +36,7 @@ module.exports = {
         404: "url('./assets/404.jpg')",
         forms: "url('./assets/forms.png')",
         dashboardBg: "url('./assets/dashboardBg.jpg')",
+        dashboardDustBg: "url('https://i.imgur.com/wd4CqQQ.png')",
         Blobs: "url('./assets/Blobs.png')",
         cardsWave: "url('./assets/cardsWave.png')",
         iphone: "url('./assets/iphoneMockup.png')",

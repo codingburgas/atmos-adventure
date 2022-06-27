@@ -30,20 +30,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           {authContext.isAuthenticated ? null : (
-            <Route path="Login" element={<Login />}></Route>
+            <Route path="/Login" element={<Login />}></Route>
           )}
           {authContext.isAuthenticated ? null : (
-            <Route path="Register" element={<Register />}></Route>
+            <Route path="/Register" element={<Register />}></Route>
           )}
           {authContext.isAuthenticated ? (
-            <Route path="Profile" element={<Profile />}></Route>
+            <Route path="/Profile" element={<Profile />}></Route>
           ) : null}
           {authContext.isAuthenticated ? (
-            <Route path="Dashboard" element={<Dashboard />}></Route>
+            <Route path="/Dashboard" element={<Dashboard />}></Route>
           ) : null}
           {authContext.verified ? (
             <Route
-              path="VerificationEmail"
+              path="/VerificationEmail"
               element={<VerificationEmail />}
             ></Route>
           ) : null}
