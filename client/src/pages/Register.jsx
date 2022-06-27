@@ -62,12 +62,12 @@ const Register = () => {
     const user = {
       username: username,
       email: email,
-      password: email,
+      password: password,
     };
     if (
       username.match(USERNAME_REGEX) &&
-      email.match(EMAIL_REGEX) &&
-      password.match(PASSWORD_REGEX)
+      password.match(PASSWORD_REGEX) &&
+      email.match(EMAIL_REGEX)
     ) {
       axios
         .post("http://localhost:3001/api/register", user, {
