@@ -618,34 +618,37 @@ router.get('/sendConfirmationEmail', (req,res)=>{
     if(req.session.uuid)
     {
         console.log(`User with uuid: "${req.session.uuid}" requesting a confirmation email.`)
-        const token = randToken.generate(60);
-        db.query('UPDATE users SET token = (?) WHERE uuid = (?) AND verified = FALSE', [token, req.session.uuid], (err, result) => {
-            if(err) 
-            {
-                console.error("Something went wrong");
-                res.send({"message":"Something went wrong"});
-            }
-            else 
-            {
-                if(result.affectedRows > 0 && !req.session.sentEmail)
+        if(req.session.sentEmail)
+        {
+            console.log("Email already sent");
+            res.send({"message":"Email already sent"});
+        }
+        else
+        {
+            const token = randToken.generate(60);
+            db.query('UPDATE users SET token = (?) WHERE uuid = (?) AND verified = FALSE', [token, req.session.uuid], (err, result) => {
+                if(err) 
                 {
-                    console.log("Created temporary verification token"); 
-                    mailer.sendConfirmationEmail(req.session.uuid, token);
-                    req.session.sentEmail = true;
-                    res.send({"message":"Created temporary verification token"});
+                    console.error("Something went wrong");
+                    res.send({"message":"Something went wrong"});
                 }
-                else if(result.affectedRows > 0 && req.session.sentEmail)
-                {
-                    console.log("Email already sent");
-                    res.send({"message":"Email already sent"});
-                }   
                 else 
                 {
-                    console.log("User already verified");
-                    res.send({"message":"User already verified"});
+                    if(result.affectedRows)
+                    {
+                        console.log("Created temporary verification token"); 
+                        mailer.sendConfirmationEmail(req.session.uuid, token);
+                        req.session.sentEmail = true;
+                        res.send({"message":"Created temporary verification token"});
+                    }
+                    else 
+                    {
+                        console.log("User already verified");
+                        res.send({"message":"User already verified"});
+                    }
                 }
-            }
-        });
+            });
+        }
     }
     else
     {
