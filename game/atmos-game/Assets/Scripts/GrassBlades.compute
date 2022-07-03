@@ -1,0 +1,285 @@
+// @Minionsart version
+// credits  to  forkercat https://gist.github.com/junhaowww/fb6c030c17fe1e109a34f1c92571943f
+// and  NedMakesGames https://gist.github.com/NedMakesGames/3e67fabe49e2e3363a657ef8a6a09838
+// for the base setup for compute shaders
+
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Main
+
+
+// Define some constants
+#define PI          3.14159265358979323846
+#define TWO_PI      6.28318530717958647693
+
+// This describes a vertex on the source mesh
+struct SourceVertex
+{
+    float3 positionOS; // position in object space
+    float3 normalOS;
+    float2 uv;  // contains widthMultiplier, heightMultiplier
+    float3 color;
+};
+
+// Source buffers, arranged as a vertex buffer and index buffer
+StructuredBuffer<SourceVertex> _SourceVertices;
+
+// This describes a vertex on the generated mesh
+struct DrawVertex
+{
+    float3 positionWS; // The position in world space
+    float2 uv;
+    float3 diffuseColor;
+};
+
+// A triangle on the generated mesh
+struct DrawTriangle
+{
+    float3 normalOS;
+    DrawVertex vertices[3]; // The three points on the triangle
+};
+
+// A buffer containing the generated mesh
+AppendStructuredBuffer<DrawTriangle> _DrawTriangles;
+
+// The indirect draw call args, as described in the renderer script
+struct IndirectArgs
+{
+    uint numVerticesPerInstance;
+    uint numInstances;
+    uint startVertexIndex;
+    uint startInstanceIndex;
+};
+
+// The kernel will count the number of vertices, so this must be RW enabled
+RWStructuredBuffer<IndirectArgs> _IndirectArgsBuffer;
+
+// These values are bounded by limits in C# scripts,
+// because in the script we need to specify the buffer size
+#define GRASS_SEGMENTS 5  // segments per blade
+#define GRASS_NUM_VERTICES_PER_BLADE (GRASS_SEGMENTS * 2 + 1)
+
+// ----------------------------------------
+
+// Variables set by the renderer
+int _NumSourceVertices;
+
+// Local to world matrix
+float4x4 _LocalToWorld;
+
+// Time
+float _Time;
+
+// Grass
+half _GrassHeight;
+half _GrassWidth;
+float _GrassRandomHeight;
+
+// Wind
+half _WindSpeed;
+float _WindStrength;
+
+// Interactor
+half _InteractorRadius, _InteractorStrength;
+
+// Blade
+half _BladeRadius;
+float _BladeForward;
+float _BladeCurve;
+float _BottomWidth;
+int _MaxBladesPerVertex;
+int _MaxSegmentsPerBlade;
+
+// Camera
+float _MinFadeDist, _MaxFadeDist;
+
+// Uniforms
+uniform float4 _PositionsMoving[100];
+uniform float _InteractorsLength;
+uniform float3 _CameraPositionWS;
+
+float3 _OrthographicCamPos;
+float _OrthographicCamSize;
+
+
+
+// ----------------------------------------
+
+// Helper Functions
+
+float rand(float3 co)
+{
+    return frac(
+    sin(dot(co.xyz, float3(12.9898, 78.233, 53.539))) * 43758.5453);
+}
+
+// A function to compute an rotation matrix which rotates a point
+// by angle radians around the given axis
+// By Keijiro Takahashi
+float3x3 AngleAxis3x3(float angle, float3 axis)
+{
+    float c, s;
+    sincos(angle, s, c);
+
+    float t = 1 - c;
+    float x = axis.x;
+    float y = axis.y;
+    float z = axis.z;
+
+    return float3x3(
+    t * x * x + c, t * x * y - s * z, t * x * z + s * y,
+    t * x * y + s * z, t * y * y + c, t * y * z - s * x,
+    t * x * z - s * y, t * y * z + s * x, t * z * z + c);
+}
+
+// Generate each grass vertex for output triangles
+DrawVertex GrassVertex(float3 positionOS, float width, float height,
+float offset, float curve, float2 uv, float3x3 rotation, float3 color)
+{
+    DrawVertex output = (DrawVertex)0;
+    
+    float3 newPosOS = positionOS + mul(rotation, float3(width, height, curve + offset));
+    output.positionWS = mul(_LocalToWorld, float4(newPosOS, 1)).xyz;
+    output.uv = uv;
+    output.diffuseColor = color;
+    // shadows is exactly as positionWS (no need to create a new variable)
+    return output;
+}
+
+// ----------------------------------------
+
+// The main kernel
+[numthreads(128, 1, 1)]
+void Main(uint3 id : SV_DispatchThreadID)
+{
+    // Return if every triangle has been processed
+    if ((int)id.x >= _NumSourceVertices)
+    {
+        return;
+    }
+    
+    SourceVertex sv = _SourceVertices[id.x];
+
+    float randomisedPos = rand(sv.positionOS.xyz);
+
+    float3 worldPos = mul(_LocalToWorld, float4(sv.positionOS, 1)).xyz;
+    float distanceFromCamera = distance(worldPos, _CameraPositionWS);
+    float distanceCutoff = saturate(1 - saturate((distanceFromCamera - _MinFadeDist) / (_MaxFadeDist - _MinFadeDist)));
+    float distanceFade = saturate(1 - saturate((distanceFromCamera - _MinFadeDist - 5) / (_MaxFadeDist - _MinFadeDist -5)));
+
+    // Blades & Segments
+    int numBladesPerVertex = max(1, _MaxBladesPerVertex);
+    int numSegmentsPerBlade = max(1, _MaxSegmentsPerBlade);
+    int numTrianglesPerBlade = (numSegmentsPerBlade - 1) * 2 + 1;
+
+
+    if(numBladesPerVertex <= 0 || distanceCutoff < 0){
+        return;
+    }
+
+    float3 perpendicularAngle = float3(0, 0, 1);
+    float3 faceNormal = cross(perpendicularAngle, sv.normalOS);  // multiply GetMainLight().direction in later stage
+
+    // Wind
+    float3 v0 = sv.positionOS.xyz;
+    float3 wind1 = float3(
+    sin(_Time.x * _WindSpeed + v0.x) + sin(
+    _Time.x * _WindSpeed + v0.z * 2) + sin(
+    _Time.x * _WindSpeed * 0.1 + v0.x), 0,
+    cos(_Time.x * _WindSpeed + v0.x * 2) + cos(
+    _Time.x * _WindSpeed + v0.z));
+
+    wind1 *= _WindStrength;
+    
+ float3 combinedDisp = 0;
+   // Interactivity
+  for (int i = 0; i <_InteractorsLength; i++)
+     {
+     float3 playerToVertex = worldPos-_PositionsMoving[i].xyz;
+    float3 directionFromPlayer = normalize(playerToVertex);
+    float distanceFromSphere = abs(length(playerToVertex)) + _InteractorRadius;
+
+    float3 baseXZOffset = float3(directionFromPlayer.x, 0, directionFromPlayer.z) * distanceFromSphere;
+
+     float3 sphereDisp = (baseXZOffset * _InteractorStrength) - float3(0, distanceFromSphere*  1, 0);
+
+    float3 dis = distance(_PositionsMoving[i].xyz, worldPos);
+    float3 radius = 1 - saturate(dis / _InteractorRadius);
+    sphereDisp *= radius ;
+
+    combinedDisp += sphereDisp;// combine
+
+ }
+   
+    
+    
+
+    // Set vertex color
+    float3 color = sv.color;
+    
+    // Set grass height
+    _GrassHeight = sv.uv.y;
+    _GrassWidth = sv.uv.x;  // UV.x == width multiplier (set in GrassPainter.cs)
+    _GrassHeight += clamp(randomisedPos * _GrassRandomHeight, 1 - _GrassRandomHeight,
+    1 + _GrassRandomHeight);
+    _GrassWidth *= (distanceFade);
+    
+    
+    DrawVertex drawVertices[GRASS_NUM_VERTICES_PER_BLADE];
+
+    
+    for (int j = 0; j < numBladesPerVertex; ++j)
+    {
+        // set rotation and radius of the blades
+        float3x3 facingRotationMatrix = AngleAxis3x3(
+        randomisedPos * TWO_PI +j, float3(0, 1, -0.1));
+        float3x3 transformationMatrix = facingRotationMatrix;
+        float bladeRadius = j/(float) numBladesPerVertex;
+        float offset = (1 - bladeRadius) * _BladeRadius;
+
+        for (int i = 0; i < numSegmentsPerBlade; ++i)
+        {
+            // taper width, increase height
+            float t = i / (float) numSegmentsPerBlade;
+            float segmentHeight = _GrassHeight * t;
+            float segmentWidth = _GrassWidth * (1 - t);
+
+            // the first (0) grass segment is thinner
+            segmentWidth = i == 0 ? _BottomWidth * segmentWidth : segmentWidth;
+
+            float segmentForward = pow(abs(t), _BladeCurve) * _BladeForward;
+
+            // Add below the line declaring float segmentWidth
+            float3x3 transformMatrix = (i == 0) ? facingRotationMatrix: transformationMatrix;
+
+            // First grass (0) segment does not get displaced by interactor
+            float3 newPos = (i == 0) ? v0 : v0 + (combinedDisp * t) + wind1 * t;
+            
+            // Append First Vertex
+            drawVertices[i * 2] = GrassVertex(newPos, segmentWidth, segmentHeight, offset, segmentForward, float2(0, t), transformMatrix, color);
+
+            // Append Second Vertex
+            drawVertices[i * 2 + 1] = GrassVertex(newPos, -segmentWidth, segmentHeight, offset, segmentForward, float2(1, t), transformMatrix, color);
+        }
+        // Append Top Vertex
+        float3 topPosOS = v0 + combinedDisp + wind1;
+        drawVertices[numSegmentsPerBlade * 2] = GrassVertex(topPosOS, 0, _GrassHeight, offset, _BladeForward, float2(0.5, 1), transformationMatrix, color);
+        // Append Triangles
+        for (int k = 0; k < numTrianglesPerBlade; ++k)
+        {
+            DrawTriangle tri = (DrawTriangle)0;
+            tri.normalOS = faceNormal;
+            tri.vertices[0] = drawVertices[k];
+            tri.vertices[1] = drawVertices[k + 1];
+            tri.vertices[2] = drawVertices[k + 2];
+            _DrawTriangles.Append(tri);
+        }
+        
+    }  // For loop - Blade
+    
+    // InterlockedAdd(a, b) adds b to a and stores the value in a. It is thread-safe
+    // This call counts the number of vertices, storing it in the indirect arguments
+    // This tells the renderer how many vertices are in the mesh in DrawProcedural
+    
+    InterlockedAdd(_IndirectArgsBuffer[0].numVerticesPerInstance,
+    numTrianglesPerBlade * numBladesPerVertex * 3);
+}
