@@ -1,16 +1,11 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "./context/ThemeContext";
+import React from "react";
+import { useRoutes } from "react-router-dom";
 function App() {
-  const { theme } = useContext(ThemeContext);
-  return (
-    <div
-      className={`text-center ${
-        theme === "nuclea" ? "text-red-500" : "text-blue-500"
-      }`}
-    >
-      {theme.toUpperCase()}
-    </div>
-  );
+  let routes = useRoutes([
+    { path: "/", element: <h1>Home</h1> },
+    { path: "*", element: <h1>404 page</h1> },
+  ]);
+  return routes;
 }
 
 export default App;
