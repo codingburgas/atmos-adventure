@@ -2,7 +2,8 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    themeVariants: ["dust", "nuclea"],
   },
-  plugins: [],
+  variants: {},
+  plugins: [require("tailwindcss-multi-theme")],
 };
